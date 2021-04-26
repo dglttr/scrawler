@@ -1,0 +1,25 @@
+import os
+import csv
+
+from scrawler import backends
+
+# Request
+DEFAULT_REQUEST_TIMEOUT = 15  # in seconds
+DEFAULT_REQUEST_TLS_VERIFICATION = True
+DEFAULT_NO_CONCURRENT_REQUESTS_PER_HOST = 10
+
+# Crawling
+DEFAULT_BACKEND = backends.ASYNCIO
+DEFAULT_PAUSE_TIME = 0.5  # in seconds
+DEFAULT_MAX_NO_PARALLEL_PROCESSES = 2 * os.cpu_count()
+
+# Data processing
+DEFAULT_HTML_PARSER = "html.parser"
+DEFAULT_EMPTY_FIELD_STRING = "NULL"
+
+# CSV data export
+DEFAULT_CSV_ENCODING = "utf-8"
+DEFAULT_CSV_SEPARATOR = ","
+DEFAULT_CSV_QUOTING = csv.QUOTE_MINIMAL
+DEFAULT_CSV_ESCAPECHAR = None
+# Matching SQL loading parameters (MySQL/MariaDB syntax): CHARACTER SET utf8 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES

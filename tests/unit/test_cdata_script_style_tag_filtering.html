@@ -1,0 +1,35 @@
+<!-- Sample HTML file to test whether the correct text is extracted. This should not include the parts in CDATA, style or script tags. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- Test comment -->
+    <p>Hello there. This text should <![CDATA[Inhalte inhalte inhalte viele inhalte]]> be found.</p>
+    <p></p>
+
+    <script>
+        alert( 'Hello, world!' );
+    </script>
+
+    <style>
+        p.info {
+        font-family: arial, sans-serif;
+        line-height: 150%;
+        margin-left: 2em;
+        padding: 1em;
+        border: 3px solid red;
+        background-color: #f89;
+        display: inline-block;
+    }
+    p.info span {
+        font-weight: bold;
+    }
+    p.info span::after {
+        content: ": ";
+    }
+    </style>
+</body>
+</html>

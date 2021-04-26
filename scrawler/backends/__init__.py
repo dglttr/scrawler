@@ -1,0 +1,2 @@
+ASYNCIO = "asyncio"
+MULTITHREADING = "multithreading"

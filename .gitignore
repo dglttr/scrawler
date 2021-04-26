@@ -1,0 +1,19 @@
+# virtualenv
+venv/
+.venv/
+
+# auto-created .idea directory
+.idea/
+
+# auto-created .vscode directory
+.vscode/
+
+# Build directories
+dist/
+build/
+scrawler.egg-info/
+
+# Pycaches
+scrawler/__pycache__/
+scrawler/backends/__pycache__/
+scrawler/utils/__pycache__/
