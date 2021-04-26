@@ -321,6 +321,8 @@ Finally, the file `scrawler` > [`defaults.py`](scrawler/defaults.py) contains st
 
 ## FAQ
 ### Why are there two backends?
-The folder `backends` contains two files that contain very similar functions for scraping and crawling, but built on different technologies for parallelization.
-In general, the `asyncio` version is to be preferred because more sites can be processes in parallel. However, with very large sites, this may get stuck and the entire crawling will hang.
-In these cases, it is preferable to use the backend built on `multithreading`.
+The module [`backends`](scrawler/backends) contains two files with the same functions for scraping and crawling, but built on different technologies for parallelization.
+In general, the `asyncio` version is preferable because more sites can be processed in parallel.
+However, on very large sites, scrawler may get stuck, and the entire crawling will hang.
+Also, there you may occasionally get many `ServerDisconnectedError`s when using the `asyncio` backend.
+If you expect or experience these cases, it is preferable to use the backend built on `multithreading`, which is slower, but more robust.
