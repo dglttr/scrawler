@@ -320,12 +320,6 @@ If you look at the templates' "setup" section again, it includes a `USER_AGENT` 
 Finally, the file `scrawler` > [`defaults.py`](scrawler/defaults.py) contains standard settings that are used throughout the project.
 
 ## FAQ
-### I receive a `ModuleNotFoundError` when running a scraping/crawling script from the command line.
-The cause of this problem is described [here](https://www.reddit.com/r/learnpython/comments/729u0t/module_not_found_error_when_trying_to_run_from_cmd/).
-To fix it:
-1.	Inside the command line window, navigate to the root folder where the project is located (not to the sub-folder where the script is located). Note: The script should be located within the project.
-2.	Run the command `python -m folder_name.script_name.py`. Note the parameter `-m`and the use of `folder_name.`.
-
 ### Why are there two backends?
 The folder `backends` contains two files that contain very similar functions for scraping and crawling, but built on different technologies for parallelization.
 In general, the `asyncio` version is to be preferred because more sites can be processes in parallel. However, with very large sites, this may get stuck and the entire crawling will hang.
