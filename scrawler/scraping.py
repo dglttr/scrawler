@@ -10,6 +10,7 @@ from scrawler.utils.file_io_utils import export_to_csv, multithreaded_csv_export
 from scrawler.utils.validation_utils import validate_input_params
 from scrawler.defaults import DEFAULT_REQUEST_TIMEOUT, DEFAULT_NO_CONCURRENT_REQUESTS_PER_HOST, DEFAULT_BACKEND
 from scrawler import backends
+from scrawler.backends import asyncio_backend, multithreading_backend
 
 
 class Scraper:
@@ -78,7 +79,7 @@ class Scraper:
 
             # Define function with constant parameters pre-filled
             def scrape_site_params_prefilled(current_index: int, url: str):
-                return backends.multithreading_backend.scrape_site(url, export_attrs=export_attrs, search_attrs=self.search_attrs,
+                return multithreading_backend.scrape_site(url, export_attrs=export_attrs, search_attrs=self.search_attrs,
                                                           current_index=current_index, user_agent=self.user_agent,
                                                           progress_bar=self._progress_bar)
 
@@ -87,11 +88,11 @@ class Scraper:
             self.data = pool.starmap(scrape_site_params_prefilled, urls_and_index)
             pool.close()
             pool.join()
-        elif self.backend == ASYNCIO:
+        elif self.backend == backends.ASYNCIO:
             async def scrape_all_urls(urls):
                 connector = aiohttp.TCPConnector(limit_per_host=DEFAULT_NO_CONCURRENT_REQUESTS_PER_HOST)
                 async with aiohttp.ClientSession(timeout=self.timeout, connector=connector) as session:
-                    tasks = [backends.asyncio_backend.async_scrape_site(url, session=session, search_attrs=self.search_attrs,
+                    tasks = [asyncio_backend.async_scrape_site(url, session=session, search_attrs=self.search_attrs,
                                                                export_attrs=export_attrs, current_index=i,
                                                                user_agent=self.user_agent, progress_bar=self._progress_bar)
                              for i, url in enumerate(urls)]

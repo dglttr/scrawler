@@ -10,6 +10,7 @@ from scrawler.attributes import SearchAttributes, ExportAttributes, CrawlingAttr
 from scrawler.utils.file_io_utils import export_to_csv, multithreaded_csv_export
 from scrawler.utils.validation_utils import validate_input_params
 from scrawler import backends
+from scrawler.backends import asyncio_backend, multithreading_backend
 
 
 class Crawler:
@@ -95,7 +96,7 @@ class Crawler:
 
             # Define function with constant parameters pre-filled
             def crawl_domain_prefilled_params(current_index: int, domain: str):
-                return backends.multithreading_backend.crawl_domain(start_url=domain, search_attributes=self.search_attrs,
+                return multithreading_backend.crawl_domain(start_url=domain, search_attributes=self.search_attrs,
                                                            export_attrs=export_attrs, user_agent=self.user_agent,
                                                            current_index=current_index, return_type=return_type,
                                                            progress_bar=self._progress_bar,
@@ -110,7 +111,7 @@ class Crawler:
             async def crawl_all_urls(urls: Union[str, List[str]]):
                 semaphore = asyncio.BoundedSemaphore(self.parallel_processes)
                 async with aiohttp.ClientSession(timeout=self.timeout) as session:
-                    tasks = [backends.asyncio_backend.async_crawl_domain(start_url=url, session=session, search_attributes=self.search_attrs,
+                    tasks = [asyncio_backend.async_crawl_domain(start_url=url, session=session, search_attributes=self.search_attrs,
                                                                 export_attrs=export_attrs, user_agent=self.user_agent,
                                                                 return_type=return_type, progress_bar=self._progress_bar, current_index=i,
                                                                 semaphore=semaphore,
