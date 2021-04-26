@@ -37,7 +37,7 @@ All template include three sections: Imports, Setup and Execution.
 - **Setup** is where all parameters are specified
 - In **Execution**, an instance of the respective Python object is created and its `run()` method executed
 
-You can copy-and-paste the template and make any adjustments you would like. Make sure to paste it within the project directory.
+You can copy-and-paste the template and make any adjustments you would like.
 
 ### Specifying parameters
 Let's have a closer look at the "setup" section.
