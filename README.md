@@ -255,6 +255,7 @@ Some commonly adjusted parameters include:
 - `filter_foreign_urls`: This parameter defines how the crawler knows that a given URL is still part of the target domain.
     For example, one may only want to crawl a subdomain, not the entire domain (only URLs from `subdomain.example.com` vs. the entire `example.com` domain).
     Details on valid input values can be found in the documentation for `CrawlingAttributes` in the code.
+    By default, this is set to `auto`, which means that the correct mode will be inferred by looking at the passed base/start URL. For example, if the start URL contains a subdomain, only links from the subdomain will be crawled. For details, refer to the documentation for the `extract_same_host_pattern()` function.
     Note that you can also pass your own comparison function here. It has to include two parameters, `url1` and `url2`.
     The first URL is the one to be checked, and the second is the reference (the crawling start URL).
     This function should return `True` for URLs that belong to the same host, and `False` for foreign URLs.
