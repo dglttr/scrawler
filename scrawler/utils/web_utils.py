@@ -71,16 +71,28 @@ async def async_get_html(url: str, session: aiohttp.ClientSession,
 
 
 def extract_same_host_pattern(base_url: str) -> str:
-    """Looks at the passed URL to determine which mode for `is_same_host()` is appropriate.
-        Can only be `fld` or `subdomainX` (for details, see the documentation of `is_same_host()`).
+    """Looks at the passed base/start URL to determine which mode for `is_same_host()` is appropriate.
+        First looks at whether the start URL contains a non-empty path. If one is found, the number of directories `X` is counted and `directoryX` is returned.
+        Otherwise, check whether the URL contains subdomains. If found, the number of subdomains `X` is counted and `subdomainX` is returned.
+        If neither exist, returns `fld`.
+        Refer also to the documentation for `is_same_host()`.
     """
     u = ParsedUrl(base_url)
-    subdomain_cleaned = u.subdomain.replace("www1.", "").replace("www.", "").replace("www1", "").replace("www", "")
-    if subdomain_cleaned == "":
-        return "fld"
-    else:
+
+    path_cleaned = u.path
+    path_cleaned = path_cleaned[1:] if path_cleaned[:1] == "/" else path_cleaned   # remove leading '/' TODO in the future replace with `removeprefix()` (>= Python 3.9)
+    path_cleaned = path_cleaned[:-1] if path_cleaned[-1:] == "/" else path_cleaned   # remove trailing '/' TODO in the future replace with `removesuffix()` (>= Python 3.9)
+    path_cleaned = path_cleaned if not ("." in path_cleaned) else "/".join(path_cleaned.split("/")[:-1])    # if URL points to a file, use the directory of the file
+
+    subdomain_cleaned = u.subdomain.replace("www1.", "").replace("www.", "").replace("www1", "").replace("www", "")  # first replace www with dot, then without
+    if path_cleaned != "":  # check for subdirectories
+        subdirectory_depth = len(path_cleaned.split("/"))
+        return f"directory{subdirectory_depth}"
+    elif subdomain_cleaned != "":   # check for subdomains
         no_subdomains = len(subdomain_cleaned.split("."))
         return f"subdomain{no_subdomains}"
+    else:   # if nothing else matches, use full domain
+        return "fld"
 
 
 def filter_urls(urls: Iterable,
