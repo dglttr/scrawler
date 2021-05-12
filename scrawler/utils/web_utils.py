@@ -435,7 +435,7 @@ def is_same_host(url1: str, url2: str, mode: str = "hostname") -> bool:
             raise ValueError(f"Invalid comparison mode in is_same_host(): {mode}. When specifying to check the subdomains, you have to include the subdomain level up to which the comparison will be made. Example: 'subdomain1'.")
     elif re.match(r"directory\d", mode):  # equal up to a certain directory specified by an int
         try:
-            index = int(mode[-1])
+            index = int(mode[-1]) + 1   # +1 because path begins with '/' -> first element of split will be empty string ''
             return ((url1.hostname == url2.hostname)
                     and url1.path.split("/")[:index] == url2.path.split("/")[:index])
         except IndexError:
