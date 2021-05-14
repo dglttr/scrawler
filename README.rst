@@ -31,9 +31,9 @@ You can install scrawler from PyPI:
 Getting Started
 ---------------
 
-Check out the `Getting Started Guide <>`__.
+Check out the `Getting Started Guide <https://scrawler.readthedocs.io/en/latest/getting_started.html>`__.
 
 Documentation
 -------------
 
-Documentation is available at `Read the Docs <>`__.
+Documentation is available at `Read the Docs <https://scrawler.readthedocs.io/en/latest/>`__.
