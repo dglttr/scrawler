@@ -15,7 +15,6 @@ setup(
     author_email='d.glatter@outlook.com',
     description='Tool for General Purpose Web Scraping and Crawling',
     long_description=readme,
-    long_description_content_type="text/markdown",
     license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",
