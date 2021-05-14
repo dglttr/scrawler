@@ -8,7 +8,7 @@ except IOError:
 
 setup(
     name='scrawler',
-    version='0.2.1',
+    version='0.3.0',
     packages=find_packages(),
     url='https://github.com/dglttr/scrawler',
     author='Daniel Glatter',
