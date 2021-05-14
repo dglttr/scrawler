@@ -115,7 +115,7 @@ class CrawlingAttributes:
 
                  validate: bool = True
                  ):
-        """Specify how to conduct the crawling, e. g. how to filter irrelevant URLs or limits on the number of URLs crawled.
+        """Specify how to conduct the crawling, including filtering irrelevant URLs or limiting the number of crawled URLs.
 
         :param filter_non_standard_schemes: Filter URLs starting with schemes other than ``http:`` or ``https:`` (e.g., ``mailto:`` or ``javascript:``).
         :param filter_media_files: Whether to filter media files. Recommended: ``True`` to avoid long runtimes caused by large file downloads.

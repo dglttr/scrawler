@@ -36,8 +36,8 @@ Check out the `Getting Started Guide <getting_started.html>`__.
 Important concepts and classes
 ------------------------------
 
-Website Object
-~~~~~~~~~~~~~~
+:class:`.Website` Object
+~~~~~~~~~~~~~~~~~~~~~~~~
 Basic object to contain information on one website. This is basically a wrapper around a
 `BeautifulSoup <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>`__ object constructed from a website's HTML text,
 adding additional information such as the URL and `its parts <reference.html#scrawler.utils.web_utils.ParsedUrl>`__ and the HTTP response when fetching the website.
@@ -48,9 +48,12 @@ Crawling/Scraping attribute objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Used for specifying options for the crawling/scraping processes, like what data to collect, which URLs to include and where to save the data.
 
-- :class:`.SearchAttributes`: Specify which data to collect/search for in the website (and how to do it)
-- :class:`.ExportAttributes`: Specify how and where to export the collected data to
-- :class:`.CrawlingAttributes`: Specify how to conduct the crawling, e.g. how to filter irrelevant URLs or limits on the number of URLs crawled. As implied by their name, they are only relevant for crawling tasks.
+.. autosummary::
+   :nosignatures:
+
+   ~scrawler.attributes.SearchAttributes
+   ~scrawler.attributes.ExportAttributes
+   ~scrawler.attributes.CrawlingAttributes
 
 
 Data Extractors

@@ -1,5 +1,5 @@
-Welcome to scrawler's documentation!
-====================================
+scrawler
+========
 
 *"scrawler" = "scraper" + "crawler"*
 
