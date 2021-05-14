@@ -1,5 +1,0 @@
-``SearchAttributes``
-====================
-
-.. autoclass:: scrawler.attributes.SearchAttributes
-   :members:

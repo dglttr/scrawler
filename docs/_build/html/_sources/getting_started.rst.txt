@@ -1,36 +1,31 @@
 Getting Started
 ===============
 
-To get started, have a look at the ``templates`` folder. It
-contains four files, each one doing a different task. All template
-include three sections: Imports, Setup and Execution.
+To get started, have a look at the `templates <https://github.com/dglttr/scrawler/tree/main/templates>`__ folder. It
+contains four files, each one doing a different task. All templates include three sections:
 
--  **Imports** retrieves all code dependencies from various files
--  **Setup** is where all parameters are specified
--  In **Execution**, an instance of the respective Python object is
-   created and its ``run()`` method executed
+1. **Imports** retrieves all code dependencies from various files.
+2. **Setup** is where all parameters are specified.
+3. In **Execution**, an instance of the respective Python object is created and its ``run()`` method executed.
 
-You can copy-and-paste the template and make any adjustments you would
-like.
+As a starting point, you can copy-and-paste a template and make any adjustments you would like.
 
-Let's have a closer look at the "setup" section.
+Let's have a closer look at the **Setup** section.
 
-First, the **URLs** that are to be processed are specified (for more
-details, have a look at the section `Attributes`_).
+First, the *URL(s)* to be processed are specified.
 
-Then, the attributes that define how to accomplish the tasks are
-specified:
+Then, the *attributes* that define how to accomplish the tasks are specified:
 
--  The **search attributes** specify which data to collect/search for in
-   the website (and how to do it)
--  The **export attributes** specify how and where to export the
-   collected data to
--  In the case of a crawling task, the **crawling attributes** specify
-   how to conduct the crawling, e.g. how to filter irrelevant URLs or
-   limits on the number of URLs crawled.
+.. autosummary::
+   :nosignatures:
 
-In the section "execution", these parameters are then passed to the
-relevant object (see section Basic Objects).
+   ~scrawler.attributes.SearchAttributes
+   ~scrawler.attributes.ExportAttributes
+   ~scrawler.attributes.CrawlingAttributes
+
+For more details, see the section `Attributes`_.
+
+In the section **Execution**, these parameters are then passed to the relevant object (see next section).
 
 Basic Objects
 -------------
@@ -40,12 +35,8 @@ The basic functionality of **scrawler** is contained in two classes, :class:`.Sc
 Functionality
 ~~~~~~~~~~~~~
 
-The objects are passed all relevant parameters during object
-initialization and then executed by calling the object's ``run()`` or
-``run_and_export()`` methods. Afterwards, data may be exported by
-calling the ``export_data()`` method.
-
-To sum it up:
+The objects are passed all relevant parameters during object initialization.
+Then, three methods can be applied to them:
 
 -  ``run()``: Execute the task and return the results.
 -  ``run_and_export()``: This may be used when scraping/crawling many
@@ -57,9 +48,9 @@ To sum it up:
 Example Crawling
 ~~~~~~~~~~~~~~~~
 
-Let's have a look at an example. For more information on how to create
-search, export and crawling attributes, you can refer to the section
-`Attributes`_:
+Let's have a look at an example for **crawling** ``https://example.com``.
+For the moment, you can ignore the variables ``search_attrs``, ``export_attrs`` and ``crawling_attrs``.
+We will get to them `later <#attributes>`_.
 
 .. code:: python
 
@@ -77,7 +68,7 @@ search, export and crawling attributes, you can refer to the section
 Example Scraping
 ~~~~~~~~~~~~~~~~
 
-Here, multiple sites are scraped at once.
+Here, multiple sites are **scraped** at once.
 
 .. code:: python
 
@@ -94,7 +85,7 @@ Here, multiple sites are scraped at once.
 Attributes
 ----------
 
-Now that the object necessary for our task has been created, we would like to specify exactly how to go about the task.
+Now that we know the objects that will perform our tasks, we would like to specify exactly how to go about it.
 
 Search Attributes
 ~~~~~~~~~~~~~~~~~
@@ -106,16 +97,9 @@ objects to :class:`.SearchAttributes` during initialization.
 There are many data extractors already build into the project, see `built-in data extractors <built_in_data_extractors.html>`__.
 You can also specify your own `custom data extractors <custom_data_extractors.html>`__.
 
-This example uses the built-in :class:`.DateExtractor` to extract a
-website's publication date from an `HTML meta tag <https://www.w3schools.com/tags/tag_meta.asp>`__.
-
-.. code:: python
-
-   from scrawler.data_extractors import DateExtractor
-
-   pubdate_extractor = DateExtractor(tag_types="meta", tag_attrs={"name": "pubdate"})
-
-Here's an exemplary :class:`.SearchAttributes` object creation:
+In this example, we set up :class:`.SearchAttributes` that will extract three different data points from websites,
+specified using the built-in :class:`.UrlExtractor`, :class:`.TitleExtractor` and :class:`.DateExtractor` data extractors.
+Note how parameters for the data extractors are passed directly during initialization.
 
 .. code:: python
 
@@ -125,10 +109,8 @@ Here's an exemplary :class:`.SearchAttributes` object creation:
    search_attrs = SearchAttributes(
        UrlExtractor(),  # returns URL
        TitleExtractor(),  # returns website <title> tag content
-       DateExtractor(tag_types="meta", tag_attrs={"name": "pubdate"})  # returns publication date
+       DateExtractor(tag_types="meta", tag_attrs={"name": "pubdate"})  # returns publication date from pubdate meta tag
    )
-
-Note how parameters for the data extractors are passed directly during initialization.
 
 .. seealso:: :class:`.SearchAttributes`: More detailed documentation.
 
@@ -141,11 +123,10 @@ various parameters are geared towards the CSV format.
 
 Two parameters *must* be specified here:
 
--  ``directory``: The directory (folder) that the file(s) will be saved
-   to.
--  ``fn``: (filename/filenames) Name(s) of the file(s) containing the
-   crawled data, without the file extension. For example,
-   ``crawled_data`` instead of ``crawled_data.csv``.
+-  ``directory``: The directory (folder) that the file(s) will be saved to.
+-  ``fn``: Filename(s) of the exported CSV files containing the crawled data.
+   You don't have to specify the file extension ``.csv``, since the files will always be CSV files
+   (for example, use ``crawled_data`` instead of ``crawled_data.csv``).
 
 .. seealso:: :class:`.ExportAttributes`: More detailed documentation.
 
@@ -157,7 +138,7 @@ Here's an exemplary :class:`.ExportAttributes` object creation:
 
    export_attrs = ExportAttributes(
        directory=r"C:\Users\USER\Documents",
-       fn=["crawled_data_abc", "crawled_data_def", "crawled_data_ghi"],
+       fn=["example1_crawled_data", "example1_crawled_data", "example1_crawled_data"],
        header=["URL", "Title", "Publication Date"],
        separator="\t"
    )
@@ -168,6 +149,7 @@ Crawling Attributes
 The :class:`.CrawlingAttributes` specify how to conduct the crawling, e.g.
 how to filter irrelevant URLs or limits on the number of URLs crawled.
 As implied by their name, they are only relevant for crawling tasks.
+
 Some commonly adjusted parameters include:
 
 -  ``filter_foreign_urls``: This parameter defines how the crawler knows
@@ -231,19 +213,20 @@ Another example with a custom foreign URL filter:
    DOMAIN_TO_CRAWL = "https://www.blog.example.com/my_directory/index.html"
 
 
-   def should_be_crawled(url1: str, url2: str) -> bool:  # Custom foreign URL filter
+   def should_be_crawled(url1: str, url2: str) -> bool:
+       """My custom foreign URL filter: Crawl all URLs from host `www.blog.example.com` inside the directory `my_directory`."""
        try:  # don't forget exception handling
            url1 = ParsedUrl(url1)
            url2 = ParsedUrl(url2)
        except (tld.exceptions.TldBadUrl, tld.exceptions.TldDomainNotFound):  # URL couldn't be parsed
            return False
 
-       return ((url1.hostname == url2.hostname)  # hostname "www.blog.example.com"
+       return ((url1.hostname == url2.hostname)  # hostname is `www.blog.example.com`
                and ("my_directory" in url1.path) and ("my_directory" in url2.path))
 
 
    crawling_attrs = CrawlingAttributes(
-       filter_foreign_urls=should_be_crawled,  # crawl URLs from host "www.blog.example.com" inside the directory "my_directory"
+       filter_foreign_urls=should_be_crawled,  # pass custom foreign URL filter here
        filter_media_files=True,
        blocklist=("git.", "datasets.", "nextcloud."),
        max_no_urls=1000
@@ -255,13 +238,11 @@ Other Settings
 Most parameters are encompassed in the three attribute objects above.
 However, there are some additional settings available for special cases.
 
-If you look at the templates' "setup" section again, it includes a
-``USER_AGENT`` parameter that sets the `user
-agent <https://en.wikipedia.org/wiki/User_agent>`__ to be used during
-scraping/crawling.
+If you look at the templates' **Setup** section again, it includes a ``USER_AGENT`` parameter that sets the
+`user agent <https://en.wikipedia.org/wiki/User_agent>`__ to be used during scraping/crawling.
 
-Finally, ``scrawler`` > ``defaults.py`` contains standard settings
-that are used throughout the project.
+Finally, `defaults.py <https://github.com/dglttr/scrawler/blob/main/scrawler/defaults.py>`__
+contains standard settings that are used throughout the project.
 
 FAQ
 ---
@@ -269,7 +250,7 @@ FAQ
 Why are there two backends?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The module ``backends`` contains two files with
+The module `backends <https://github.com/dglttr/scrawler/tree/main/scrawler/backends>`__ contains two files with
 the same functions for scraping and crawling, but built on different
 technologies for parallelization. In general, the ``asyncio`` version is
 preferable because more sites can be processed in parallel. However, on

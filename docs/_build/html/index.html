@@ -190,7 +190,7 @@ for each respective <a class="reference external" href="https://github.com/dgltt
 <div class="section" id="important-concepts-and-classes">
 <h2>Important concepts and classes<a class="headerlink" href="#important-concepts-and-classes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="website-object">
-<h3>Website Object<a class="headerlink" href="#website-object" title="Permalink to this headline">¶</a></h3>
+<h3><a class="reference internal" href="reference.html#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> Object<a class="headerlink" href="#website-object" title="Permalink to this headline">¶</a></h3>
 <p>Basic object to contain information on one website. This is basically a wrapper around a
 <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> object constructed from a website’s HTML text,
 adding additional information such as the URL and <a class="reference external" href="reference.html#scrawler.utils.web_utils.ParsedUrl">its parts</a> and the HTTP response when fetching the website.</p>
@@ -201,11 +201,23 @@ adding additional information such as the URL and <a class="reference external" 
 <div class="section" id="crawling-scraping-attribute-objects">
 <h3>Crawling/Scraping attribute objects<a class="headerlink" href="#crawling-scraping-attribute-objects" title="Permalink to this headline">¶</a></h3>
 <p>Used for specifying options for the crawling/scraping processes, like what data to collect, which URLs to include and where to save the data.</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a>: Specify which data to collect/search for in the website (and how to do it)</p></li>
-<li><p><a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a>: Specify how and where to export the collected data to</p></li>
-<li><p><a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a>: Specify how to conduct the crawling, e.g. how to filter irrelevant URLs or limits on the number of URLs crawled. As implied by their name, they are only relevant for crawling tasks.</p></li>
-</ul>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a></p></td>
+<td><p>Specify which data to collect/search for in the website.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a></p></td>
+<td><p>Specify how and where to export the collected data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a></p></td>
+<td><p>Specify how to conduct the crawling, including filtering irrelevant URLs or limiting the number of crawled URLs.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="data-extractors">
 <h3>Data Extractors<a class="headerlink" href="#data-extractors" title="Permalink to this headline">¶</a></h3>
