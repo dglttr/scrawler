@@ -1,0 +1,23 @@
+﻿scrawler.data\_extractors.DateExtractor
+=======================================
+
+.. currentmodule:: scrawler.data_extractors
+
+.. autoclass:: DateExtractor
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DateExtractor.__init__
+      ~DateExtractor.run
+   
+   
+
+   
+   
+   

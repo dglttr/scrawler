@@ -1,0 +1,5 @@
+``Website``
+===========
+
+.. autoclass:: scrawler.website.Website
+   :members:

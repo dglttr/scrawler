@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Welcome to scrawler’s documentation! &mdash; scrawler 0.2.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> scrawler
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="built_in_data_extractors.html">Built-in Data Extractors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_data_extractors.html">Custom Data Extractors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">scrawler</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to scrawler’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-scrawler-s-documentation">
+<h1>Welcome to scrawler’s documentation!<a class="headerlink" href="#welcome-to-scrawler-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p><em>“scrawler” = “scraper” + “crawler”</em></p>
+<p>Provides functionality for the automatic collection of website data
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Web_scraping">web scraping</a>) and
+following links to map an entire domain
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Web_crawler">crawling</a>). It can
+handle these tasks individually, or process several websites/domains in
+parallel using <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> and <code class="docutils literal notranslate"><span class="pre">multithreading</span></code>.</p>
+<p>This project was initially developed while working at the <a class="reference external" href="https://www.isi.fraunhofer.de/en.html">Fraunhofer
+Institute for Systems and Innovation
+Research</a>. Many thanks for the
+opportunity and support!</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You can install scrawler from PyPI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">scrawler</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alternatively, you can find the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> and <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> files on GitHub
+for each respective <a class="reference external" href="https://github.com/dglttr/scrawler/releases">release</a>.</p>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Check out the <a class="reference external" href="getting_started.html">Getting Started Guide</a>.</p>
+</div>
+<div class="section" id="important-concepts-and-classes">
+<h2>Important concepts and classes<a class="headerlink" href="#important-concepts-and-classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="website-object">
+<h3>Website Object<a class="headerlink" href="#website-object" title="Permalink to this headline">¶</a></h3>
+<p>Basic object to contain information on one website. This is basically a wrapper around a
+<a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> object constructed from a website’s HTML text,
+adding additional information such as the URL and <a class="reference external" href="reference.html#scrawler.utils.web_utils.ParsedUrl">its parts</a> and the HTTP response when fetching the website.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="reference.html#scrawler.website.Website">Website Object documentation</a></p></li>
+</ul>
+</div>
+<div class="section" id="crawling-scraping-attribute-objects">
+<h3>Crawling/Scraping attribute objects<a class="headerlink" href="#crawling-scraping-attribute-objects" title="Permalink to this headline">¶</a></h3>
+<p>Used for specifying options for the crawling/scraping processes, like what data to collect, which URLs to include and where to save the data.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a>: Specify which data to collect/search for in the website (and how to do it)</p></li>
+<li><p><a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a>: Specify how and where to export the collected data to</p></li>
+<li><p><a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a>: Specify how to conduct the crawling, e.g. how to filter irrelevant URLs or limits on the number of URLs crawled. As implied by their name, they are only relevant for crawling tasks.</p></li>
+</ul>
+</div>
+<div class="section" id="data-extractors">
+<h3>Data Extractors<a class="headerlink" href="#data-extractors" title="Permalink to this headline">¶</a></h3>
+<p>Data extractors are functions used to retrieve various data points from <a class="reference internal" href="reference.html#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> objects.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="built_in_data_extractors.html">List of built-in data extractors</a></p></li>
+<li><p><a class="reference external" href="custom_data_extractors.html">Guide on how to build custom data extractors</a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Daniel Glatter.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Getting Started &mdash; scrawler 0.2.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Built-in Data Extractors" href="built_in_data_extractors.html" />
+    <link rel="prev" title="Welcome to scrawler’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> scrawler
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-objects">Basic Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functionality">Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-crawling">Example Crawling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-scraping">Example Scraping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#search-attributes">Search Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-attributes">Export Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crawling-attributes">Crawling Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-settings">Other Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#faq">FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-are-there-two-backends">Why are there two backends?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="built_in_data_extractors.html">Built-in Data Extractors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_data_extractors.html">Custom Data Extractors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">scrawler</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>To get started, have a look at the <code class="docutils literal notranslate"><span class="pre">templates</span></code> folder. It
+contains four files, each one doing a different task. All template
+include three sections: Imports, Setup and Execution.</p>
+<ul class="simple">
+<li><p><strong>Imports</strong> retrieves all code dependencies from various files</p></li>
+<li><p><strong>Setup</strong> is where all parameters are specified</p></li>
+<li><p>In <strong>Execution</strong>, an instance of the respective Python object is
+created and its <code class="docutils literal notranslate"><span class="pre">run()</span></code> method executed</p></li>
+</ul>
+<p>You can copy-and-paste the template and make any adjustments you would
+like.</p>
+<p>Let’s have a closer look at the “setup” section.</p>
+<p>First, the <strong>URLs</strong> that are to be processed are specified (for more
+details, have a look at the section <a class="reference internal" href="#attributes">Attributes</a>).</p>
+<p>Then, the attributes that define how to accomplish the tasks are
+specified:</p>
+<ul class="simple">
+<li><p>The <strong>search attributes</strong> specify which data to collect/search for in
+the website (and how to do it)</p></li>
+<li><p>The <strong>export attributes</strong> specify how and where to export the
+collected data to</p></li>
+<li><p>In the case of a crawling task, the <strong>crawling attributes</strong> specify
+how to conduct the crawling, e.g. how to filter irrelevant URLs or
+limits on the number of URLs crawled.</p></li>
+</ul>
+<p>In the section “execution”, these parameters are then passed to the
+relevant object (see section Basic Objects).</p>
+<div class="section" id="basic-objects">
+<h2>Basic Objects<a class="headerlink" href="#basic-objects" title="Permalink to this headline">¶</a></h2>
+<p>The basic functionality of <strong>scrawler</strong> is contained in two classes, <a class="reference internal" href="reference.html#scrawler.scraping.Scraper" title="scrawler.scraping.Scraper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scraper</span></code></a> and <a class="reference internal" href="reference.html#scrawler.crawling.Crawler" title="scrawler.crawling.Crawler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crawler</span></code></a>.</p>
+<div class="section" id="functionality">
+<h3>Functionality<a class="headerlink" href="#functionality" title="Permalink to this headline">¶</a></h3>
+<p>The objects are passed all relevant parameters during object
+initialization and then executed by calling the object’s <code class="docutils literal notranslate"><span class="pre">run()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">run_and_export()</span></code> methods. Afterwards, data may be exported by
+calling the <code class="docutils literal notranslate"><span class="pre">export_data()</span></code> method.</p>
+<p>To sum it up:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run()</span></code>: Execute the task and return the results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_and_export()</span></code>: This may be used when scraping/crawling many
+sites at once, generating huge amounts of data. In order to prevent a
+<code class="docutils literal notranslate"><span class="pre">MemoryError</span></code>, data will be exported as soon as it is ready and
+then discarded to make room for the next sites/domains.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export_data()</span></code>: Export the collected data to CSV file(s).</p></li>
+</ul>
+</div>
+<div class="section" id="example-crawling">
+<h3>Example Crawling<a class="headerlink" href="#example-crawling" title="Permalink to this headline">¶</a></h3>
+<p>Let’s have a look at an example. For more information on how to create
+search, export and crawling attributes, you can refer to the section
+<a class="reference internal" href="#attributes">Attributes</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler</span> <span class="kn">import</span> <span class="n">Crawler</span>
+
+<span class="n">search_attrs</span><span class="p">,</span> <span class="n">export_attrs</span><span class="p">,</span> <span class="n">crawling_attrs</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span>
+
+<span class="n">crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
+                  <span class="n">search_attributes</span><span class="o">=</span><span class="n">search_attrs</span><span class="p">,</span>
+                  <span class="n">export_attributes</span><span class="o">=</span><span class="n">export_attrs</span><span class="p">,</span>
+                  <span class="n">crawling_attributes</span><span class="o">=</span><span class="n">crawling_attrs</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">crawler</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">crawler</span><span class="o">.</span><span class="n">export_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-scraping">
+<h3>Example Scraping<a class="headerlink" href="#example-scraping" title="Permalink to this headline">¶</a></h3>
+<p>Here, multiple sites are scraped at once.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler</span> <span class="kn">import</span> <span class="n">Scraper</span>
+
+<span class="n">search_attrs</span><span class="p">,</span> <span class="n">export_attrs</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span>
+
+<span class="n">scraper</span> <span class="o">=</span> <span class="n">Scraper</span><span class="p">([</span><span class="s2">&quot;https://www.example1.com&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example2.com&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example3.com&quot;</span><span class="p">],</span>
+                  <span class="n">search_attributes</span><span class="o">=</span><span class="n">search_attrs</span><span class="p">,</span>
+                  <span class="n">export_attributes</span><span class="o">=</span><span class="n">export_attrs</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">scraper</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">scraper</span><span class="o">.</span><span class="n">export_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<p>Now that the object necessary for our task has been created, we would like to specify exactly how to go about the task.</p>
+<div class="section" id="search-attributes">
+<h3>Search Attributes<a class="headerlink" href="#search-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a> specify which data to collect/search for in
+the website (and how to do it). This is done by passing data extractor
+objects to <a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a> during initialization.</p>
+<p>There are many data extractors already build into the project, see <a class="reference external" href="built_in_data_extractors.html">built-in data extractors</a>.
+You can also specify your own <a class="reference external" href="custom_data_extractors.html">custom data extractors</a>.</p>
+<p>This example uses the built-in <a class="reference internal" href="reference.html#scrawler.data_extractors.DateExtractor" title="scrawler.data_extractors.DateExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateExtractor</span></code></a> to extract a
+website’s publication date from an <a class="reference external" href="https://www.w3schools.com/tags/tag_meta.asp">HTML meta tag</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.data_extractors</span> <span class="kn">import</span> <span class="n">DateExtractor</span>
+
+<span class="n">pubdate_extractor</span> <span class="o">=</span> <span class="n">DateExtractor</span><span class="p">(</span><span class="n">tag_types</span><span class="o">=</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="n">tag_attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;pubdate&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Here’s an exemplary <a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a> object creation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">SearchAttributes</span>
+<span class="kn">from</span> <span class="nn">scrawler.data_extractors</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">search_attrs</span> <span class="o">=</span> <span class="n">SearchAttributes</span><span class="p">(</span>
+    <span class="n">UrlExtractor</span><span class="p">(),</span>  <span class="c1"># returns URL</span>
+    <span class="n">TitleExtractor</span><span class="p">(),</span>  <span class="c1"># returns website &lt;title&gt; tag content</span>
+    <span class="n">DateExtractor</span><span class="p">(</span><span class="n">tag_types</span><span class="o">=</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="n">tag_attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;pubdate&quot;</span><span class="p">})</span>  <span class="c1"># returns publication date</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note how parameters for the data extractors are passed directly during initialization.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code>: More detailed documentation.</p>
+</div>
+</div>
+<div class="section" id="export-attributes">
+<h3>Export Attributes<a class="headerlink" href="#export-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> specify how and where to export the collected
+data to. Data is always exported to the CSV format, therefore the
+various parameters are geared towards the CSV format.</p>
+<p>Two parameters <em>must</em> be specified here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">directory</span></code>: The directory (folder) that the file(s) will be saved
+to.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fn</span></code>: (filename/filenames) Name(s) of the file(s) containing the
+crawled data, without the file extension. For example,
+<code class="docutils literal notranslate"><span class="pre">crawled_data</span></code> instead of <code class="docutils literal notranslate"><span class="pre">crawled_data.csv</span></code>.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a>: More detailed documentation.</p>
+</div>
+<p>Here’s an exemplary <a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> object creation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">ExportAttributes</span>
+
+<span class="n">export_attrs</span> <span class="o">=</span> <span class="n">ExportAttributes</span><span class="p">(</span>
+    <span class="n">directory</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;C:\Users\USER\Documents&quot;</span><span class="p">,</span>
+    <span class="n">fn</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;crawled_data_abc&quot;</span><span class="p">,</span> <span class="s2">&quot;crawled_data_def&quot;</span><span class="p">,</span> <span class="s2">&quot;crawled_data_ghi&quot;</span><span class="p">],</span>
+    <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">,</span> <span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;Publication Date&quot;</span><span class="p">],</span>
+    <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="crawling-attributes">
+<h3>Crawling Attributes<a class="headerlink" href="#crawling-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a> specify how to conduct the crawling, e.g.
+how to filter irrelevant URLs or limits on the number of URLs crawled.
+As implied by their name, they are only relevant for crawling tasks.
+Some commonly adjusted parameters include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_foreign_urls</span></code>: This parameter defines how the crawler knows
+that a given URL is still part of the target domain. For example, one
+may only want to crawl a subdomain, not the entire domain (only URLs
+from <code class="docutils literal notranslate"><span class="pre">subdomain.example.com</span></code> vs. the entire <code class="docutils literal notranslate"><span class="pre">example.com</span></code>
+domain). Details on valid input values can be found in the
+documentation for <code class="docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code> in the code. By default,
+this is set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>, which means that the correct mode will be
+inferred by looking at the passed base/start URL. For example, if the
+start URL contains a subdomain, only links from the subdomain will be
+crawled. For details, refer to the documentation for the
+<code class="docutils literal notranslate"><span class="pre">extract_same_host_pattern()</span></code> function. Note that you can also pass
+your own comparison function here. It has to include two parameters,
+<code class="docutils literal notranslate"><span class="pre">url1</span></code> and <code class="docutils literal notranslate"><span class="pre">url2</span></code>. The first URL is the one to be checked, and
+the second is the reference (the crawling start URL). This function
+should return <code class="docutils literal notranslate"><span class="pre">True</span></code> for URLs that belong to the same host, and
+<code class="docutils literal notranslate"><span class="pre">False</span></code> for foreign URLs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_media_files</span></code>: Controls whether to filter out (ignore) media
+files. Media files can be quite large and make the crawling process
+significantly longer, while not adding any new information because
+media file data can’t be parsed and processed. Therefore, the crawler
+filters media by looking at the URL (e.g. URLs ending in <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> or
+<code class="docutils literal notranslate"><span class="pre">.jpg</span></code>), as well as the response header
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">content-type</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blocklist</span></code>: Some directories might not be interesting for the
+crawling process (e.g., <code class="docutils literal notranslate"><span class="pre">/media/</span></code>). The <code class="docutils literal notranslate"><span class="pre">blocklist</span></code> parameter
+makes it possible to pass a list of strings that might occur in a
+URL. If the URL contains any of the given strings, it is filtered
+out.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_no_urls</span></code>: Some domains contain many webpages. This parameter
+can be passed an integer as the maximum total amount of URLs to be
+crawled.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a>: More detailed documentation.</p>
+</div>
+<p>Here’s an exemplary <a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a> object creation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">CrawlingAttributes</span>
+
+<span class="n">DOMAIN_TO_CRAWL</span> <span class="o">=</span> <span class="s2">&quot;https://www.blog.example.com&quot;</span>
+
+<span class="n">crawling_attrs</span> <span class="o">=</span> <span class="n">CrawlingAttributes</span><span class="p">(</span>
+    <span class="n">filter_foreign_urls</span><span class="o">=</span><span class="s2">&quot;subdomain1&quot;</span><span class="p">,</span>  <span class="c1"># only crawling the `blog` subdomain</span>
+    <span class="n">filter_media_files</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">blocklist</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;git.&quot;</span><span class="p">,</span> <span class="s2">&quot;datasets.&quot;</span><span class="p">,</span> <span class="s2">&quot;nextcloud.&quot;</span><span class="p">),</span>
+    <span class="n">max_no_urls</span><span class="o">=</span><span class="mi">1000</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Another example with a custom foreign URL filter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tld.exceptions</span>
+
+<span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">CrawlingAttributes</span>
+<span class="kn">from</span> <span class="nn">scrawler.utils.web_utils</span> <span class="kn">import</span> <span class="n">ParsedUrl</span>
+
+<span class="n">DOMAIN_TO_CRAWL</span> <span class="o">=</span> <span class="s2">&quot;https://www.blog.example.com/my_directory/index.html&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">should_be_crawled</span><span class="p">(</span><span class="n">url1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># Custom foreign URL filter</span>
+    <span class="k">try</span><span class="p">:</span>  <span class="c1"># don&#39;t forget exception handling</span>
+        <span class="n">url1</span> <span class="o">=</span> <span class="n">ParsedUrl</span><span class="p">(</span><span class="n">url1</span><span class="p">)</span>
+        <span class="n">url2</span> <span class="o">=</span> <span class="n">ParsedUrl</span><span class="p">(</span><span class="n">url2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">tld</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">TldBadUrl</span><span class="p">,</span> <span class="n">tld</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">TldDomainNotFound</span><span class="p">):</span>  <span class="c1"># URL couldn&#39;t be parsed</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="p">((</span><span class="n">url1</span><span class="o">.</span><span class="n">hostname</span> <span class="o">==</span> <span class="n">url2</span><span class="o">.</span><span class="n">hostname</span><span class="p">)</span>  <span class="c1"># hostname &quot;www.blog.example.com&quot;</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;my_directory&quot;</span> <span class="ow">in</span> <span class="n">url1</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;my_directory&quot;</span> <span class="ow">in</span> <span class="n">url2</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+
+
+<span class="n">crawling_attrs</span> <span class="o">=</span> <span class="n">CrawlingAttributes</span><span class="p">(</span>
+    <span class="n">filter_foreign_urls</span><span class="o">=</span><span class="n">should_be_crawled</span><span class="p">,</span>  <span class="c1"># crawl URLs from host &quot;www.blog.example.com&quot; inside the directory &quot;my_directory&quot;</span>
+    <span class="n">filter_media_files</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">blocklist</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;git.&quot;</span><span class="p">,</span> <span class="s2">&quot;datasets.&quot;</span><span class="p">,</span> <span class="s2">&quot;nextcloud.&quot;</span><span class="p">),</span>
+    <span class="n">max_no_urls</span><span class="o">=</span><span class="mi">1000</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-settings">
+<h3>Other Settings<a class="headerlink" href="#other-settings" title="Permalink to this headline">¶</a></h3>
+<p>Most parameters are encompassed in the three attribute objects above.
+However, there are some additional settings available for special cases.</p>
+<p>If you look at the templates’ “setup” section again, it includes a
+<code class="docutils literal notranslate"><span class="pre">USER_AGENT</span></code> parameter that sets the <a class="reference external" href="https://en.wikipedia.org/wiki/User_agent">user
+agent</a> to be used during
+scraping/crawling.</p>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">scrawler</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">defaults.py</span></code> contains standard settings
+that are used throughout the project.</p>
+</div>
+</div>
+<div class="section" id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-are-there-two-backends">
+<h3>Why are there two backends?<a class="headerlink" href="#why-are-there-two-backends" title="Permalink to this headline">¶</a></h3>
+<p>The module <code class="docutils literal notranslate"><span class="pre">backends</span></code> contains two files with
+the same functions for scraping and crawling, but built on different
+technologies for parallelization. In general, the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> version is
+preferable because more sites can be processed in parallel. However, on
+very large sites, scrawler may get stuck, and the entire crawling will
+hang. Also, there you may occasionally get many
+<code class="docutils literal notranslate"><span class="pre">ServerDisconnectedError</span></code>s when using the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> backend. If
+you expect or experience these cases, it is preferable to use the
+backend built on <code class="docutils literal notranslate"><span class="pre">multithreading</span></code>, which is slower, but more robust.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="built_in_data_extractors.html" class="btn btn-neutral float-right" title="Built-in Data Extractors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to scrawler’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Daniel Glatter.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

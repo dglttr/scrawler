@@ -1,0 +1,5 @@
+``CrawlingAttributes``
+======================
+
+.. autoclass:: scrawler.attributes.CrawlingAttributes
+   :members:
