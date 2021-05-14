@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Union, Tuple, List, Callable
+import functools
 
 import dateutil.parser
 from bs4 import BeautifulSoup, Tag, NavigableString
@@ -50,6 +51,7 @@ _DEFAULT_IS_MOBILE_OPTIMIZED_TAG_ATTRS = {"name": "viewport"}
 def supports_dynamic_parameters(func) -> Callable:
     """Function decorator to select correct parameter based on index when using dynamic parameters."""
 
+    @functools.wraps(func)
     def run(self, website: Website, index: int = None) -> Callable:
         if index is not None and self.dynamic_parameters:
             # First, initialize new object to prevent changes to original.
@@ -69,15 +71,17 @@ def supports_dynamic_parameters(func) -> Callable:
 
 class BaseExtractor:
     def __init__(self, *args, dynamic_parameters: bool = False, n_return_values: int = None, **kwargs) -> None:
-        """This BaseExtractor provides the basic architecture for each data extractor.
-        Every data extractor has to inherit from BaseExtractor.
+        """Provides the basic architecture for each data extractor.
+        Every data extractor has to inherit from :class:`.BaseExtractor`.
 
-        :param args: Positional arguments to be used by children inheriting from BaseExtractor.
-        :param dynamic_parameters: Set this to True when you would like to pass a list to a certain parameter,
+        :param args: Positional arguments to be used by children inheriting from :class:`.BaseExtractor`.
+        :param dynamic_parameters: Set this to ``True`` when you would like to pass a ``list`` to a certain parameter,
             and have each URL/scraping target use a different value from that list based on an index.
+            See also `here <custom_data_extractors.html#dynamic-parameters>`__.
         :param n_return_values: Specifies the number of values that will be returned by the extractor.
-            This is almost always 1, but there are cases such as `DateExtractor` which may return more values.
-        :param kwargs: Keyword arguments to be used by children inheriting from BaseExtractor.
+            This is almost always 1, but there are cases such as :class:`.DateExtractor` which may return more values.
+            See also `here <custom_data_extractors.html#n-return-values>`__.
+        :param kwargs: Keyword arguments to be used by children inheriting from :class:`.BaseExtractor`.
         """
         self.dynamic_parameters = dynamic_parameters
         self.n_return_values = n_return_values if (n_return_values is not None) else 1
@@ -86,11 +90,11 @@ class BaseExtractor:
     def run(self, website: Website, index: int = None):
         """Runs the extraction and returns the extracted data.
 
-        :param website: Website object that data is extracted from.
-        :param index: Used for extractors that should behave differently for each domain/site (relevant only for
-            MultiSiteScraper/MultiDomainSCrawler). Usually, the extractor will be passed a list of values and use only
-            the value relevant to the currently processed domain/site (for example, CustomStringPutter may put
-            a different string for each domain).
+        :param website: :class:`.Website` object that data is extracted from.
+        :param index: Used for extractors that should behave differently for each domain/site if multiple are processed.
+            Usually, the extractor will be passed a list of values and use only the value relevant
+            to the currently processed domain/site (for example, :class:`.CustomStringPutter` may put
+            a different string for each domain). See also `here <custom_data_extractors.html#dynamic-parameters>`__.
         """
         pass
 
@@ -100,13 +104,13 @@ class GeneralHtmlTagExtractor(BaseExtractor):
                  fill_empty_field: bool = True, **kwargs):
         """General purpose extractor for extracting HTML tags and then extracting a single attribute from the tag.
 
-        :param tag_types: Describes the tag types to find, e. g. "div".
+        :param tag_types: Describes the tag types to find, e. g. ``div``.
         :param tag_attrs: Specifies the HTML attributes use to find the relevant HTML tag in a key-value dict format.
-            Example: {"class": ["content", "main-content"]}.
-            For an explanation of HTML tag attributes, see https://www.w3schools.com/htmL/html_attributes.asp.
+            Example: ``{"class": ["content", "main-content"]}``.
+            See also `this explanation of HTML tag attributes <https://www.w3schools.com/htmL/html_attributes.asp>`__.
         :param attr_to_extract: The attribute that should be extracted from the found HTML tag.
         :param fill_empty_field: Used in cases where the specified attribute in the HTML tag exists but is empty.
-            If True, returns the value specified in DEFAULT_EMPTY_FIELD_STRING.
+            If ``True``, returns the value specified in ``DEFAULT_EMPTY_FIELD_STRING``.
             Otherwise, returns an empty string.
         :param kwargs:
         """
@@ -157,7 +161,7 @@ class GeneralHttpHeaderFieldExtractor(BaseExtractor):
 
 class AccessTimeExtractor(BaseExtractor):
     def __init__(self, **kwargs):
-        """Returns the current time as time of access. To be exact, this is more of a time of processing."""
+        """Returns the current time as time of access. To be exact, the time of processing."""
         super().__init__(**kwargs)
 
     @supports_dynamic_parameters
@@ -170,7 +174,7 @@ class CmsExtractor(BaseExtractor):
         """Extract the Content Management System (CMS) used for building the website.
 
         Note: This method uses the HTML generator meta tag and some hard-coded search terms.
-        Therefore, not all CM systems will be identified correctly."""
+        Therefore, not all systems will be identified correctly."""
         super().__init__(**kwargs)
 
     @supports_dynamic_parameters
@@ -193,8 +197,8 @@ class ContactNameExtractor(BaseExtractor):
                  separator: str = ";", **kwargs):
         """Find contact name(s) for a given website.
 
-        :param tag_types: Specifies which kind of tags to look at (e. g., "div" or "span")
-        :param tag_attrs: Provide additional attributes in a dictionary, e. g. {"class": "contact"}.
+        :param tag_types: Specifies which kind of tags to look at (e. g., ``div`` or ``span``)
+        :param tag_attrs: Provide additional attributes in a dictionary, e. g. ``{"class": "contact"}``.
         :param separator: When more than one contact is found, they are separated by the string given here.
         """
         self.tag_types = tag_types
@@ -217,10 +221,10 @@ class CustomStringPutter(BaseExtractor):
     def __init__(self, string: Union[str, list], **kwargs):
         """Simply returns a given string or entry from a list of strings. Background: Sometimes, a column should be appended with a custom label for a given website (for example, an external ID).
 
-        :param string: The string to be returned by the `run()` method.
+        :param string: The string to be returned by the :meth:`~scrawler.data_extractors.CustomStringPutter.run` method.
             Can optionally pass a list here and use a different value for different URLs/domains that are scraped.
-            In that case, remember to also pass `use_index=True`.
-        :raises IndexError: May raise an IndexError if a the parameter `string` is passed a list and `use_index=True`.
+            In that case, remember to also pass ``use_index=True``.
+        :raises IndexError: May raise an ``IndexError`` if a the parameter ``string`` is passed a list and ``use_index=True``.
             This may occur when you pass a list of custom strings shorter than the list of URLs crawled.
         """
         self.string = string
@@ -239,10 +243,10 @@ class DateExtractor(BaseExtractor):
         """
         Get dates by looking at passed tag. Can optionally parse dates to year, month and day.
 
-        :param tag_types: Describes the tag types to find, e. g. "meta".
+        :param tag_types: Describes the tag types to find, e. g. ``meta``.
         :param tag_attrs: Specifies HTML attributes and their values in a key-value dict format.
-            Example: {"name": "pubdate"}.
-        :param return_year_month_day: If True, returns date as 3 integer: year (YYYY), month (MM) and day (dd).
+            Example: ``{"name": "pubdate"}``.
+        :param return_year_month_day: If True, returns date as 3 integers: year (``YYYY``), month (``MM``) and day (``dd``).
         """
         super().__init__(**kwargs)
 
@@ -293,7 +297,8 @@ class DescriptionExtractor(BaseExtractor):
 class DirectoryDepthExtractor(BaseExtractor):
     def __init__(self, **kwargs):
         """Returns the directory level that a given document is in.
-        For example, "https://www.sub.example.com/dir1/dir2/file.html" returns 3"""
+
+        For example, ``https://www.sub.example.com/dir1/dir2/file.html`` returns 3."""
         super().__init__(**kwargs)
 
     @supports_dynamic_parameters
@@ -303,7 +308,7 @@ class DirectoryDepthExtractor(BaseExtractor):
 
 class ExpiryDateExtractor(GeneralHttpHeaderFieldExtractor, DateExtractor, BaseExtractor):
     def __init__(self, return_year_month_day: bool = False, **kwargs):
-        """Get website `expiry` date from HTTP header or HTML Meta tag."""
+        """Get website ``expiry`` date from HTTP header or HTML Meta tag."""
         GeneralHttpHeaderFieldExtractor.__init__(self, field_to_extract="Expires", **kwargs)
         DateExtractor.__init__(self, tag_types=("meta"), tag_attrs={"name": ["expires", "Expires", "EXPIRES"]},
                                return_year_month_day=return_year_month_day)
@@ -357,7 +362,7 @@ class KeywordsExtractor(GeneralHtmlTagExtractor, BaseExtractor):
 
 class LanguageExtractor(GeneralHtmlTagExtractor, BaseExtractor):
     def __init__(self, **kwargs):
-        """Get language of a given website from its HTML tag 'lang' attribute."""
+        """Get language of a given website from its HTML tag ``lang`` attribute."""
         super().__init__(tag_types="html", tag_attrs={}, attr_to_extract="lang", **kwargs)
 
     @supports_dynamic_parameters
@@ -367,7 +372,7 @@ class LanguageExtractor(GeneralHtmlTagExtractor, BaseExtractor):
 
 class LastModifiedDateExtractor(GeneralHttpHeaderFieldExtractor, DateExtractor, BaseExtractor):
     def __init__(self, return_year_month_day: bool = False, **kwargs):
-        """Get website `last-modified` date from HTTP header or HTML Meta tag."""
+        """Get website ``last-modified`` date from HTTP header or HTML Meta tag."""
         GeneralHttpHeaderFieldExtractor.__init__(self, field_to_extract="Last-Modified", **kwargs)
         DateExtractor.__init__(self, tag_types=("meta"), tag_attrs={"http-equiv": "last-modified"},
                                return_year_month_day=return_year_month_day)
@@ -400,7 +405,7 @@ class LinkExtractor(BaseExtractor):
 
 class ServerProductExtractor(GeneralHttpHeaderFieldExtractor, BaseExtractor):
     def __init__(self, **kwargs):
-        """Get website `Server` info from HTTP header."""
+        """Get website ``Server`` info from HTTP header."""
         super().__init__(field_to_extract="Server", **kwargs)
 
     @supports_dynamic_parameters
@@ -420,7 +425,7 @@ class StepsFromStartPageExtractor(BaseExtractor):
 
 class MobileOptimizedExtractor(BaseExtractor):
     def __init__(self, **kwargs):
-        """Checks whether website is optimized for mobile usage by looking up HTML viewport meta tag."""
+        """Checks whether website is optimized for mobile usage by looking up HTML ``viewport`` meta tag."""
         super().__init__(**kwargs)
 
     @supports_dynamic_parameters
@@ -436,7 +441,7 @@ class TermOccurrenceExtractor(BaseExtractor):
         """Checks if the given terms occur in the website's HTML text.
         Returns 0 if no term occurs in the soup's text, 1 if at least one occurs.
 
-        :param terms: term or list of the terms to search for.
+        :param terms: term or list of terms to search for.
         :param ignore_case: Whether to respect the text's casing (upper-/lowercase).
         """
 
@@ -460,14 +465,15 @@ class TermOccurrenceExtractor(BaseExtractor):
 
 
 class TermOccurrenceCountExtractor(BaseExtractor):
-    def __init__(self, terms: list, ignore_case: bool = False, **kwargs):
-        """Count the number of times the terms occur in the website's HTML text. Returns the sum of all occurrences.
+    def __init__(self, terms: Union[List[str], str], ignore_case: bool = False, **kwargs):
+        """Count the number of times the given terms occur in the website's HTML text.
 
-        :param terms: List of the terms to search for.
+        :param terms: term or list of terms to search for.
         :param ignore_case: Whether to respect the text's casing (upper-/lowercase).
+        :returns: Total sum of all occurrences.
         """
 
-        self.terms = terms
+        self.terms = [terms] if type(terms) is str else terms
         self.ignore_case = ignore_case
 
         super().__init__(**kwargs)
@@ -507,11 +513,11 @@ class UrlExtractor(BaseExtractor):
 
 class UrlBranchNameExtractor(BaseExtractor):
     def __init__(self, branch_name_position: int = 1, **kwargs):
-        """Extract sub-domain names from URLs like subdomain.example.com, which often refer to an entity's sub-branches.
+        """Extract sub-domain names from URLs like ``subdomain.example.com``, which often refer to an entity's sub-branches.
 
-        :param branch_name_position: Where in the URL to look for the name. If 0, the domain will be used.
-            Otherwise, branch_name_position indexes into all available sub-domains:
-            1 would retrieve the first sub-domain from the right, 2 the second, and so on.
+        :param branch_name_position: Where in the URL to look for the name. If ``0``, the domain will be used.
+            Otherwise, indexes into all available sub-domains:
+            ``1`` would retrieve the first sub-domain *from the right*, ``2`` the second, and so on.
         """
         self.branch_name_position = branch_name_position
         super().__init__(**kwargs)
@@ -532,7 +538,7 @@ class UrlBranchNameExtractor(BaseExtractor):
 class UrlCategoryExtractor(BaseExtractor):
     def __init__(self, category_position: int = 2, **kwargs):
         """
-        Try to identify the category of a given URL as the directory specified by category_position.
+        Try to identify the category of a given URL as the directory specified by :attr:`category_position`.
 
         :param category_position: Specify at which position in the path the category can be found.
         """
@@ -554,22 +560,22 @@ class WebsiteTextExtractor(BaseExtractor):
                  tag_attrs: dict = _DEFAULT_TEXT_TAG_ATTRS,
                  allowed_string_types: List[NavigableString] = _DEFAULT_TEXT_ALLOWED_STRING_TYPES,
                  separator: str = "[SEP]", **kwargs):
-        """Get readable website text, excluding `<script>`, `<style>`, `<template>` and other non-readable text.
-        Several modes are available to make sur eto only capture relevant text.
+        """Get readable website text, excluding ``<script>``, ``<style>``, ``<template>`` and other non-readable text.
+        Several modes are available to make sure to only capture relevant text.
 
-        :param mode: Default mode is `auto`, which uses the readability algorithms to only extract a website's article text.
-            If `all_strings`, all readable website text (excluding script, style and other tags as well as HTML comments will be retrieved.
-            See also the `BeautifulSoup documentation <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text>`__ for the `get_text()` method.
-            If `by_length`, the `min_length` parameter will be used to determine the minimum length of HTML strings to be included in the text.
-            If `search_in_tags`, the tags dictionary will be used to identify the tags that include text.
-        :param min_length: If using mode `by_length`, this is the minimum length of a string to be considered.
+        :param mode: Default mode is ``auto``, which uses the ``readability`` algorithm to only extract a website's article text.
+            If ``all_strings``, all readable website text (excluding script, style and other tags as well as HTML comments) will be retrieved.
+            See also the `BeautifulSoup documentation <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text>`__ for the ``get_text()`` method.
+            If ``by_length``, the :attr:`min_length` parameter will be used to determine the minimum length of HTML strings to be included in the text.
+            If ``search_in_tags``, the tags dictionary will be used to identify the tags that include text.
+        :param min_length: If using mode ``by_length``, this is the minimum length of a string to be considered.
             Shorter strings will be discarded.
-        :param tag_types: Describes the tag types to find, e. g. "div".
+        :param tag_types: Describes the tag types to find, e. g. ``div``.
         :param tag_attrs: Specifies HTML attributes and their values in a key-value dict format.
-            Example: {"class": ["content", "main-content"]}.
+            Example: ``{"class": ["content", "main-content"]}``.
 
         :param allowed_string_types: List of types that are considered to be readable. This makes sure that scripts and similar types are excluded.
-            Note that the types passed here have to inherit from `bs4.NavigableString`.
+            Note that the types passed here have to inherit from :class:`bs4.NavigableString`.
         :param separator: String to be used as separator when concatenating all found strings.
         """
         self.mode = mode
