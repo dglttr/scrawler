@@ -22,8 +22,7 @@ to three types of data:
 Basic structure
 ---------------
 
-Data extractors must inherit from ``BaseExtractor`` (documented `here <reference.html#scrawler.data_extractors.BaseExtractor>`__)
-and implement two methods:
+Data extractors must inherit from :class:`.BaseExtractor` and implement two methods:
 
 -  ``__init__()``: Where parameters to the extractor can be passed and
    are stored in object attributes.
@@ -31,9 +30,9 @@ and implement two methods:
    is the same as for ``BaseExtractor``, i.e. two parameters can be
    passed, ``website`` and ``index`` as an optional parameter.
 
-Note on ``BaseExtractor`` parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-There are two important parameters specified in ``BaseExtractor`` that apply to all data extractors.
+Note on :class:`.BaseExtractor` parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+There are two important parameters specified in :class:`.BaseExtractor` that apply to all data extractors.
 Please consider these parameters when writing your own data extractor.
 
 ``n_return_values``
@@ -53,7 +52,7 @@ The parameter ``dynamic_parameters`` handles a special case of data
 extraction when scraping/crawling multiple sites. There may be cases
 where you would like to have a different set of parameters for each URL.
 In this case, you can pass the relevant parameter as a list and set
-``dynamic_parameters`` to True. The scraper/crawler will then have each
+``dynamic_parameters`` to ``True``. The scraper/crawler will then have each
 URL/scraping target use a different value from that list based on an
 index. In this example, a different ID will be put for each crawled domain:
 
@@ -67,7 +66,7 @@ index. In this example, a different ID will be put for each crawled domain:
 Note that when enabling ``dynamic_parameters``, to parameters going into
 this data extractor can only have one of two forms:
 
--  A list (not a tuple!) where each list entry matches *exactly one* URL
+-  A ``list`` (not a ``tuple``!) where each list entry matches *exactly one* URL
    (in the same order as in the list of the URLs, see variable
    ``DOMAINS_TO_CRAWL`` in the example above).
 -  A constant (of a type other than list) than will be the same for all
@@ -78,7 +77,7 @@ raise an error.
 
 All built-in data extractors support dynamic parameters and you can
 easily add support to your custom data extractor by using the
-``supports_dynamic_parameters`` function decorator to decorate the
+:func:`.supports_dynamic_parameters` function decorator to decorate your
 ``run()`` method, like this:
 
 .. code:: python
@@ -133,7 +132,7 @@ copyright tag (if available):
            return copyright_text
 
 In this case, we could actually have had an easier solution. The
-built-in extractor ``GeneralHtmlTagExtractor`` already contains all the
+built-in extractor :class:`.GeneralHtmlTagExtractor` already contains all the
 necessary functionality:
 
 .. code:: python

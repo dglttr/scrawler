@@ -93,7 +93,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Data Extractors</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-kinds-of-data-can-be-extracted">What kinds of data can be extracted?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basic-structure">Basic structure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#note-on-baseextractor-parameters">Note on <code class="docutils literal notranslate"><span class="pre">BaseExtractor</span></code> parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#note-on-baseextractor-parameters">Note on <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code> parameters</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#n-return-values"><code class="docutils literal notranslate"><span class="pre">n_return_values</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynamic-parameters"><code class="docutils literal notranslate"><span class="pre">dynamic_parameters</span></code></a></li>
 </ul>
@@ -192,8 +192,7 @@ aiohttp <code class="docutils literal notranslate"><span class="pre">ClientRespo
 </div>
 <div class="section" id="basic-structure">
 <h2>Basic structure<a class="headerlink" href="#basic-structure" title="Permalink to this headline">¶</a></h2>
-<p>Data extractors must inherit from <code class="docutils literal notranslate"><span class="pre">BaseExtractor</span></code> (documented <a class="reference external" href="reference.html#scrawler.data_extractors.BaseExtractor">here</a>)
-and implement two methods:</p>
+<p>Data extractors must inherit from <a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a> and implement two methods:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code>: Where parameters to the extractor can be passed and
 are stored in object attributes.</p></li>
@@ -202,8 +201,8 @@ is the same as for <code class="docutils literal notranslate"><span class="pre">
 passed, <code class="docutils literal notranslate"><span class="pre">website</span></code> and <code class="docutils literal notranslate"><span class="pre">index</span></code> as an optional parameter.</p></li>
 </ul>
 <div class="section" id="note-on-baseextractor-parameters">
-<h3>Note on <code class="docutils literal notranslate"><span class="pre">BaseExtractor</span></code> parameters<a class="headerlink" href="#note-on-baseextractor-parameters" title="Permalink to this headline">¶</a></h3>
-<p>There are two important parameters specified in <code class="docutils literal notranslate"><span class="pre">BaseExtractor</span></code> that apply to all data extractors.
+<h3>Note on <a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a> parameters<a class="headerlink" href="#note-on-baseextractor-parameters" title="Permalink to this headline">¶</a></h3>
+<p>There are two important parameters specified in <a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a> that apply to all data extractors.
 Please consider these parameters when writing your own data extractor.</p>
 <div class="section" id="n-return-values">
 <h4><code class="docutils literal notranslate"><span class="pre">n_return_values</span></code><a class="headerlink" href="#n-return-values" title="Permalink to this headline">¶</a></h4>
@@ -222,7 +221,7 @@ the implementation of <code class="docutils literal notranslate"><span class="pr
 extraction when scraping/crawling multiple sites. There may be cases
 where you would like to have a different set of parameters for each URL.
 In this case, you can pass the relevant parameter as a list and set
-<code class="docutils literal notranslate"><span class="pre">dynamic_parameters</span></code> to True. The scraper/crawler will then have each
+<code class="docutils literal notranslate"><span class="pre">dynamic_parameters</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. The scraper/crawler will then have each
 URL/scraping target use a different value from that list based on an
 index. In this example, a different ID will be put for each crawled domain:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.data_extractors</span> <span class="kn">import</span> <span class="n">CustomStringPutter</span>
@@ -234,7 +233,7 @@ index. In this example, a different ID will be put for each crawled domain:</p>
 <p>Note that when enabling <code class="docutils literal notranslate"><span class="pre">dynamic_parameters</span></code>, to parameters going into
 this data extractor can only have one of two forms:</p>
 <ul class="simple">
-<li><p>A list (not a tuple!) where each list entry matches <em>exactly one</em> URL
+<li><p>A <code class="docutils literal notranslate"><span class="pre">list</span></code> (not a <code class="docutils literal notranslate"><span class="pre">tuple</span></code>!) where each list entry matches <em>exactly one</em> URL
 (in the same order as in the list of the URLs, see variable
 <code class="docutils literal notranslate"><span class="pre">DOMAINS_TO_CRAWL</span></code> in the example above).</p></li>
 <li><p>A constant (of a type other than list) than will be the same for all
@@ -244,7 +243,7 @@ URLs.</p></li>
 raise an error.</p>
 <p>All built-in data extractors support dynamic parameters and you can
 easily add support to your custom data extractor by using the
-<code class="docutils literal notranslate"><span class="pre">supports_dynamic_parameters</span></code> function decorator to decorate the
+<a class="reference internal" href="reference.html#scrawler.data_extractors.supports_dynamic_parameters" title="scrawler.data_extractors.supports_dynamic_parameters"><code class="xref py py-func docutils literal notranslate"><span class="pre">supports_dynamic_parameters()</span></code></a> function decorator to decorate your
 <code class="docutils literal notranslate"><span class="pre">run()</span></code> method, like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler</span> <span class="kn">import</span> <span class="n">Website</span>
 <span class="kn">from</span> <span class="nn">scrawler.data_extractors</span> <span class="kn">import</span> <span class="n">BaseExtractor</span><span class="p">,</span> <span class="n">supports_dynamic_parameters</span>
@@ -297,7 +296,7 @@ copyright tag (if available):</p>
 </pre></div>
 </div>
 <p>In this case, we could actually have had an easier solution. The
-built-in extractor <code class="docutils literal notranslate"><span class="pre">GeneralHtmlTagExtractor</span></code> already contains all the
+built-in extractor <a class="reference internal" href="reference.html#scrawler.data_extractors.GeneralHtmlTagExtractor" title="scrawler.data_extractors.GeneralHtmlTagExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneralHtmlTagExtractor</span></code></a> already contains all the
 necessary functionality:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.data_extractors</span> <span class="kn">import</span> <span class="n">GeneralHtmlTagExtractor</span>
 

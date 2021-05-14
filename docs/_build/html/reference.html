@@ -942,30 +942,67 @@ You will need to also pass <code class="docutils literal notranslate"><span clas
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.BaseExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">BaseExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_parameters</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_return_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.BaseExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>This BaseExtractor provides the basic architecture for each data extractor.
-Every data extractor has to inherit from BaseExtractor.</p>
+<dd><p>Provides the basic architecture for each data extractor.
+Every data extractor has to inherit from <a class="reference internal" href="#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>args</strong> – Positional arguments to be used by children inheriting from BaseExtractor.</p></li>
-<li><p><strong>dynamic_parameters</strong> – Set this to True when you would like to pass a list to a certain parameter,
-and have each URL/scraping target use a different value from that list based on an index.</p></li>
+<li><p><strong>args</strong> – Positional arguments to be used by children inheriting from <a class="reference internal" href="#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a>.</p></li>
+<li><p><strong>dynamic_parameters</strong> – Set this to <code class="docutils literal notranslate"><span class="pre">True</span></code> when you would like to pass a <code class="docutils literal notranslate"><span class="pre">list</span></code> to a certain parameter,
+and have each URL/scraping target use a different value from that list based on an index.
+See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
 <li><p><strong>n_return_values</strong> – Specifies the number of values that will be returned by the extractor.
-This is almost always 1, but there are cases such as <cite>DateExtractor</cite> which may return more values.</p></li>
-<li><p><strong>kwargs</strong> – Keyword arguments to be used by children inheriting from BaseExtractor.</p></li>
+This is almost always 1, but there are cases such as <a class="reference internal" href="#scrawler.data_extractors.DateExtractor" title="scrawler.data_extractors.DateExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DateExtractor</span></code></a> which may return more values.
+See also <a class="reference external" href="custom_data_extractors.html#n-return-values">here</a>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments to be used by children inheriting from <a class="reference internal" href="#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="scrawler.data_extractors.BaseExtractor.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.BaseExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scrawler.data_extractors.supports_dynamic_parameters">
+<span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">supports_dynamic_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.supports_dynamic_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function decorator to select correct parameter based on index when using dynamic parameters.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.AccessTimeExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">AccessTimeExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.AccessTimeExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the current time as time of access. To be exact, this is more of a time of processing.</p>
+<dd><p>Returns the current time as time of access. To be exact, the time of processing.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.AccessTimeExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.AccessTimeExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">datetime.datetime</span><a class="headerlink" href="#scrawler.data_extractors.AccessTimeExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -974,11 +1011,23 @@ This is almost always 1, but there are cases such as <cite>DateExtractor</cite> 
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">CmsExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.CmsExtractor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract the Content Management System (CMS) used for building the website.</p>
 <p>Note: This method uses the HTML generator meta tag and some hard-coded search terms.
-Therefore, not all CM systems will be identified correctly.</p>
+Therefore, not all systems will be identified correctly.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.CmsExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.CmsExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.CmsExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -989,16 +1038,28 @@ Therefore, not all CM systems will be identified correctly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tag_types</strong> – Specifies which kind of tags to look at (e. g., “div” or “span”)</p></li>
-<li><p><strong>tag_attrs</strong> – Provide additional attributes in a dictionary, e. g. {“class”: “contact”}.</p></li>
+<li><p><strong>tag_types</strong> – Specifies which kind of tags to look at (e. g., <code class="docutils literal notranslate"><span class="pre">div</span></code> or <code class="docutils literal notranslate"><span class="pre">span</span></code>)</p></li>
+<li><p><strong>tag_attrs</strong> – Provide additional attributes in a dictionary, e. g. <code class="docutils literal notranslate"><span class="pre">{&quot;class&quot;:</span> <span class="pre">&quot;contact&quot;}</span></code>.</p></li>
 <li><p><strong>separator</strong> – When more than one contact is found, they are separated by the string given here.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.ContactNameExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.ContactNameExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.ContactNameExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1008,19 +1069,31 @@ Therefore, not all CM systems will be identified correctly.</p>
 <dd><p>Simply returns a given string or entry from a list of strings. Background: Sometimes, a column should be appended with a custom label for a given website (for example, an external ID).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>string</strong> – The string to be returned by the <cite>run()</cite> method.
+<dd class="field-odd"><p><strong>string</strong> – The string to be returned by the <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter.run" title="scrawler.data_extractors.CustomStringPutter.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.
 Can optionally pass a list here and use a different value for different URLs/domains that are scraped.
-In that case, remember to also pass <cite>use_index=True</cite>.</p>
+In that case, remember to also pass <code class="docutils literal notranslate"><span class="pre">use_index=True</span></code>.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>IndexError</strong> – May raise an IndexError if a the parameter <cite>string</cite> is passed a list and <cite>use_index=True</cite>.
+<dd class="field-even"><p><strong>IndexError</strong> – May raise an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if a the parameter <code class="docutils literal notranslate"><span class="pre">string</span></code> is passed a list and <code class="docutils literal notranslate"><span class="pre">use_index=True</span></code>.
 This may occur when you pass a list of custom strings shorter than the list of URLs crawled.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.CustomStringPutter.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.CustomStringPutter.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.CustomStringPutter.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1031,17 +1104,29 @@ This may occur when you pass a list of custom strings shorter than the list of U
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tag_types</strong> – Describes the tag types to find, e. g. “meta”.</p></li>
+<li><p><strong>tag_types</strong> – Describes the tag types to find, e. g. <code class="docutils literal notranslate"><span class="pre">meta</span></code>.</p></li>
 <li><p><strong>tag_attrs</strong> – Specifies HTML attributes and their values in a key-value dict format.
-Example: {“name”: “pubdate”}.</p></li>
-<li><p><strong>return_year_month_day</strong> – If True, returns date as 3 integer: year (YYYY), month (MM) and day (dd).</p></li>
+Example: <code class="docutils literal notranslate"><span class="pre">{&quot;name&quot;:</span> <span class="pre">&quot;pubdate&quot;}</span></code>.</p></li>
+<li><p><strong>return_year_month_day</strong> – If True, returns date as 3 integers: year (<code class="docutils literal notranslate"><span class="pre">YYYY</span></code>), month (<code class="docutils literal notranslate"><span class="pre">MM</span></code>) and day (<code class="docutils literal notranslate"><span class="pre">dd</span></code>).</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.DateExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.DateExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">,</span> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#scrawler.data_extractors.DateExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1051,31 +1136,67 @@ Example: {“name”: “pubdate”}.</p></li>
 <dd><p>Get website description (the one shown in search engine results) using two common description fields.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.DescriptionExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.DescriptionExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.DescriptionExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.DirectoryDepthExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">DirectoryDepthExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.DirectoryDepthExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the directory level that a given document is in.
-For example, “<a class="reference external" href="https://www.sub.example.com/dir1/dir2/file.html">https://www.sub.example.com/dir1/dir2/file.html</a>” returns 3</p>
+<dd><p>Returns the directory level that a given document is in.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">https://www.sub.example.com/dir1/dir2/file.html</span></code> returns 3.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.DirectoryDepthExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.DirectoryDepthExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#scrawler.data_extractors.DirectoryDepthExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.ExpiryDateExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">ExpiryDateExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_year_month_day</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.ExpiryDateExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get website <cite>expiry</cite> date from HTTP header or HTML Meta tag.</p>
+<dd><p>Get website <code class="docutils literal notranslate"><span class="pre">expiry</span></code> date from HTTP header or HTML Meta tag.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.ExpiryDateExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.ExpiryDateExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">,</span> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#scrawler.data_extractors.ExpiryDateExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1086,13 +1207,13 @@ For example, “<a class="reference external" href="https://www.sub.example.com/
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tag_types</strong> – Describes the tag types to find, e. g. “div”.</p></li>
+<li><p><strong>tag_types</strong> – Describes the tag types to find, e. g. <code class="docutils literal notranslate"><span class="pre">div</span></code>.</p></li>
 <li><p><strong>tag_attrs</strong> – Specifies the HTML attributes use to find the relevant HTML tag in a key-value dict format.
-Example: {“class”: [“content”, “main-content”]}.
-For an explanation of HTML tag attributes, see <a class="reference external" href="https://www.w3schools.com/htmL/html_attributes.asp">https://www.w3schools.com/htmL/html_attributes.asp</a>.</p></li>
+Example: <code class="docutils literal notranslate"><span class="pre">{&quot;class&quot;:</span> <span class="pre">[&quot;content&quot;,</span> <span class="pre">&quot;main-content&quot;]}</span></code>.
+See also <a class="reference external" href="https://www.w3schools.com/htmL/html_attributes.asp">this explanation of HTML tag attributes</a>.</p></li>
 <li><p><strong>attr_to_extract</strong> – The attribute that should be extracted from the found HTML tag.</p></li>
 <li><p><strong>fill_empty_field</strong> – Used in cases where the specified attribute in the HTML tag exists but is empty.
-If True, returns the value specified in DEFAULT_EMPTY_FIELD_STRING.
+If <code class="docutils literal notranslate"><span class="pre">True</span></code>, returns the value specified in <code class="docutils literal notranslate"><span class="pre">DEFAULT_EMPTY_FIELD_STRING</span></code>.
 Otherwise, returns an empty string.</p></li>
 <li><p><strong>kwargs</strong> – </p></li>
 </ul>
@@ -1100,8 +1221,20 @@ Otherwise, returns an empty string.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.GeneralHtmlTagExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.GeneralHtmlTagExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.GeneralHtmlTagExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1111,8 +1244,20 @@ Otherwise, returns an empty string.</p></li>
 <dd><p>General purpose extractor for extracting <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> fields.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.GeneralHttpHeaderFieldExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.GeneralHttpHeaderFieldExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.GeneralHttpHeaderFieldExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1122,8 +1267,20 @@ Otherwise, returns an empty string.</p></li>
 <dd><p>Get status code of HTTP request.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.HttpStatusCodeExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.HttpStatusCodeExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#scrawler.data_extractors.HttpStatusCodeExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1133,30 +1290,66 @@ Otherwise, returns an empty string.</p></li>
 <dd><p>Get keywords from HTML keyword meta tag (if present).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.KeywordsExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.KeywordsExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.KeywordsExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.LanguageExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">LanguageExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.LanguageExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get language of a given website from its HTML tag ‘lang’ attribute.</p>
+<dd><p>Get language of a given website from its HTML tag <code class="docutils literal notranslate"><span class="pre">lang</span></code> attribute.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.LanguageExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.LanguageExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.LanguageExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.LastModifiedDateExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">LastModifiedDateExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_year_month_day</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.LastModifiedDateExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get website <cite>last-modified</cite> date from HTTP header or HTML Meta tag.</p>
+<dd><p>Get website <code class="docutils literal notranslate"><span class="pre">last-modified</span></code> date from HTTP header or HTML Meta tag.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.LastModifiedDateExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.LastModifiedDateExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">,</span> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#scrawler.data_extractors.LastModifiedDateExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1166,30 +1359,66 @@ Otherwise, returns an empty string.</p></li>
 <dd><p>Find all links from a website (without duplicates).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.LinkExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.LinkExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">set</span><a class="headerlink" href="#scrawler.data_extractors.LinkExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.MobileOptimizedExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">MobileOptimizedExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.MobileOptimizedExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks whether website is optimized for mobile usage by looking up HTML viewport meta tag.</p>
+<dd><p>Checks whether website is optimized for mobile usage by looking up HTML <code class="docutils literal notranslate"><span class="pre">viewport</span></code> meta tag.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.MobileOptimizedExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.MobileOptimizedExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#scrawler.data_extractors.MobileOptimizedExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.ServerProductExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">ServerProductExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.ServerProductExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get website <cite>Server</cite> info from HTTP header.</p>
+<dd><p>Get website <code class="docutils literal notranslate"><span class="pre">Server</span></code> info from HTTP header.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.ServerProductExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.ServerProductExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.ServerProductExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1199,27 +1428,54 @@ Otherwise, returns an empty string.</p></li>
 <dd><p>Returns the number of links that have to be followed from the start page to arrive at this website.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.StepsFromStartPageExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.StepsFromStartPageExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#scrawler.data_extractors.StepsFromStartPageExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.TermOccurrenceCountExtractor">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">TermOccurrenceCountExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.TermOccurrenceCountExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Count the number of times the terms occur in the website’s HTML text. Returns the sum of all occurrences.</p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">TermOccurrenceCountExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_case</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.TermOccurrenceCountExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of times the given terms occur in the website’s HTML text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>terms</strong> – List of the terms to search for.</p></li>
+<li><p><strong>terms</strong> – term or list of terms to search for.</p></li>
 <li><p><strong>ignore_case</strong> – Whether to respect the text’s casing (upper-/lowercase).</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Total sum of all occurrences.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.TermOccurrenceCountExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.TermOccurrenceCountExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#scrawler.data_extractors.TermOccurrenceCountExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1231,15 +1487,27 @@ Returns 0 if no term occurs in the soup’s text, 1 if at least one occurs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>terms</strong> – term or list of the terms to search for.</p></li>
+<li><p><strong>terms</strong> – term or list of terms to search for.</p></li>
 <li><p><strong>ignore_case</strong> – Whether to respect the text’s casing (upper-/lowercase).</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.TermOccurrenceExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.TermOccurrenceExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#scrawler.data_extractors.TermOccurrenceExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1249,33 +1517,57 @@ Returns 0 if no term occurs in the soup’s text, 1 if at least one occurs.</p>
 <dd><p>Get title of a website (the same that is shown in a browser in the tabs tray).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.TitleExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.TitleExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.TitleExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.UrlBranchNameExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">UrlBranchNameExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch_name_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.UrlBranchNameExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract sub-domain names from URLs like subdomain.example.com, which often refer to an entity’s sub-branches.</p>
+<dd><p>Extract sub-domain names from URLs like <code class="docutils literal notranslate"><span class="pre">subdomain.example.com</span></code>, which often refer to an entity’s sub-branches.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>branch_name_position</strong> – Where in the URL to look for the name. If 0, the domain will be used.
-Otherwise, branch_name_position indexes into all available sub-domains:
-1 would retrieve the first sub-domain from the right, 2 the second, and so on.</p>
+<dd class="field-odd"><p><strong>branch_name_position</strong> – Where in the URL to look for the name. If <code class="docutils literal notranslate"><span class="pre">0</span></code>, the domain will be used.
+Otherwise, indexes into all available sub-domains:
+<code class="docutils literal notranslate"><span class="pre">1</span></code> would retrieve the first sub-domain <em>from the right</em>, <code class="docutils literal notranslate"><span class="pre">2</span></code> the second, and so on.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.UrlBranchNameExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.UrlBranchNameExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.UrlBranchNameExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.UrlCategoryExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">UrlCategoryExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.UrlCategoryExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Try to identify the category of a given URL as the directory specified by category_position.</p>
+<dd><p>Try to identify the category of a given URL as the directory specified by <code class="xref py py-attr docutils literal notranslate"><span class="pre">category_position</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>category_position</strong> – Specify at which position in the path the category can be found.</p>
@@ -1283,8 +1575,20 @@ Otherwise, branch_name_position indexes into all available sub-domains:
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.UrlCategoryExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.UrlCategoryExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.UrlCategoryExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1294,39 +1598,63 @@ Otherwise, branch_name_position indexes into all available sub-domains:
 <dd><p>Returns the website’s URL.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.UrlExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.UrlExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.UrlExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="scrawler.data_extractors.WebsiteTextExtractor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scrawler.data_extractors.</span></span><span class="sig-name descname"><span class="pre">WebsiteTextExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">mode:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'auto',</span> <span class="pre">min_length:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">30,</span> <span class="pre">tag_types:</span> <span class="pre">tuple</span> <span class="pre">=</span> <span class="pre">'div',</span> <span class="pre">tag_attrs:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">{'class':</span> <span class="pre">['content']},</span> <span class="pre">allowed_string_types:</span> <span class="pre">List[bs4.element.NavigableString]</span> <span class="pre">=</span> <span class="pre">[&lt;class</span> <span class="pre">'bs4.element.NavigableString'&gt;],</span> <span class="pre">separator:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'[SEP]',</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.data_extractors.WebsiteTextExtractor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get readable website text, excluding <cite>&lt;script&gt;</cite>, <cite>&lt;style&gt;</cite>, <cite>&lt;template&gt;</cite> and other non-readable text.
-Several modes are available to make sur eto only capture relevant text.</p>
+<dd><p>Get readable website text, excluding <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;template&gt;</span></code> and other non-readable text.
+Several modes are available to make sure to only capture relevant text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mode</strong> – Default mode is <cite>auto</cite>, which uses the readability algorithms to only extract a website’s article text.
-If <cite>all_strings</cite>, all readable website text (excluding script, style and other tags as well as HTML comments will be retrieved.
-See also the <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text">BeautifulSoup documentation</a> for the <cite>get_text()</cite> method.
-If <cite>by_length</cite>, the <cite>min_length</cite> parameter will be used to determine the minimum length of HTML strings to be included in the text.
-If <cite>search_in_tags</cite>, the tags dictionary will be used to identify the tags that include text.</p></li>
-<li><p><strong>min_length</strong> – If using mode <cite>by_length</cite>, this is the minimum length of a string to be considered.
+<li><p><strong>mode</strong> – Default mode is <code class="docutils literal notranslate"><span class="pre">auto</span></code>, which uses the <code class="docutils literal notranslate"><span class="pre">readability</span></code> algorithm to only extract a website’s article text.
+If <code class="docutils literal notranslate"><span class="pre">all_strings</span></code>, all readable website text (excluding script, style and other tags as well as HTML comments) will be retrieved.
+See also the <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text">BeautifulSoup documentation</a> for the <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> method.
+If <code class="docutils literal notranslate"><span class="pre">by_length</span></code>, the <code class="xref py py-attr docutils literal notranslate"><span class="pre">min_length</span></code> parameter will be used to determine the minimum length of HTML strings to be included in the text.
+If <code class="docutils literal notranslate"><span class="pre">search_in_tags</span></code>, the tags dictionary will be used to identify the tags that include text.</p></li>
+<li><p><strong>min_length</strong> – If using mode <code class="docutils literal notranslate"><span class="pre">by_length</span></code>, this is the minimum length of a string to be considered.
 Shorter strings will be discarded.</p></li>
-<li><p><strong>tag_types</strong> – Describes the tag types to find, e. g. “div”.</p></li>
+<li><p><strong>tag_types</strong> – Describes the tag types to find, e. g. <code class="docutils literal notranslate"><span class="pre">div</span></code>.</p></li>
 <li><p><strong>tag_attrs</strong> – Specifies HTML attributes and their values in a key-value dict format.
-Example: {“class”: [“content”, “main-content”]}.</p></li>
+Example: <code class="docutils literal notranslate"><span class="pre">{&quot;class&quot;:</span> <span class="pre">[&quot;content&quot;,</span> <span class="pre">&quot;main-content&quot;]}</span></code>.</p></li>
 <li><p><strong>allowed_string_types</strong> – List of types that are considered to be readable. This makes sure that scripts and similar types are excluded.
-Note that the types passed here have to inherit from <cite>bs4.NavigableString</cite>.</p></li>
+Note that the types passed here have to inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">bs4.NavigableString</span></code>.</p></li>
 <li><p><strong>separator</strong> – String to be used as separator when concatenating all found strings.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scrawler.data_extractors.WebsiteTextExtractor.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Callable</span><a class="headerlink" href="#scrawler.data_extractors.WebsiteTextExtractor.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><span class="pre">scrawler.website.Website</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#scrawler.data_extractors.WebsiteTextExtractor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the extraction and returns the extracted data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>website</strong> – <a class="reference internal" href="#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> object that data is extracted from.</p></li>
+<li><p><strong>index</strong> – Used for extractors that should behave differently for each domain/site if multiple are processed.
+Usually, the extractor will be passed a list of values and use only the value relevant
+to the currently processed domain/site (for example, <a class="reference internal" href="#scrawler.data_extractors.CustomStringPutter" title="scrawler.data_extractors.CustomStringPutter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomStringPutter</span></code></a> may put
+a different string for each domain). See also <a class="reference external" href="custom_data_extractors.html#dynamic-parameters">here</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

@@ -61,7 +61,10 @@ data_extractors
    :members:
    :undoc-members:
 
-   .. autoclass:: scrawler.data_extractors.BaseExtractor
+   .. autoclass:: BaseExtractor
+      :members:
+
+   .. autofunction:: supports_dynamic_parameters
 
 scraping
 --------

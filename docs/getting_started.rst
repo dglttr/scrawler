@@ -278,3 +278,6 @@ hang. Also, there you may occasionally get many
 ``ServerDisconnectedError``\ s when using the ``asyncio`` backend. If
 you expect or experience these cases, it is preferable to use the
 backend built on ``multithreading``, which is slower, but more robust.
+
+- `asyncio Backend Documentation <reference.html#module-scrawler.backends.asyncio_backend>`__
+- `multithreading Backend Documentation <reference.html#module-scrawler.backends.multithreading_backend>`__
