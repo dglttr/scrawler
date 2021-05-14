@@ -128,8 +128,6 @@ Two parameters *must* be specified here:
    You don't have to specify the file extension ``.csv``, since the files will always be CSV files
    (for example, use ``crawled_data`` instead of ``crawled_data.csv``).
 
-.. seealso:: :class:`.ExportAttributes`: More detailed documentation.
-
 Here's an exemplary :class:`.ExportAttributes` object creation:
 
 .. code:: python
@@ -142,6 +140,8 @@ Here's an exemplary :class:`.ExportAttributes` object creation:
        header=["URL", "Title", "Publication Date"],
        separator="\t"
    )
+
+.. seealso:: :class:`.ExportAttributes`: More detailed documentation.
 
 Crawling Attributes
 ~~~~~~~~~~~~~~~~~~~
@@ -183,8 +183,6 @@ Some commonly adjusted parameters include:
 -  ``max_no_urls``: Some domains contain many webpages. This parameter
    can be passed an integer as the maximum total amount of URLs to be
    crawled.
-
-.. seealso:: :class:`.CrawlingAttributes`: More detailed documentation.
 
 Here's an exemplary :class:`.CrawlingAttributes` object creation:
 
@@ -231,6 +229,8 @@ Another example with a custom foreign URL filter:
        blocklist=("git.", "datasets.", "nextcloud."),
        max_no_urls=1000
    )
+
+.. seealso:: :class:`.CrawlingAttributes`: More detailed documentation.
 
 Other Settings
 ~~~~~~~~~~~~~~
