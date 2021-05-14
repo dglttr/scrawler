@@ -30,7 +30,7 @@ release = '0.2.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.intersphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -55,3 +55,10 @@ html_static_path = ['_static']
 
 # -- Autodoc options ---------------------------------------------------------
 autoclass_content = 'both'
+
+# -- Intersphinx options ---------------------------------------------------------
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
+                       'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
+                       'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
+                       'requests': ('https://requests.readthedocs.io/en/master/', None),
+                       'bs': ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', None)}

@@ -15,7 +15,7 @@ def export_to_csv(data, directory: str, fn: str, header: Union[list, str, bool] 
                   current_index: int = None, **kwargs) -> None:
     """Export data to a CSV file.
 
-    :param data: One- or two-dimensional data that will be parsed to a `Pandas <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ ``DataFrame``.
+    :param data: One- or two-dimensional data that will be parsed to a :class:`pandas:pandas.DataFrame`.
     :param directory: Path to directory where file will be saved.
     :param fn: Filename (*without* file extension).
     :param header: If ``None`` or ``False``, no header will be written.
@@ -26,8 +26,7 @@ def export_to_csv(data, directory: str, fn: str, header: Union[list, str, bool] 
     :param quoting: Puts quotes around cells that contain the separator character.
     :param escapechar: Escapes the separator character.
     :param current_index: If ``fn`` is a list of filenames, use this to specify which filename to use.
-    :param kwargs: Any parameter supported by ``pandas.DataFrame.to_csv()`` can be passed
-        (see `their documentation <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html>`__).
+    :param kwargs: Any parameter supported by :meth:`pandas:pandas.DataFrame.to_csv` can be passed.
     """
     if type(fn) is not str and current_index is not None:
         fn = fn[current_index]
@@ -60,7 +59,7 @@ def export_to_csv(data, directory: str, fn: str, header: Union[list, str, bool] 
 def multithreaded_csv_export(list_of_datasets: list, **kwargs) -> None:
     """Export a list of multi-column dataset to a CSV file in parallel using ``multithreading``.
 
-    :param list_of_datasets: List of two-dimensional data objects that will be parsed to a Pandas ``DataFrame``.
+    :param list_of_datasets: List of two-dimensional data objects that will be parsed to a :class:`pandas:pandas.DataFrame`.
     :param kwargs: Keywords arguments that are passed on to :func:`.export_to_csv`.
     """
     # Prepare argument list

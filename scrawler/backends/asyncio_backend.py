@@ -68,8 +68,8 @@ async def async_crawl_domain(start_url: str,
         contain a list of filenames, and only the relevant filename for the currently processed URL should be used).
         See `this explanation <custom_data_extractors.html#dynamic-parameters>`__ for details.
 
-    :param semaphore: ``asyncio.Semaphore`` used for controlling the number of concurrent processes run.
-    :param session: ``aiohttp.ClientSession`` used to make requests in a concurrent manner.
+    :param semaphore: :class:`python:asyncio.Semaphore` used for controlling the number of concurrent processes run.
+    :param session: :class:`aiohttp:aiohttp.ClientSession` used to make requests in a concurrent manner.
 
     :return: List of the data collected from all URLs that where found using ``start_url`` as starting point.
     """
@@ -201,7 +201,7 @@ async def async_scrape_site(url: str, session: aiohttp.ClientSession,
     """Scrape the data specified in search_attrs from one website.
 
     :param url: URL to be scraped.
-    :param session: ``aiohttp.ClientSession`` used to make requests in a concurrent manner.
+    :param session: :class:`aiohttp:aiohttp.ClientSession` used to make requests in a concurrent manner.
     :param search_attrs: Specify which data to collect/search for in the website.
     :param export_attrs: Specify how and where to export the collected data (as CSV).
     :param user_agent: Optionally specify a user agent for making the HTTP request.

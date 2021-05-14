@@ -24,7 +24,7 @@ class Website(BeautifulSoup):
         """Fetch website from given URL and construct ``BeautifulSoup`` from response data.
 
         :param kwargs: Are passed on to :func:`.get_html`.
-        :raises: Exceptions from making the request (requests library) and HTML parsing.
+        :raises: Exceptions from making the request (using :func:`requests:requests.get`) and HTML parsing.
         :return: Website object with ``BeautifulSoup`` properties.
         """
         self.html_text, self.http_response = get_html(self.url, return_response_object=True, **kwargs)
@@ -37,9 +37,9 @@ class Website(BeautifulSoup):
     async def fetch_async(self, session: aiohttp.ClientSession, **kwargs):
         """Asynchronously fetch website from given URL and construct BeautifulSoup from response data.
 
-        :param session: `aiohttp.ClientSession <https://docs.aiohttp.org/en/v3.7.3/client_reference.html#aiohttp.ClientSession>`__ to be used for making the request asynchronously.
+        :param session: :class:`aiohttp:aiohttp.ClientSession` to be used for making the request asynchronously.
         :param kwargs: Are passed on to :func:`.async_get_html`.
-        :raises: Exceptions from making the request (using `aiohttp <https://docs.aiohttp.org/en/stable/>`__) and HTML parsing.
+        :raises: Exceptions from making the request (using :meth:`aiohttp:aiohttp.ClientSession.get`) and HTML parsing.
         :return: Website object with ``BeautifulSoup`` properties.
         """
         self.html_text, self.http_response = await async_get_html(self.url, session=session,

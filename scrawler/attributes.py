@@ -72,8 +72,7 @@ class ExportAttributes:
         :param quoting: Puts quotes around cells that contain the separator character.
         :param escapechar: Escapes the separator character.
         :param validate: Whether to make sure that input parameters are valid.
-        :param kwargs: Any parameter supported by ``pandas.DataFrame.to_csv()`` can be passed
-            (see `their documentation <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html>`__).
+        :param kwargs: Any parameter supported by :meth:`pandas:pandas.DataFrame.to_csv` can be passed.
         """
         if validate:
             # Check that directory exists

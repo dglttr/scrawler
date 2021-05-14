@@ -31,7 +31,7 @@ class Crawler:
         :param crawling_attributes: Specify how to conduct the crawling, e. g. how to filter irrelevant URLs or limits on the number of URLs crawled.
         :param user_agent: Optionally specify a user agent for making the HTTP request.
         :param timeout: Timeout to be used when making HTTP requests. Note that the values specified here apply to each request individually, not to an entire session.
-            When using the ``asyncio`` backend, you can pass an ``aiohttp.ClientTimeout`` object where you can specify detailed timeout settings. See `their documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout>`__.
+            When using the ``asyncio`` backend, you can pass an :class:`aiohttp:aiohttp.ClientTimeout` object where you can specify detailed timeout settings.
             Alternatively, you can pass an integer that will be interpreted as total timeout for one request in seconds.
             If nothing is passed, a default timeout will be used.
         :param backend: ``multithreading`` (more stable, but most likely slower) or

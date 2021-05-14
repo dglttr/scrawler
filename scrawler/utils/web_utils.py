@@ -31,17 +31,17 @@ async def async_get_html(url: str, session: aiohttp.ClientSession,
     """Collect HTML text of a given URL.
 
     :param url: URL to retrieve the HTML from.
-    :param session: ``aiohttp.ClientSession`` to be used for making the request asynchronously.
+    :param session: :class:`aiohttp:aiohttp.ClientSession` to be used for making the request asynchronously.
     :param user_agent: Allows to optionally specify a different user agent than the default Python user agent.
     :param verify: Whether to verify the server's TLS certificate. Useful if TLS connections fail, but should in general be ``True`` to avoid man-in-the-middle attacks.
     :param max_content_length: Check the HTTP header for the attribute ``content-length``. If it is bigger than this specified parameter, a ValueError is raised. Set to ``-1`` when not needed.
     :param check_http_content_type: Whether to check the HTTP header field ``content-type``. If it does not include ``text``, a ValueError is raised.
     :param return_response_object: If True, also returns the ClientResponse object from the GET request.
     :param raise_for_status: If True, raise an HTTPError if the HTTP request returned an unsuccessful status code.
-    :param kwargs: Will be passed on to ``aiohttp.ClientSession.get()``, see `aiohttp's documentation <https://docs.aiohttp.org/en/v3.7.3/client_reference.html#aiohttp.ClientSession.get>`__.
+    :param kwargs: Will be passed on to :meth:`aiohttp:aiohttp.ClientSession.get`.
     :return: HTML text from the given URL. Optionally also returns the HTTP response object.
     :raises aiohttp.ClientError, aiohttp.HTTPError, ValueError:
-        Errors derived from ``aiohttp.ClientError`` include ``InvalidURL``, ``ClientConnectionError`` and ``ClientResponseError``.
+        Errors derived from :class:`aiohttp:aiohttp.ClientError` include ``InvalidURL``, ``ClientConnectionError`` and ``ClientResponseError``.
         May optionally raise ``aiohttp.HTTPError`` (if ``raise_for_status`` is ``True``)
         or ValueError (if ``check_http_content_type`` or ``max_content_length`` are ``True``).
     """
@@ -112,11 +112,20 @@ def filter_urls(urls: Iterable,
     :param blocklist: Specify a list of words or parts that if they appear in a URL, the URL will be discarded (e. g. 'git.', datasets.').
     :param filter_foreign_urls: Specify how to detect foreign URLs.
         Can either be a string that is passed to :func:`is_same_host()`, or a custom ``Callable`` that has to include two arguments, ``url1`` and ``url2``.
-        For details on possible strings for :func:`is_same_host()` see its documentation.
-        Note that the ``base_url`` parameter has to be passed for this to work.
+        For details on possible strings see :func:`is_same_host()` (note that the ``base_url`` parameter has to be passed for this to work).
+        If you pass your own comparison function here, it has to include two parameters, ``url1`` and ``url2``.
+        The first URL is the one to be checked, and the second is the reference (the crawling start URL). This function
+        should return ``True`` for URLs that belong to the same host, and ``False`` for foreign URLs.
     :param base_url: Used in conjunction with the ``filter_foreign_urls`` parameter to detect foreign URLs.
     :param return_discarded: If ``True``, also returns to discarded URLs.
     :return: ``Set`` containing URLs that were not filtered. Optionally also returns discarded URLs.
+
+    .. seealso::
+       .. autosummary::
+          :nosignatures:
+
+          is_media_file
+          is_same_host
     """
     filtered, discarded = set(), set()
     for url in urls:
@@ -164,7 +173,7 @@ def get_html(url: str, timeout: int = DEFAULT_REQUEST_TIMEOUT, user_agent: str =
     """Collect HTML text of a given URL.
 
     :param url: URL to retrieve the HTML from.
-    :param timeout: If the server does not answer for the number of seconds specified here, a ``TimeoutError`` is raised.
+    :param timeout: If the server does not answer for the number of seconds specified here, a :class:`Timeout` exception is raised.
     :param user_agent: Allows to optionally specify a different user agent than the default Python user agent.
     :param verify: Whether to verify the server's TLS certificate. Useful if TLS connections fail, but should in general be ``True`` to avoid man-in-the-middle attacks.
     :param stream: If ``True``, only the header of the response is retrieved. This allows for HTTP content type checking before actually retrieving the content. For details see the `Requests documentation <https://2.python-requests.org/en/master/user/advanced/#id9>`__.
@@ -175,7 +184,7 @@ def get_html(url: str, timeout: int = DEFAULT_REQUEST_TIMEOUT, user_agent: str =
     :return: HTML text from the given URL.
     :raises ConnectionError, Timeout, other RequestExceptions, HTTPError, ValueError: Raises some errors from the
         requests library when retrieval errors occur. Optionally raises ``HTTPError`` (if ``raise_for_status`` is ``True``) and
-        ``ValueError``s (if ``check_http_content_type`` or ``max_content_length`` are ``True``).
+        ``ValueError`` (if ``check_http_content_type`` or ``max_content_length`` are ``True``).
     """
     response = requests.get(url, timeout=timeout, stream=stream, verify=verify, headers={"user_agent": user_agent})
 
@@ -290,7 +299,7 @@ def get_redirected_url(url: str, max_redirects_to_follow: int = 100, **kwargs) -
 
 
 async def async_get_robot_file_parser(start_url: str, session: aiohttp.ClientSession, **kwargs) -> Union[RobotFileParser, None]:
-    """Returns ``RobotFileParser`` object (`Python doc <https://docs.python.org/3/library/urllib.robotparser.html#urllib.robotparser.RobotFileParser>`__) from given URL.
+    """Returns :class:`~python:urllib.robotparser.RobotFileParser` from given URL.
     If no ``robots.txt`` file is found or error occurs, returns ``None``.
 
     :param start_url: URL from which ``robots.txt`` will be collected.
@@ -317,7 +326,7 @@ async def async_get_robot_file_parser(start_url: str, session: aiohttp.ClientSes
 
 
 def get_robot_file_parser(start_url: str, **kwargs) -> Union[RobotFileParser, None]:
-    """Returns :class:`.RobotFileParser` object (`Python doc <https://docs.python.org/3/library/urllib.robotparser.html#urllib.robotparser.RobotFileParser>`__) from given URL.
+    """Returns :class:`~python:urllib.robotparser.RobotFileParser` object from given URL.
     If no ``robots.txt`` file is found or error occurs, returns ``None``.
 
     :param start_url: URL from which ``robots.txt`` will be collected.
