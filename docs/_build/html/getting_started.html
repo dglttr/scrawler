@@ -291,7 +291,7 @@ website’s publication date from an <a class="reference external" href="https:/
 <p>Note how parameters for the data extractors are passed directly during initialization.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code>: More detailed documentation.</p>
+<p><a class="reference internal" href="reference.html#scrawler.attributes.SearchAttributes" title="scrawler.attributes.SearchAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchAttributes</span></code></a>: More detailed documentation.</p>
 </div>
 </div>
 <div class="section" id="export-attributes">
@@ -335,12 +335,12 @@ that a given URL is still part of the target domain. For example, one
 may only want to crawl a subdomain, not the entire domain (only URLs
 from <code class="docutils literal notranslate"><span class="pre">subdomain.example.com</span></code> vs. the entire <code class="docutils literal notranslate"><span class="pre">example.com</span></code>
 domain). Details on valid input values can be found in the
-documentation for <code class="docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code> in the code. By default,
+documentation for <a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a>. By default,
 this is set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>, which means that the correct mode will be
 inferred by looking at the passed base/start URL. For example, if the
 start URL contains a subdomain, only links from the subdomain will be
 crawled. For details, refer to the documentation for the
-<code class="docutils literal notranslate"><span class="pre">extract_same_host_pattern()</span></code> function. Note that you can also pass
+<a class="reference internal" href="reference.html#scrawler.utils.web_utils.extract_same_host_pattern" title="scrawler.utils.web_utils.extract_same_host_pattern"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_same_host_pattern()</span></code></a> function. Note that you can also pass
 your own comparison function here. It has to include two parameters,
 <code class="docutils literal notranslate"><span class="pre">url1</span></code> and <code class="docutils literal notranslate"><span class="pre">url2</span></code>. The first URL is the one to be checked, and
 the second is the reference (the crawling start URL). This function

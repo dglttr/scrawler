@@ -191,7 +191,7 @@ for <a class="reference external" href="custom_data_extractors.html">custom data
 <td><p>Returns the directory level that a given document is in.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.ExpiryDateExtractor" title="scrawler.data_extractors.ExpiryDateExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpiryDateExtractor</span></code></a></p></td>
-<td><p>Get website <cite>expiry</cite> date from HTTP header or HTML Meta tag.</p></td>
+<td><p>Get website <code class="docutils literal notranslate"><span class="pre">expiry</span></code> date from HTTP header or HTML Meta tag.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.GeneralHtmlTagExtractor" title="scrawler.data_extractors.GeneralHtmlTagExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneralHtmlTagExtractor</span></code></a></p></td>
 <td><p>General purpose extractor for extracting HTML tags and then extracting a single attribute from the tag.</p></td>
@@ -206,28 +206,28 @@ for <a class="reference external" href="custom_data_extractors.html">custom data
 <td><p>Get keywords from HTML keyword meta tag (if present).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.LanguageExtractor" title="scrawler.data_extractors.LanguageExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LanguageExtractor</span></code></a></p></td>
-<td><p>Get language of a given website from its HTML tag ‘lang’ attribute.</p></td>
+<td><p>Get language of a given website from its HTML tag <code class="docutils literal notranslate"><span class="pre">lang</span></code> attribute.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.LastModifiedDateExtractor" title="scrawler.data_extractors.LastModifiedDateExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LastModifiedDateExtractor</span></code></a></p></td>
-<td><p>Get website <cite>last-modified</cite> date from HTTP header or HTML Meta tag.</p></td>
+<td><p>Get website <code class="docutils literal notranslate"><span class="pre">last-modified</span></code> date from HTTP header or HTML Meta tag.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.LinkExtractor" title="scrawler.data_extractors.LinkExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinkExtractor</span></code></a></p></td>
 <td><p>Find all links from a website (without duplicates).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.ServerProductExtractor" title="scrawler.data_extractors.ServerProductExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerProductExtractor</span></code></a></p></td>
-<td><p>Get website <cite>Server</cite> info from HTTP header.</p></td>
+<td><p>Get website <code class="docutils literal notranslate"><span class="pre">Server</span></code> info from HTTP header.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.StepsFromStartPageExtractor" title="scrawler.data_extractors.StepsFromStartPageExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StepsFromStartPageExtractor</span></code></a></p></td>
 <td><p>Returns the number of links that have to be followed from the start page to arrive at this website.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.MobileOptimizedExtractor" title="scrawler.data_extractors.MobileOptimizedExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MobileOptimizedExtractor</span></code></a></p></td>
-<td><p>Checks whether website is optimized for mobile usage by looking up HTML viewport meta tag.</p></td>
+<td><p>Checks whether website is optimized for mobile usage by looking up HTML <code class="docutils literal notranslate"><span class="pre">viewport</span></code> meta tag.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.TermOccurrenceExtractor" title="scrawler.data_extractors.TermOccurrenceExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TermOccurrenceExtractor</span></code></a></p></td>
 <td><p>Checks if the given terms occur in the website’s HTML text.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.TermOccurrenceCountExtractor" title="scrawler.data_extractors.TermOccurrenceCountExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TermOccurrenceCountExtractor</span></code></a></p></td>
-<td><p>Count the number of times the terms occur in the website’s HTML text.</p></td>
+<td><p>Count the number of times the given terms occur in the website’s HTML text.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.TitleExtractor" title="scrawler.data_extractors.TitleExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TitleExtractor</span></code></a></p></td>
 <td><p>Get title of a website (the same that is shown in a browser in the tabs tray).</p></td>
@@ -236,13 +236,13 @@ for <a class="reference external" href="custom_data_extractors.html">custom data
 <td><p>Returns the website’s URL.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.UrlBranchNameExtractor" title="scrawler.data_extractors.UrlBranchNameExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UrlBranchNameExtractor</span></code></a></p></td>
-<td><p>Extract sub-domain names from URLs like subdomain.example.com, which often refer to an entity’s sub-branches.</p></td>
+<td><p>Extract sub-domain names from URLs like <code class="docutils literal notranslate"><span class="pre">subdomain.example.com</span></code>, which often refer to an entity’s sub-branches.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.UrlCategoryExtractor" title="scrawler.data_extractors.UrlCategoryExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UrlCategoryExtractor</span></code></a></p></td>
-<td><p>Try to identify the category of a given URL as the directory specified by category_position.</p></td>
+<td><p>Try to identify the category of a given URL as the directory specified by <code class="xref py py-attr docutils literal notranslate"><span class="pre">category_position</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="reference.html#scrawler.data_extractors.WebsiteTextExtractor" title="scrawler.data_extractors.WebsiteTextExtractor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WebsiteTextExtractor</span></code></a></p></td>
-<td><p>Get readable website text, excluding <cite>&lt;script&gt;</cite>, <cite>&lt;style&gt;</cite>, <cite>&lt;template&gt;</cite> and other non-readable text.</p></td>
+<td><p>Get readable website text, excluding <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;template&gt;</span></code> and other non-readable text.</p></td>
 </tr>
 </tbody>
 </table>
