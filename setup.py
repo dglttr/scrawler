@@ -11,6 +11,11 @@ setup(
     version='0.3.0',
     packages=find_packages(),
     url='https://github.com/dglttr/scrawler',
+    project_urls={
+            "Bug Tracker": "https://github.com/dglttr/scrawler/issues",
+            "Documentation": "https://scrawler.readthedocs.io/",
+            "Source Code": "https://github.com/dglttr/scrawler"
+    },
     author='Daniel Glatter',
     author_email='d.glatter@outlook.com',
     description='Tool for General Purpose Web Scraping and Crawling',
