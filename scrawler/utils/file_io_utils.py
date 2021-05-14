@@ -13,21 +13,21 @@ def export_to_csv(data, directory: str, fn: str, header: Union[list, str, bool] 
                   encoding: str = DEFAULT_CSV_ENCODING, separator: str = DEFAULT_CSV_SEPARATOR,
                   quoting: int = DEFAULT_CSV_QUOTING, escapechar: str = DEFAULT_CSV_ESCAPECHAR,
                   current_index: int = None, **kwargs) -> None:
-    """
-    Export data to a CSV file.
+    """Export data to a CSV file.
 
-    :param data: One- or two-dimensional data that will be parsed to a Pandas DataFrame.
+    :param data: One- or two-dimensional data that will be parsed to a `Pandas <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__ ``DataFrame``.
     :param directory: Path to directory where file will be saved.
-    :param fn: Filename (without file extension).
-    :param header: If None or False, no header will be written. Use "first-row" to use first row of data as header.
+    :param fn: Filename (*without* file extension).
+    :param header: If ``None`` or ``False``, no header will be written.
+        If ``first-row`` or ``True``, uses first row of data as header.
         Else, pass list of strings of appropriate length.
     :param encoding: Encoding to use to create the CSV file.
     :param separator: Column separator or delimiter to use for creating the CSV file.
     :param quoting: Puts quotes around cells that contain the separator character.
     :param escapechar: Escapes the separator character.
-    :param current_index: If `fn` is a list of filenames, use this to specify which filename to use.
-    :param kwargs: Any parameter supported by pandas.DataFrame.to_csv() can be passed.
-        See their documentation: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html
+    :param current_index: If ``fn`` is a list of filenames, use this to specify which filename to use.
+    :param kwargs: Any parameter supported by ``pandas.DataFrame.to_csv()`` can be passed
+        (see `their documentation <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html>`__).
     """
     if type(fn) is not str and current_index is not None:
         fn = fn[current_index]
@@ -45,7 +45,7 @@ def export_to_csv(data, directory: str, fn: str, header: Union[list, str, bool] 
 
     if (header is None) or (header is False):
         container = pd.DataFrame(data)
-    elif header == "first-row":
+    elif (header == "first-row") or (header is True):
         container = pd.DataFrame(data[1:], columns=data[0])
     else:
         container = pd.DataFrame(data, columns=header)
@@ -58,10 +58,10 @@ def export_to_csv(data, directory: str, fn: str, header: Union[list, str, bool] 
 
 
 def multithreaded_csv_export(list_of_datasets: list, **kwargs) -> None:
-    """Export a list of multi-column dataset to a CSV file in parallel using multi-threading.
+    """Export a list of multi-column dataset to a CSV file in parallel using ``multithreading``.
 
-    :param list_of_datasets: List of two-dimensional data objects that will be parsed to a Pandas DataFrame.
-    :param kwargs: Keywords arguments that are passed on to `export_to_csv()`.
+    :param list_of_datasets: List of two-dimensional data objects that will be parsed to a Pandas ``DataFrame``.
+    :param kwargs: Keywords arguments that are passed on to :func:`.export_to_csv`.
     """
     # Prepare argument list
     args = list(enumerate(list_of_datasets))
@@ -83,9 +83,9 @@ def get_data_in_dir(directory: str,
     """Read all CSV files within a directory. All files in the directory must be CSV files.
 
     :param directory: Path to the directory.
-    :param start_idx: Sometimes, not all CSV files in the directory should be read. Together with end_idx, this
+    :param start_idx: Sometimes, not all CSV files in the directory should be read. Together with ``end_idx``, this
         parameter allows to specify an interval of files that should be read in, e. g. the first up to the 5th file.
-    :param end_idx: See start_idx.
+    :param end_idx: See ``start_idx``.
     :param encoding: The character encoding of the CSV files to be read.
     :param separator: The separator/delimiter of the CSV files to be read.
     """

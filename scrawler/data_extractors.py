@@ -135,7 +135,7 @@ class GeneralHtmlTagExtractor(BaseExtractor):
 
 class GeneralHttpHeaderFieldExtractor(BaseExtractor):
     def __init__(self, field_to_extract: str, fill_empty_field: bool = True, **kwargs):
-        """Get status code of HTTP request."""
+        """General purpose extractor for extracting `HTTP header <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>`__ fields."""
         self.field_to_extract = field_to_extract
         self.fill_empty_field = fill_empty_field
         super().__init__(**kwargs)
@@ -215,8 +215,7 @@ class ContactNameExtractor(BaseExtractor):
 
 class CustomStringPutter(BaseExtractor):
     def __init__(self, string: Union[str, list], **kwargs):
-        """Sometimes, a column should be appended with a custom label for a given website (for example, an external ID).
-        This method allows passing a string that will be returned.
+        """Simply returns a given string or entry from a list of strings. Background: Sometimes, a column should be appended with a custom label for a given website (for example, an external ID).
 
         :param string: The string to be returned by the `run()` method.
             Can optionally pass a list here and use a different value for different URLs/domains that are scraped.
@@ -560,7 +559,7 @@ class WebsiteTextExtractor(BaseExtractor):
 
         :param mode: Default mode is `auto`, which uses the readability algorithms to only extract a website's article text.
             If `all_strings`, all readable website text (excluding script, style and other tags as well as HTML comments will be retrieved.
-            See also the BeautifulSoup documentation for the `get_text()` method (https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text).
+            See also the `BeautifulSoup documentation <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#get-text>`__ for the `get_text()` method.
             If `by_length`, the `min_length` parameter will be used to determine the minimum length of HTML strings to be included in the text.
             If `search_in_tags`, the tags dictionary will be used to identify the tags that include text.
         :param min_length: If using mode `by_length`, this is the minimum length of a string to be considered.

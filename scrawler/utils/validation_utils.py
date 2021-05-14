@@ -1,4 +1,4 @@
-"""Functions to validate data and insure its integrity."""
+"""Functions to make sure the specifications for a crawling/scraping are valid and work together correctly."""
 from typing import List
 import logging
 

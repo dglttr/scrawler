@@ -41,36 +41,37 @@ async def async_crawl_domain(start_url: str,
 
     :param start_url: The first URL to be accessed. From here, links will be extracted and iteratively processed to find all linked sites.
     :param search_attributes: Dictionary specifying what to search for and how to search it.
-    :param export_attrs: Optional. If specified, the crawled data is exported from within the crawl() function.
+    :param export_attrs: Optional. If specified, the crawled data is exported as soon as it's ready, not after the entire crawling has finished.
 
     :param user_agent: Optionally specify a user agent for making the HTTP request.
-    :param pause_time: Time to wait between the crawling of 2 URLs (in seconds). This pause is mostly to avoid being flagged as spammer by websites.
-    :param respect_robots_txt: Whether to respect the specifications made in the website's robots.txt file.
+    :param pause_time: Time to wait between the crawling of two URLs (in seconds).
+    :param respect_robots_txt: Whether to respect the specifications made in the website's ``robots.txt`` file.
 
     :param max_no_urls: Maximum number of URLs to be crawled (safety limit for very large crawls).
     :param max_distance_from_start_url: Maximum number of links that have to be followed to arrive at a certain URL from the start_url.
-    :param max_subdirectory_depth: Maximum sub-level of the host up to which to crawl. E.g., consider this schema: hostname/sub-directory1/sub-siteA.
-        If you would want to crawl all URLs of the same level as 'sub-directory1', specify 1.
-        sub-siteA will then not be found, but a site hostname/sub-directory2 or hostname/sub-siteB will be.
+    :param max_subdirectory_depth: Maximum sub-level of the host up to which to crawl. E.g., consider this schema: ``hostname/sub-directory1/sub-siteA``.
+            If you would want to crawl all URLs of the same level as ``sub-directory1``, specify 1.
+            ``sub-siteA`` will then not be found, but a site ``hostname/sub-directory2`` or ``hostname/sub-siteB`` will be.
 
-    :param filter_non_standard_schemes: See utils.web_utils.filter_urls() for explanation.
-    :param filter_media_files: See utils.web_utils.filter_urls() for explanation.
-    :param blocklist: See utils.web_utils.filter_urls() for explanation.
-    :param filter_foreign_urls: See utils.web_utils.filter_urls() for explanation.
+    :param filter_non_standard_schemes: See :func:`.filter_urls`.
+    :param filter_media_files: See :func:`.filter_urls`.
+    :param blocklist: See :func:`.filter_urls`.
+    :param filter_foreign_urls: See :func:`.filter_urls`.
 
-    :param strip_url_parameters: See utils.web_utils.strip_unnecessary_url_parts() for explanation.
-    :param strip_url_fragments: See utils.web_utils.strip_unnecessary_url_parts() for explanation.
+    :param strip_url_parameters: See :func:`.strip_unnecessary_url_parts`.
+    :param strip_url_fragments: See :func:`.strip_unnecessary_url_parts`.
 
     :param return_type: Specify which values to return ("all", "none", "data").
-    :param progress_bar: If a ProgressBar object is passed, prints a progress bar on the command line.
+    :param progress_bar: If a :class:`.ProgressBar` object is passed, prints a progress bar on the command line.
     :param current_index: Internal index needed to allow dynamic parameters (parameters where a list of values has been
         passed and only the values relevant to the currently processed URL should be used; for example, export_attrs may
         contain a list of filenames, and only the relevant filename for the currently processed URL should be used).
+        See `this explanation <custom_data_extractors.html#dynamic-parameters>`__ for details.
 
-    :param semaphore: asyncio.Semaphore used for controlling the number of concurrent processes run.
-    :param session: aiohttp.ClientSession used to make requests in a concurrent manner.
+    :param semaphore: ``asyncio.Semaphore`` used for controlling the number of concurrent processes run.
+    :param session: ``aiohttp.ClientSession`` used to make requests in a concurrent manner.
 
-    :return: List of the data collected from all URLs that where found using start_url as starting point.
+    :return: List of the data collected from all URLs that where found using ``start_url`` as starting point.
     """
     async with semaphore:
         # Fetch and update start URL (solves redirects)
@@ -200,14 +201,15 @@ async def async_scrape_site(url: str, session: aiohttp.ClientSession,
     """Scrape the data specified in search_attrs from one website.
 
     :param url: URL to be scraped.
-    :param session: aiohttp.ClientSession used to make requests in a concurrent manner.
+    :param session: ``aiohttp.ClientSession`` used to make requests in a concurrent manner.
     :param search_attrs: Specify which data to collect/search for in the website.
     :param export_attrs: Specify how and where to export the collected data (as CSV).
     :param user_agent: Optionally specify a user agent for making the HTTP request.
     :param current_index: Internal index needed to allow dynamic parameters (parameters where a list of values has been
         passed and only the values relevant to the currently processed URL should be used; for example, export_attrs may
         contain a list of filenames, and only the relevant filename for the currently processed URL should be used).
-    :param progress_bar: If a ProgressBar object is passed, prints a progress bar on the command line.
+        See `this explanation <custom_data_extractors.html#dynamic-parameters>`__ for details.
+    :param progress_bar: If a :class:`.ProgressBar` object is passed, prints a progress bar on the command line.
     :return: List of data collected from the website.
     """
     if progress_bar is not None:

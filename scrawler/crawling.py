@@ -31,17 +31,19 @@ class Crawler:
         :param crawling_attributes: Specify how to conduct the crawling, e. g. how to filter irrelevant URLs or limits on the number of URLs crawled.
         :param user_agent: Optionally specify a user agent for making the HTTP request.
         :param timeout: Timeout to be used when making HTTP requests. Note that the values specified here apply to each request individually, not to an entire session.
-            You can pass an aiohttp.ClientTimeout object where you can specify detailed timeout settings. See the documentation at https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout.
+            When using the ``asyncio`` backend, you can pass an ``aiohttp.ClientTimeout`` object where you can specify detailed timeout settings. See `their documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout>`__.
             Alternatively, you can pass an integer that will be interpreted as total timeout for one request in seconds.
             If nothing is passed, a default timeout will be used.
-        :param backend: 'multithreading' (more stable, but most likely slower) or
-                        'asyncio' (faster when crawling many domains at once, but more unstable and may get hung).
-        :param parallel_processes: Number of concurrent processes/threads to use. This can be very large when using
-            the `asyncio` backend, but should not exceed 2x the CPU count on the machine running the crawling.
+        :param backend: ``multithreading`` (more stable, but most likely slower) or
+                        ``asyncio`` (faster when crawling many domains at once, but more unstable and may get hung).
+                        See also `Why are there two backends? <getting_started.html#why-are-there-two-backends>`__
+        :param parallel_processes: Number of concurrent processes/threads to use.
+            Can be very large when using the ``asyncio`` backend.
+            When using ``multithreading``, should not exceed 2x the CPU count on the machine running the crawling.
         :param validate_input_parameters: Whether to validate input parameters.
             Note that this validates that all URLs work and that the various attributes work together.
             However, the attributes themselves are also validated independently.
-            You will need to also pass validate=False to the attributes to completely disable input validation.
+            You will need to also pass ``validate=False`` to the attributes individually to completely disable input validation.
         """
         self.urls = [urls] if (type(urls) is str) else urls     # cast to list because validation expects list of urls
         
@@ -76,7 +78,7 @@ class Crawler:
     def run(self, export_immediately: bool = False) -> List[List[List[Any]]]:
         """Execute the crawling task and return the results.
 
-        :param export_immediately: May be used when crawling many sites at once. In order to prevent a `MemoryError`,
+        :param export_immediately: May be used when crawling many sites at once. In order to prevent a ``MemoryError``,
             data will be exported as soon as it is ready and then discarded to make room for the next domains.
         :return: The result is a list with three layers.
             The first layer has one entry per crawled domain (result = [domain1, domain2, ...]).
@@ -126,7 +128,7 @@ class Crawler:
         return self.data
 
     def run_and_export(self, export_attrs: ExportAttributes = None) -> None:
-        """Shorthand for Crawler.run(export_immediately=True).
+        """Shorthand for ``Crawler.run(export_immediately=True)``.
 
         :param export_attrs: Object specifying export parameters.
         """

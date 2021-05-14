@@ -32,43 +32,56 @@ def timing_decorator(method):
 
 
 class ProgressBar:
-    """Print a progress bar in the command line interface."""
-
     def __init__(self, total_length: int = 0,
                  progress: int = 0,
                  custom_message: str = "",
                  width_in_command_line: int = 100,
                  progress_char: str = "█",
                  remaining_char: str = "-"):
-        self.TOTAL_LENGTH = total_length
-        self.PROGRESS = progress
+        """Print a progress bar in the command line interface.
 
-        self.CUSTOM_MSG = custom_message
+        Default looks like this: ``Custom Message |██████████----------| 50.0% (5 / 10)``.
 
-        self.WIDTH_IN_COMMAND_LINE = width_in_command_line
+        :param total_length: Absolute length of concept (e.g. total download size = 20,000 bytes).
+        :param progress: Share of ``total_length`` already reached (e.g. 10,000 bytes already downloaded).
+        :param custom_message: String to appear to the left of the progress bar.
+        :param width_in_command_line: Number of characters used in print to display the progress bar.
+        :param progress_char: Character to use for filling the progress bar.
+        :param remaining_char: Character to use for the space not yet filled by progress.
+        """
+        self.total_length = total_length
+        self.progress = progress
 
-        self.PROGRESS_CHAR = progress_char
-        self.REMAINING_CHAR = remaining_char
+        self.custom_msg = custom_message
+
+        self.width_in_command_line = width_in_command_line
+
+        self.progress_char = progress_char
+        self.remaining_char = remaining_char
 
     def update(self, iterations: int = 1, total_length_update: int = 0):
-        """Update internal progress parameters."""
-        self.PROGRESS += iterations
-        self.TOTAL_LENGTH += total_length_update
+        """Update internal progress parameters.
+
+        :param iterations: Used to update :attr:`progress`.
+        :param total_length_update: Used to update :attr:`total_length`.
+        """
+        self.progress += iterations
+        self.total_length += total_length_update
 
         self.print()
 
     def print(self):
         """Print current progress on the command line."""
         try:
-            percentage = self.PROGRESS / self.TOTAL_LENGTH
+            percentage = self.progress / self.total_length
         except ZeroDivisionError:
             percentage = 0
 
-        no_progress_characters = int(percentage * self.WIDTH_IN_COMMAND_LINE)
-        no_remaining_characters = self.WIDTH_IN_COMMAND_LINE - no_progress_characters
+        no_progress_characters = int(percentage * self.width_in_command_line)
+        no_remaining_characters = self.width_in_command_line - no_progress_characters
 
-        progress_bar = self.PROGRESS_CHAR * no_progress_characters + self.REMAINING_CHAR * no_remaining_characters
+        progress_bar = self.progress_char * no_progress_characters + self.remaining_char * no_remaining_characters
 
-        progress_in_numbers = f"{round(percentage * 100, 2)}% ({self.PROGRESS} / {self.TOTAL_LENGTH})"     # e.g. "99.00% (99/100)"
+        progress_in_numbers = f"{round(percentage * 100, 2)}% ({self.progress} / {self.total_length})"     # e.g. "99.00% (99/100)"
 
-        print(f"\r{self.CUSTOM_MSG} |{progress_bar}| {progress_in_numbers}", end="")
+        print(f"\r{self.custom_msg} |{progress_bar}| {progress_in_numbers}", end="")

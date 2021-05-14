@@ -14,9 +14,11 @@ from scrawler.utils.web_utils import is_same_host, extract_same_host_pattern
 
 class SearchAttributes:
     def __init__(self, *args: BaseExtractor, validate: bool = True):
-        """Specify which data to collect/search for in the website
+        """Specify which data to collect/search for in the website.
 
-        :param args: Data extractors (see utils.data_extractors for possibilities)
+        :param args: Data extractors specifying which data to extract in websites
+            (see `built-in data extractors <built_in_data_extractors.html>`__  or for possibilities
+            or `define a custom data extractor <custom_data_extractors.html>`__).
         :param validate: Whether to make sure that input parameters are valid.
         """
         if validate:
@@ -28,10 +30,11 @@ class SearchAttributes:
         self.n_return_values: int = sum([extractor.n_return_values for extractor in self.attributes])
 
     def extract_all_attrs_from_website(self, website: Website, index: int = None) -> list:
-        """Extract data from a website using data extractors specified in SearchAttributes definition.
+        """Extract data from a website using data extractors specified in ``SearchAttributes`` definition.
 
-        :param website: Website object to collect the data points specified in search_attrs from.
+        :param website: Website object to collect the specified data points from.
         :param index: Optionally pass an index for data extractors that index into passed parameters.
+            See `this explanation <custom_data_extractors.html#dynamic-parameters>`__ for details.
         """
         extracted_data = []
 
@@ -59,17 +62,18 @@ class ExportAttributes:
         """Specify how and where to export the collected data.
 
         :param directory: Folder where file(s) will be saved to.
-        :param fn: Name(s) of the file(s) containing the crawled data. Without file extension.
+        :param fn: Name(s) of the file(s) containing the crawled data. *Without* file extension.
         :param header: Have the final CSV file have a header. Possible parameters:
-            If None or False, no header will be written.
-            Use "first-row" to use first row of data as header.
+            If ``None`` or ``False``, no header will be written.
+            If ``first-row`` or ``True``, uses first row of data as header.
             Else, pass list of strings of appropriate length.
         :param encoding: Encoding to use to create the CSV file.
         :param separator: Column separator or delimiter to use for creating the CSV file.
         :param quoting: Puts quotes around cells that contain the separator character.
         :param escapechar: Escapes the separator character.
         :param validate: Whether to make sure that input parameters are valid.
-        :param kwargs: Any parameter supported by pandas.DataFrame.to_csv() can be passed. See their documentation: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html
+        :param kwargs: Any parameter supported by ``pandas.DataFrame.to_csv()`` can be passed
+            (see `their documentation <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html>`__).
         """
         if validate:
             # Check that directory exists
@@ -114,29 +118,28 @@ class CrawlingAttributes:
                  ):
         """Specify how to conduct the crawling, e. g. how to filter irrelevant URLs or limits on the number of URLs crawled.
 
-        :param filter_non_standard_schemes: Filter URLs starting with schemes other than http: or https: (e.g., mailto: or javascript:).
-        :param filter_media_files: Whether to filter media files. Recommended: True to avoid long runtimes.
-        :param blocklist: Filter URLs that contain one or more of the parts specified here. Has to be a list.
+        :param filter_non_standard_schemes: Filter URLs starting with schemes other than ``http:`` or ``https:`` (e.g., ``mailto:`` or ``javascript:``).
+        :param filter_media_files: Whether to filter media files. Recommended: ``True`` to avoid long runtimes caused by large file downloads.
+        :param blocklist: Filter URLs that contain one or more of the parts specified here. Has to be a ``list``.
         :param filter_foreign_urls: Filter URLs that do not belong to the same host (foreign URLs).
-            Can either be a string that is passed to is_same_host(), or a custom callable that has to include two arguments, `url1`and `url2`.
-            The following string values are permitted:
-            If "auto", a matching pattern will be extracted from the start URL (will be either `fld` or `subdomainX`, see below).
-            Alternatively, you can manually specify the mode to one of these options:
-            Either any one of the attributes of the ParsedUrl class (e.g. `domain`, `hostname`, `fld`).
-            Alternatively, can be set to `subdomainX` with `X` representing an integer number up to which subdomain the URLs should be compared. E.g., comparing http://www.sub.example.com and http://blog.sub.example.com, 'sub' is the first level, while the second levels are 'www' and 'blog', respectively.
-            Or, can be set to `directoryX` with `X` representing an integer number up to which directory the URLs should be compared. E.g., for http://example.com/dir1/dir2/index.html, `directory2` would include all files in "dir2".
+            Can either be a string that is passed to :func:`.is_same_host`, or a custom ``Callable`` that has to include two arguments, ``url1`` and ``url2``.
+            In :func:`.is_same_host`, the following string values are permitted:
+            1. ``auto``: Automatically extracts a matching pattern from the start URL (see :func:`.extract_same_host_pattern` for details).
+            2. Any one of the attributes of the :class:`.ParsedUrl` class (e.g. ``domain``, ``hostname``, ``fld``).
+            3. ``subdomainX`` with ``X`` representing an integer number up to which subdomain the URLs should be compared. E.g., comparing ``http://www.sub.example.com`` and ``http://blog.sub.example.com``, ``sub`` is the first level, while the second levels are ``www`` and ``blog``, respectively.
+            4. ``directoryX`` with ``X`` representing an integer number up to which directory the URLs should be compared. E.g., for ``http://example.com/dir1/dir2/index.html``, ``directory2`` would include all files in ``dir2``.
 
-        :param strip_url_parameters: Whether to strip URL query parameters (prefixed by '?') from the URL.
-        :param strip_url_fragments: Whether to strip URL fragments (prefixed by '#') from the URL.
+        :param strip_url_parameters: Whether to strip URL query parameters (prefixed by ``?``) from the URL.
+        :param strip_url_fragments: Whether to strip URL fragments (prefixed by ``#``) from the URL.
 
-        :param max_no_urls: Maximum number of URLs to be crawled per domain (safety limit for very large crawls). Set to None if you want all URLs to be crawled.
-        :param max_distance_from_start_url: Maximum number of links that have to be followed to arrive at a certain URL from the start_url.
-        :param max_subdirectory_depth: Maximum sub-level of the host up to which to crawl. E.g., consider this schema: hostname/sub-directory1/sub-siteA.
-            If you would want to crawl all URLs of the same level as 'sub-directory1', specify 1.
-            sub-siteA will then not be found, but a site hostname/sub-directory2 or hostname/sub-siteB will be.
+        :param max_no_urls: Maximum number of URLs to be crawled per domain (safety limit for very large crawls). Set to ``None`` if you want all URLs to be crawled.
+        :param max_distance_from_start_url: Maximum number of links that have to be followed to arrive at a certain URL from the start URL.
+        :param max_subdirectory_depth: Maximum sub-level of the host up to which to crawl. E.g., consider this schema: ``hostname/sub-directory1/sub-siteA``.
+            If you would want to crawl all URLs of the same level as ``sub-directory1``, specify 1.
+            ``sub-siteA`` will then not be found, but a site ``hostname/sub-directory2`` or ``hostname/sub-siteB`` will be.
 
-        :param pause_time: Time to wait between the crawling of 2 URLs (in seconds). This pause is mostly to avoid being flagged as spammer by websites.
-        :param respect_robots_txt: Whether to respect the specifications made in the website's robots.txt file.
+        :param pause_time: Time to wait between the crawling of two URLs (in seconds).
+        :param respect_robots_txt: Whether to respect the specifications made in the website's ``robots.txt`` file.
         """
         if validate:
             # Check that a valid input is passed to parameter filter_foreign_url

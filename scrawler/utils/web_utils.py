@@ -31,19 +31,19 @@ async def async_get_html(url: str, session: aiohttp.ClientSession,
     """Collect HTML text of a given URL.
 
     :param url: URL to retrieve the HTML from.
-    :param session: aiohttp.ClientSession to be used for making the request asynchronously.
-    :param user_agent: Allows to optionally specify a different user agent than the default Python user agent. Useful if websites refuse connection to Python crawlers.
-    :param verify: Whether to verify the server's TLS certificate. Useful if TLS connections fail, but should in general be 'True' to avoid man-in-the-middle attacks.
-    :param max_content_length: Check the HTTP header for the attribute 'content-length'. If it is bigger than this specified parameter, a ValueError is raised. Set to -1 when not needed.
-    :param check_http_content_type: Check the HTTP header for the attribute 'content-type'. If it does not include 'text', a ValueError is raised.
+    :param session: ``aiohttp.ClientSession`` to be used for making the request asynchronously.
+    :param user_agent: Allows to optionally specify a different user agent than the default Python user agent.
+    :param verify: Whether to verify the server's TLS certificate. Useful if TLS connections fail, but should in general be ``True`` to avoid man-in-the-middle attacks.
+    :param max_content_length: Check the HTTP header for the attribute ``content-length``. If it is bigger than this specified parameter, a ValueError is raised. Set to ``-1`` when not needed.
+    :param check_http_content_type: Whether to check the HTTP header field ``content-type``. If it does not include ``text``, a ValueError is raised.
     :param return_response_object: If True, also returns the ClientResponse object from the GET request.
     :param raise_for_status: If True, raise an HTTPError if the HTTP request returned an unsuccessful status code.
-    :param kwargs: Will be passed on to aiohttp.get(), see documentation here: https://docs.aiohttp.org/en/v3.7.3/client_reference.html#aiohttp.ClientSession.get.
+    :param kwargs: Will be passed on to ``aiohttp.ClientSession.get()``, see `aiohttp's documentation <https://docs.aiohttp.org/en/v3.7.3/client_reference.html#aiohttp.ClientSession.get>`__.
     :return: HTML text from the given URL. Optionally also returns the HTTP response object.
     :raises aiohttp.ClientError, aiohttp.HTTPError, ValueError:
-        Errors derived from aiohttp.ClientError include InvalidURL, ClientConnectionError and ClientResponseError.
-        May optionally raise aiohttp.HTTPError (if raise_for_status is True)
-        or ValueError (if check_http_content_type or max_content_length are True).
+        Errors derived from ``aiohttp.ClientError`` include ``InvalidURL``, ``ClientConnectionError`` and ``ClientResponseError``.
+        May optionally raise ``aiohttp.HTTPError`` (if ``raise_for_status`` is ``True``)
+        or ValueError (if ``check_http_content_type`` or ``max_content_length`` are ``True``).
     """
     headers = None if (user_agent is None) else {"user_agent": user_agent}
 
@@ -71,11 +71,12 @@ async def async_get_html(url: str, session: aiohttp.ClientSession,
 
 
 def extract_same_host_pattern(base_url: str) -> str:
-    """Looks at the passed base/start URL to determine which mode for `is_same_host()` is appropriate.
-        First looks at whether the start URL contains a non-empty path. If one is found, the number of directories `X` is counted and `directoryX` is returned.
-        Otherwise, check whether the URL contains subdomains. If found, the number of subdomains `X` is counted and `subdomainX` is returned.
-        If neither exist, returns `fld`.
-        Refer also to the documentation for `is_same_host()`.
+    """Looks at the passed base/start URL to determine which mode for :func:`is_same_host` is appropriate.
+        First looks at whether the given URL contains a non-empty path. If one is found, the number of directories ``X`` is counted and ``directoryX`` is returned.
+        Otherwise, check whether the URL contains subdomains. If found, the number of subdomains ``X`` is counted and ``subdomainX`` is returned.
+        If neither exist, returns ``fld``.
+
+        .. seealso:: :func:`is_same_host`
     """
     u = ParsedUrl(base_url)
 
@@ -106,16 +107,16 @@ def filter_urls(urls: Iterable,
     """Filter a list of URLs along some given attributes.
 
     :param urls: List of URLs to filter.
-    :param filter_non_standard_schemes: If True, makes sure that the URLs start with 'http:' or 'https:'.
-    :param filter_media_files: If True, discards URLs having media file extensions like '.pdf' or '.jpeg'. For details, see the is_media() function.
+    :param filter_non_standard_schemes: If ``True``, makes sure that the URLs start with ``http:`` or ``https:``.
+    :param filter_media_files: If ``True``, discards URLs having media file extensions like ``.pdf`` or ``.jpeg``. For details, see :func:`is_media_file`.
     :param blocklist: Specify a list of words or parts that if they appear in a URL, the URL will be discarded (e. g. 'git.', datasets.').
     :param filter_foreign_urls: Specify how to detect foreign URLs.
-        Can either be a string that is passed to is_same_host(), or a custom callable that has to include two arguments, `url1`and `url2`.
-        For details on possible strings for is_same_host() see its documentation.
-        Note that the base_url parameter has to be passed for this to work.
-    :param base_url: Used in conjunction with the filter_foreign_urls parameter to detect foreign URLs.
-    :param return_discarded: If True, also returns to discarded URLs.
-    :return: Set containing URLs that were not filtered.
+        Can either be a string that is passed to :func:`is_same_host()`, or a custom ``Callable`` that has to include two arguments, ``url1`` and ``url2``.
+        For details on possible strings for :func:`is_same_host()` see its documentation.
+        Note that the ``base_url`` parameter has to be passed for this to work.
+    :param base_url: Used in conjunction with the ``filter_foreign_urls`` parameter to detect foreign URLs.
+    :param return_discarded: If ``True``, also returns to discarded URLs.
+    :return: ``Set`` containing URLs that were not filtered. Optionally also returns discarded URLs.
     """
     filtered, discarded = set(), set()
     for url in urls:
@@ -163,18 +164,18 @@ def get_html(url: str, timeout: int = DEFAULT_REQUEST_TIMEOUT, user_agent: str =
     """Collect HTML text of a given URL.
 
     :param url: URL to retrieve the HTML from.
-    :param timeout: If the server does not answer for the number of seconds specified here, a TimeoutError is raised.
-    :param user_agent: Allows to optionally specify a different user agent than the default Python user agent. Useful if websites refuse connection to Python crawlers.
-    :param verify: Whether to verify the server's TLS certificate. Useful if TLS connections fail, but should in general be 'True' to avoid man-in-the-middle attacks.
-    :param stream: If True, only the header of the response is retrieved. This allows for HTTP content type checking before actually retrieving the content. See also here: https://2.python-requests.org/en/master/user/advanced/#id9.
-    :param max_content_length: Check the HTTP header for the attribute 'content-length'. If it is bigger than this specified parameter, a ValueError is raised. Set to -1 when not needed.
-    :param check_http_content_type: Check the HTTP header for the attribute 'content-type'. If it does not include 'text', a ValueError is raised.
-    :param return_response_object: If True, also returns the Response object from the GET request.
-    :param raise_for_status: If True, raise an HTTPError if the HTTP request returned an unsuccessful status code.
+    :param timeout: If the server does not answer for the number of seconds specified here, a ``TimeoutError`` is raised.
+    :param user_agent: Allows to optionally specify a different user agent than the default Python user agent.
+    :param verify: Whether to verify the server's TLS certificate. Useful if TLS connections fail, but should in general be ``True`` to avoid man-in-the-middle attacks.
+    :param stream: If ``True``, only the header of the response is retrieved. This allows for HTTP content type checking before actually retrieving the content. For details see the `Requests documentation <https://2.python-requests.org/en/master/user/advanced/#id9>`__.
+    :param max_content_length: Check the HTTP header for the attribute ``content-length``. If it is bigger than this specified parameter, a ``ValueError`` is raised. Set to ``-1`` when not needed.
+    :param check_http_content_type: Check the HTTP header for the attribute ``content-type``. If it does not include 'text', a ``ValueError`` is raised.
+    :param return_response_object: If ``True``, also returns the ``Response`` object from the GET request.
+    :param raise_for_status: If ``True``, raise an ``HTTPError`` if the HTTP request returned an unsuccessful status code.
     :return: HTML text from the given URL.
     :raises ConnectionError, Timeout, other RequestExceptions, HTTPError, ValueError: Raises some errors from the
-        requests library when retrieval errors occur. Optionally raises HTTPError (the raise_for_status is True) and
-        ValueErrors (if check_http_content_type or max_content_length are True).
+        requests library when retrieval errors occur. Optionally raises ``HTTPError`` (if ``raise_for_status`` is ``True``) and
+        ``ValueError``s (if ``check_http_content_type`` or ``max_content_length`` are ``True``).
     """
     response = requests.get(url, timeout=timeout, stream=stream, verify=verify, headers={"user_agent": user_agent})
 
@@ -210,10 +211,10 @@ async def async_get_redirected_url(url: str, session: aiohttp.ClientSession, max
     """Find final, redirected URL. Supports both HTTP redirects and HTML redirects. Also follows up on multiple redirects.
 
     :param url: Original URL.
-    :param session: aiohttp.ClientSession to be used for making the request asynchronously.
-    :param max_redirects_to_follow: Maximum number of redirects to follow to guard against infinite redirects. If limit is reached, None is returned.
-    :param kwargs: Passed on to `async_get_html()`.
-    :returns: URL after redirects. If URL is invalid or an error occurs, returns None.
+    :param session: ``aiohttp.ClientSession`` to be used for making the request asynchronously.
+    :param max_redirects_to_follow: Maximum number of redirects to follow to guard against infinite redirects. If limit is reached, ``None`` is returned.
+    :param kwargs: Passed on to :func:`async_get_html`.
+    :returns: URL after redirects. If URL is invalid or an error occurs, returns ``None``.
     """
     redirect_counter = 0
 
@@ -252,9 +253,9 @@ def get_redirected_url(url: str, max_redirects_to_follow: int = 100, **kwargs) -
     """Find final, redirected URL. Supports both HTTP redirects and HTML redirects. Also follows up on multiple redirects.
 
     :param url: Original URL.
-    :param max_redirects_to_follow: Maximum number of redirects to follow to guard against infinite redirects. If limit is reached, None is returned.
-    :param kwargs: Passed on to `get_html()`.
-    :returns: URL after redirects. If URL is invalid or an error occurs, returns None.
+    :param max_redirects_to_follow: Maximum number of redirects to follow to guard against infinite redirects. If limit is reached, ``None`` is returned.
+    :param kwargs: Passed on to :func:`get_html`.
+    :returns: URL after redirects. If URL is invalid or an error occurs, returns ``None``.
     """
     redirect_counter = 0
 
@@ -289,11 +290,12 @@ def get_redirected_url(url: str, max_redirects_to_follow: int = 100, **kwargs) -
 
 
 async def async_get_robot_file_parser(start_url: str, session: aiohttp.ClientSession, **kwargs) -> Union[RobotFileParser, None]:
-    """Returns RobotFileParser object from given URL. If no robots.txt file is found or error occurs, returns None.
+    """Returns ``RobotFileParser`` object (`Python doc <https://docs.python.org/3/library/urllib.robotparser.html#urllib.robotparser.RobotFileParser>`__) from given URL.
+    If no ``robots.txt`` file is found or error occurs, returns ``None``.
 
-    :param start_url: URL from which robots.txt will be collected.
-    :param session: aiohttp.ClientSession() to use for making the request.
-    :param kwargs: Will be passed to `get_html()`.
+    :param start_url: URL from which ``robots.txt`` will be collected.
+    :param session: ``aiohttp.ClientSession`` to use for making the request.
+    :param kwargs: Will be passed to :func:`get_html`.
     :returns:
     """
     try:
@@ -315,10 +317,13 @@ async def async_get_robot_file_parser(start_url: str, session: aiohttp.ClientSes
 
 
 def get_robot_file_parser(start_url: str, **kwargs) -> Union[RobotFileParser, None]:
-    """Returns RobotFileParser object from given URL. If no robots.txt file is found or error occurs, returns None.
+    """Returns :class:`.RobotFileParser` object (`Python doc <https://docs.python.org/3/library/urllib.robotparser.html#urllib.robotparser.RobotFileParser>`__) from given URL.
+    If no ``robots.txt`` file is found or error occurs, returns ``None``.
 
-    :param start_url: URL from which robots.txt will be collected.
-    :param kwargs: Will be passed to `get_html()`.
+    :param start_url: URL from which ``robots.txt`` will be collected.
+    :param kwargs: Will be passed to :func:`get_html`.
+
+    .. seealso:: :func:`async_get_robot_file_parser`
     """
     try:
         parsed_url = ParsedUrl(start_url)
@@ -343,12 +348,12 @@ def get_robot_file_parser(start_url: str, **kwargs) -> Union[RobotFileParser, No
 def get_directory_depth(url: str) -> Union[int, None]:
     """
     Returns the directory level that a given document is in.
-    For example, "https://example.com/en/directoryA/document.html" returns 3,
-    because the 'document.html' is 3 directories deep into the website's structure.
-    Further, "https://example.com/en/" returns 1 (the trailing '/' is ignored), and "https://example.com" returns 0.
+    For example, ``https://example.com/en/directoryA/document.html`` returns 3,
+    because the ``document.html`` is 3 directories deep into the website's structure.
+    Further, ``https://example.com/en/`` returns 1 (the trailing ``/`` is ignored), and ``https://example.com`` returns 0.
 
     :param url: URL to be checked which subdirectory is used.
-    :return: Subdirectory level as path depth. If the URL is invalid, returns None.
+    :return: Subdirectory level as path depth. If the URL is invalid, returns ``None``.
     """
     if url.endswith("/"):   # to ensure that path does not end with '/', making the length bigger than it is
         url = url[:-1]
@@ -365,13 +370,13 @@ def is_media_file(url: str, disallow_approach: bool = False, check_http_header: 
     Checks whether the URL ends in a file extension on an allowlist, indicating it is not a media file.
 
     :param url: URL to be checked.
-    :param disallow_approach: If True, uses a blocklist-approach, where file extensions known to be media file extensions are blocked.
-        Note that while the blocklist used covers the most frequent file extensions, it certainly not complete.
+    :param disallow_approach: If ``True``, uses a blocklist-approach, where file extensions known to be media file extensions are blocked.
+        Note that while the blocklist used covers the most frequent file extensions, it certainly is not complete.
         Using the default allowlist-approach will guarantee no URLs with any but a text file extension are processed.
-    :param check_http_header: Look up the HTTP header attribute `content-type` and checks whether it contains "text/html".
+    :param check_http_header: Look up the HTTP header attribute ``content-type`` and checks whether it contains ``text/html``.
         Note that enabling this would make the function execute much slower, because an HTTP request is made
         instead of just checking a string.
-    :return: True/False
+    :return: ``True``/``False``
     """
     if check_http_header:
         try:
@@ -412,10 +417,10 @@ def is_same_host(url1: str, url2: str, mode: str = "hostname") -> bool:
     :param url1: First URL to compare.
     :param url2: Second URL to compare.
     :param mode: String describing which URL parts to check for equality.
-        Can either be any one of the attributes of the ParsedUrl class (e.g. `domain`, `hostname`, `fld`).
-        Alternatively, can be set to `subdomainX` with `X` representing an integer number up to which subdomain the URLs should be compared. E.g., comparing http://www.sub.example.com and http://blog.sub.example.com, 'sub' is the first level, while the second levels are 'www' and 'blog', respectively.
-        Or, can be set to `directoryX` with `X` representing an integer number up to which directory the URLs should be compared. E.g., for http://example.com/dir1/dir2/index.html, `directory2` would include all files in "dir2".
-    :return: True or False. If exceptions occur, the method returns False.
+        Can either be any one of the attributes of the ParsedUrl class (e.g. ``domain``, ``hostname``, ``fld``).
+        Alternatively, can be set to ``subdomainX`` with ``X`` representing an integer number up to which subdomain the URLs should be compared. E.g., comparing ``http://www.sub.example.com`` and ``http://blog.sub.example.com``, ``sub`` is the first level, while the second levels are ``www`` and ``blog``, respectively.
+        Or, can be set to ``directoryX`` with ``X`` representing an integer number up to which directory the URLs should be compared. E.g., for ``http://example.com/dir1/dir2/index.html``, ``directory2`` would include all files in ``dir2``.
+    :return: ``True`` or ``False``. If exceptions occur, the method returns ``False``.
     :raises ValueError: If invalid mode is specified.
     """
     try:
@@ -449,17 +454,13 @@ def is_same_host(url1: str, url2: str, mode: str = "hostname") -> bool:
             raise ValueError(f"Invalid comparison mode in is_same_host(): {mode}. The comparison attribute you specified does not exist on ParsedUrl. Has to be one of the following: {ParsedUrl.__slots__}")
 
 
-def remove_trailing_slash(url: str) -> str:
-    return url[:-1] if url.endswith("/") else url
-
-
 def strip_unnecessary_url_parts(urls: Iterable, parameters: bool = False, fragments: bool = True) -> set:
-    """
-    Strip unnecessary URL parts.
+    """Strip unnecessary URL parts.
+
     :param urls: URLs to be stripped (can be any Iterable).
-    :param parameters: If True, strips URL query parameters (always start with a '?') from the URL.
-    :param fragments: If True, strips URL fragments (introduced with '#'), except for relevant fragments using Google's hash bang syntax.
-    :return: URL without (query) parameters.
+    :param parameters: If ``True``, strips URL query parameters (always start with a ``?``) from the URL.
+    :param fragments: If ``True``, strips URL fragments (introduced with ``#``), except for relevant fragments using Google's hash bang syntax.
+    :return: Iterable of URLs, optionally without (query) parameters.
     """
     stripped = set()
     for url in urls:
@@ -479,11 +480,11 @@ class ParsedUrl:
 
     def __init__(self, url: str):
         """Parse a URL string into its various parts.
-        Basically a wrapper around tld.Result to make accessing elements easier.
+        Basically a wrapper around ``tld.Result`` to make accessing elements easier.
 
         :param url: URL string to parse.
-        :param fail_silently: Returns None instead of raising an exception.
-        :raises Exception: Exceptions from TLD package if the URL is invalid.
+        :param fail_silently: Returns ``None`` instead of raising an exception.
+        :raises Exception: Exceptions from `TLD package <https://github.com/barseghyanartur/tld>`__ if the URL is invalid.
         """
         url_object = tld.get_tld(url, as_object=True)
 
