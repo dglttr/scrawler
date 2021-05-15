@@ -6,9 +6,11 @@ try:
 except IOError:
     readme = ""
 
+VERSION = "0.3.0"
+
 setup(
     name='scrawler',
-    version='0.3.0',
+    version=VERSION,
     packages=find_packages(),
     url='https://github.com/dglttr/scrawler',
     project_urls={
