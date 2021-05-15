@@ -185,19 +185,19 @@ documentation</a>
 for how to extract data from it). Because <a class="reference internal" href="reference.html#scrawler.website.Website" title="scrawler.website.Website"><code class="xref py py-class docutils literal notranslate"><span class="pre">Website</span></code></a> extends
 <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code>, you can directly execute BeautifulSoup methods on
 the website object.</p></li>
-<li><p>The HTTP response object (<code class="docutils literal notranslate"><span class="pre">http_response</span></code> attribute) as <a class="reference external" href="https://docs.python-requests.org/en/master/api/#requests.Response" title="(in Requests v2.25.1)"><code class="docutils literal notranslate"><span class="pre">requests.Response</span></code></a> or <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientResponse" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientResponse</span></code></a>
+<li><p>The HTTP response object (<code class="xref py py-attr docutils literal notranslate"><span class="pre">http_response</span></code> attribute) as <a class="reference external" href="https://docs.python-requests.org/en/master/api/#requests.Response" title="(in Requests v2.25.1)"><code class="docutils literal notranslate"><span class="pre">requests.Response</span></code></a> or <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientResponse" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientResponse</span></code></a>
 (depending on whether you are using the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> or <code class="docutils literal notranslate"><span class="pre">multithreading</span></code> backend).</p></li>
-<li><p>The website’s raw URL (<code class="docutils literal notranslate"><span class="pre">url</span></code> attribute) and parsed URL
-(<code class="docutils literal notranslate"><span class="pre">parsed_url</span></code> attribute) parts (as <a class="reference internal" href="reference.html#scrawler.utils.web_utils.ParsedUrl" title="scrawler.utils.web_utils.ParsedUrl"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a> object).</p></li>
+<li><p>The website’s raw URL (<code class="xref py py-attr docutils literal notranslate"><span class="pre">url</span></code> attribute) and parsed URL
+(<code class="xref py py-attr docutils literal notranslate"><span class="pre">parsed_url</span></code> attribute) parts (as <a class="reference internal" href="reference.html#scrawler.utils.web_utils.ParsedUrl" title="scrawler.utils.web_utils.ParsedUrl"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a> object).</p></li>
 </ol>
 </div>
 <div class="section" id="basic-structure">
 <h2>Basic structure<a class="headerlink" href="#basic-structure" title="Permalink to this headline">¶</a></h2>
 <p>Data extractors must inherit from <a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a> and implement two methods:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code>: Where parameters to the extractor can be passed and
+<li><p><a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor.__init__" title="scrawler.data_extractors.BaseExtractor.__init__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__init__()</span></code></a>: Where parameters to the extractor can be passed and
 are stored in object attributes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">run()</span></code>: To do the extraction. Make sure that the method signature
+<li><p><a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor.run" title="scrawler.data_extractors.BaseExtractor.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a>: To do the extraction. Make sure that the method signature
 is the same as for <a class="reference internal" href="reference.html#scrawler.data_extractors.BaseExtractor" title="scrawler.data_extractors.BaseExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExtractor</span></code></a>, i.e. two parameters can be
 passed, <code class="docutils literal notranslate"><span class="pre">website</span></code> and <code class="docutils literal notranslate"><span class="pre">index</span></code> as an optional parameter.</p></li>
 </ul>
