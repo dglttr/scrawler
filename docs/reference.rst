@@ -66,6 +66,8 @@ data_extractors
    .. autoclass:: BaseExtractor
       :members:
 
+      .. automethod:: __init__
+
    .. autofunction:: supports_dynamic_parameters
 
 scraping
