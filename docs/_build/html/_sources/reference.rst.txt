@@ -41,7 +41,9 @@ web_utils
 ~~~~~~~~~
 .. automodule:: scrawler.utils.web_utils
    :members:
-   :undoc-members:
+
+   .. autoclass:: ParsedUrl
+      :members:
 
 attributes
 ----------

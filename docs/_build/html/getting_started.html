@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Getting Started &mdash; scrawler 0.2.1 documentation</title>
+  <title>Getting Started &mdash; scrawler 0.3.0 documentation</title>
   
 
   
@@ -300,10 +300,6 @@ various parameters are geared towards the CSV format.</p>
 You don’t have to specify the file extension <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, since the files will always be CSV files
 (for example, use <code class="docutils literal notranslate"><span class="pre">crawled_data</span></code> instead of <code class="docutils literal notranslate"><span class="pre">crawled_data.csv</span></code>).</p></li>
 </ul>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a>: More detailed documentation.</p>
-</div>
 <p>Here’s an exemplary <a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> object creation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">ExportAttributes</span>
 
@@ -314,6 +310,10 @@ You don’t have to specify the file extension <code class="docutils literal not
     <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
 <span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="reference.html#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a>: More detailed documentation.</p>
 </div>
 </div>
 <div class="section" id="crawling-attributes">
@@ -355,10 +355,6 @@ out.</p></li>
 can be passed an integer as the maximum total amount of URLs to be
 crawled.</p></li>
 </ul>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a>: More detailed documentation.</p>
-</div>
 <p>Here’s an exemplary <a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a> object creation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">CrawlingAttributes</span>
 
@@ -382,7 +378,7 @@ crawled.</p></li>
 
 
 <span class="k">def</span> <span class="nf">should_be_crawled</span><span class="p">(</span><span class="n">url1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;My custom foreign URL filter: Crawl all URLs from host `www.blog.example.com` inside the directory `my_directory`.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Custom foreign URL filter: Crawl all URLs from host `www.blog.example.com` inside the directory `my_directory`.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>  <span class="c1"># don&#39;t forget exception handling</span>
         <span class="n">url1</span> <span class="o">=</span> <span class="n">ParsedUrl</span><span class="p">(</span><span class="n">url1</span><span class="p">)</span>
         <span class="n">url2</span> <span class="o">=</span> <span class="n">ParsedUrl</span><span class="p">(</span><span class="n">url2</span><span class="p">)</span>
@@ -400,6 +396,10 @@ crawled.</p></li>
     <span class="n">max_no_urls</span><span class="o">=</span><span class="mi">1000</span>
 <span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="reference.html#scrawler.attributes.CrawlingAttributes" title="scrawler.attributes.CrawlingAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrawlingAttributes</span></code></a>: More detailed documentation.</p>
 </div>
 </div>
 <div class="section" id="other-settings">

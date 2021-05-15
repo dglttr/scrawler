@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Reference &mdash; scrawler 0.2.1 documentation</title>
+  <title>Reference &mdash; scrawler 0.3.0 documentation</title>
   
 
   
@@ -458,70 +458,28 @@ parameter allows to specify an interval of files that should be read in, e. g. t
 Basically a wrapper around <code class="docutils literal notranslate"><span class="pre">tld.Result</span></code> to make accessing elements easier.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> – URL string to parse.</p></li>
-<li><p><strong>fail_silently</strong> – Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> instead of raising an exception.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>url</strong> – URL string to parse.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><strong>Exception</strong></a> – Exceptions from <a class="reference external" href="https://github.com/barseghyanartur/tld">TLD package</a> if the URL is invalid.</p>
 </dd>
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> – Entire URL. In the following, this example URL is used to illustrate the various URL parts:
+<code class="docutils literal notranslate"><span class="pre">http://username:password&#64;some.subdomain.example.co.uk/path1/path2?param=&quot;abc&quot;#xyz</span></code></p></li>
+<li><p><strong>domain</strong> – <code class="docutils literal notranslate"><span class="pre">example</span></code></p></li>
+<li><p><strong>subdomain</strong> – <code class="docutils literal notranslate"><span class="pre">some.subdomain</span></code></p></li>
+<li><p><strong>fld</strong> – <code class="docutils literal notranslate"><span class="pre">example.co.uk</span></code></p></li>
+<li><p><strong>tld</strong> – <code class="docutils literal notranslate"><span class="pre">co.uk</span></code></p></li>
+<li><p><strong>scheme</strong> – <code class="docutils literal notranslate"><span class="pre">http</span></code></p></li>
+<li><p><strong>netloc</strong> – <code class="docutils literal notranslate"><span class="pre">username:password&#64;some.subdomain.example.co.uk</span></code></p></li>
+<li><p><strong>hostname</strong> – <code class="docutils literal notranslate"><span class="pre">some.subdomain.example.co.uk</span></code></p></li>
+<li><p><strong>path</strong> – <code class="docutils literal notranslate"><span class="pre">/path1/path2</span></code></p></li>
+<li><p><strong>query</strong> – <code class="docutils literal notranslate"><span class="pre">param=&quot;abc&quot;</span></code></p></li>
+<li><p><strong>fragment</strong> – <code class="docutils literal notranslate"><span class="pre">xyz</span></code></p></li>
+</ul>
+</dd>
 </dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.domain">
-<span class="sig-name descname"><span class="pre">domain</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.domain" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.fld">
-<span class="sig-name descname"><span class="pre">fld</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.fld" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.fragment">
-<span class="sig-name descname"><span class="pre">fragment</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.fragment" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.hostname">
-<span class="sig-name descname"><span class="pre">hostname</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.hostname" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.netloc">
-<span class="sig-name descname"><span class="pre">netloc</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.netloc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.path">
-<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.query">
-<span class="sig-name descname"><span class="pre">query</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.query" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.scheme">
-<span class="sig-name descname"><span class="pre">scheme</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.scheme" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.subdomain">
-<span class="sig-name descname"><span class="pre">subdomain</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.subdomain" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.tld">
-<span class="sig-name descname"><span class="pre">tld</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.tld" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scrawler.utils.web_utils.ParsedUrl.url">
-<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#scrawler.utils.web_utils.ParsedUrl.url" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py function">
@@ -769,7 +727,7 @@ instead of just checking a string.</p></li>
 <li><p><strong>url1</strong> – First URL to compare.</p></li>
 <li><p><strong>url2</strong> – Second URL to compare.</p></li>
 <li><p><strong>mode</strong> – String describing which URL parts to check for equality.
-Can either be any one of the attributes of the ParsedUrl class (e.g. <code class="docutils literal notranslate"><span class="pre">domain</span></code>, <code class="docutils literal notranslate"><span class="pre">hostname</span></code>, <code class="docutils literal notranslate"><span class="pre">fld</span></code>).
+Can either be any one of the attributes of the <a class="reference internal" href="#scrawler.utils.web_utils.ParsedUrl" title="scrawler.utils.web_utils.ParsedUrl"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a> class (e.g. <code class="docutils literal notranslate"><span class="pre">domain</span></code>, <code class="docutils literal notranslate"><span class="pre">hostname</span></code>, <code class="docutils literal notranslate"><span class="pre">fld</span></code>).
 Alternatively, can be set to <code class="docutils literal notranslate"><span class="pre">subdomainX</span></code> with <code class="docutils literal notranslate"><span class="pre">X</span></code> representing an integer number up to which subdomain the URLs should be compared. E.g., comparing <code class="docutils literal notranslate"><span class="pre">http://www.sub.example.com</span></code> and <code class="docutils literal notranslate"><span class="pre">http://blog.sub.example.com</span></code>, <code class="docutils literal notranslate"><span class="pre">sub</span></code> is the first level, while the second levels are <code class="docutils literal notranslate"><span class="pre">www</span></code> and <code class="docutils literal notranslate"><span class="pre">blog</span></code>, respectively.
 Or, can be set to <code class="docutils literal notranslate"><span class="pre">directoryX</span></code> with <code class="docutils literal notranslate"><span class="pre">X</span></code> representing an integer number up to which directory the URLs should be compared. E.g., for <code class="docutils literal notranslate"><span class="pre">http://example.com/dir1/dir2/index.html</span></code>, <code class="docutils literal notranslate"><span class="pre">directory2</span></code> would include all files in <code class="docutils literal notranslate"><span class="pre">dir2</span></code>.</p></li>
 </ul>
@@ -1753,6 +1711,19 @@ Note that this is an optional parameter used in conjunction with the Crawler obj
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p>Exceptions raised during URL parsing.</p>
+</dd>
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> – Website URL.</p></li>
+<li><p><strong>parsed_url</strong> – <a class="reference internal" href="#scrawler.utils.web_utils.ParsedUrl" title="scrawler.utils.web_utils.ParsedUrl"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a> object for accessing the various URL parts (hostname, domain, path, …).</p></li>
+<li><p><strong>html_text</strong> – Website’s HTML text as a string. Only available after retrieving the Website using <a class="reference internal" href="#scrawler.website.Website.fetch" title="scrawler.website.Website.fetch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch()</span></code></a> or <a class="reference internal" href="#scrawler.website.Website.fetch_async" title="scrawler.website.Website.fetch_async"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_async()</span></code></a>.</p></li>
+<li><p><strong>http_response</strong> – HTTP response as <a class="reference external" href="https://docs.python-requests.org/en/master/api/#requests.Response" title="(in Requests v2.25.1)"><code class="docutils literal notranslate"><span class="pre">requests.Response</span></code></a> or <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientResponse" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientResponse</span></code></a> (depending on whether the website was fetched with <a class="reference internal" href="#scrawler.website.Website.fetch" title="scrawler.website.Website.fetch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch()</span></code></a> or <a class="reference internal" href="#scrawler.website.Website.fetch_async" title="scrawler.website.Website.fetch_async"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_async()</span></code></a>).
+Only available after retrieving the Website using <a class="reference internal" href="#scrawler.website.Website.fetch" title="scrawler.website.Website.fetch"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch()</span></code></a> or <a class="reference internal" href="#scrawler.website.Website.fetch_async" title="scrawler.website.Website.fetch_async"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_async()</span></code></a>.</p></li>
+<li><p><strong>steps_from_start_page</strong> – Number of steps from start URL to reach the URL in crawlings.
+This has to be passed during object initialization, which is done automatically in
+<a class="reference internal" href="#scrawler.backends.multithreading_backend.crawl_domain" title="scrawler.backends.multithreading_backend.crawl_domain"><code class="xref py py-func docutils literal notranslate"><span class="pre">crawl_domain()</span></code></a> and <a class="reference internal" href="#scrawler.backends.asyncio_backend.async_crawl_domain" title="scrawler.backends.asyncio_backend.async_crawl_domain"><code class="xref py py-func docutils literal notranslate"><span class="pre">async_crawl_domain()</span></code></a>.</p></li>
+<li><p><strong>Others</strong> – Other variables/attributes from <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a>.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
