@@ -12,9 +12,8 @@
 #
 import os
 import sys
-from setup import VERSION
 sys.path.insert(0, os.path.abspath('..'))
-
+from global_variables import VERSION
 
 # -- Project information -----------------------------------------------------
 

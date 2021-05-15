@@ -1,12 +1,11 @@
 from setuptools import setup, find_packages
+from global_variables import VERSION
 
 try:
     with open("README.rst") as f:
         readme = f.read()
 except IOError:
     readme = ""
-
-VERSION = "0.3.0"
 
 setup(
     name='scrawler',
