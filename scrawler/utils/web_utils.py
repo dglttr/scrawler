@@ -426,7 +426,7 @@ def is_same_host(url1: str, url2: str, mode: str = "hostname") -> bool:
     :param url1: First URL to compare.
     :param url2: Second URL to compare.
     :param mode: String describing which URL parts to check for equality.
-        Can either be any one of the attributes of the ParsedUrl class (e.g. ``domain``, ``hostname``, ``fld``).
+        Can either be any one of the attributes of the :class:`ParsedUrl` class (e.g. ``domain``, ``hostname``, ``fld``).
         Alternatively, can be set to ``subdomainX`` with ``X`` representing an integer number up to which subdomain the URLs should be compared. E.g., comparing ``http://www.sub.example.com`` and ``http://blog.sub.example.com``, ``sub`` is the first level, while the second levels are ``www`` and ``blog``, respectively.
         Or, can be set to ``directoryX`` with ``X`` representing an integer number up to which directory the URLs should be compared. E.g., for ``http://example.com/dir1/dir2/index.html``, ``directory2`` would include all files in ``dir2``.
     :return: ``True`` or ``False``. If exceptions occur, the method returns ``False``.
@@ -492,8 +492,20 @@ class ParsedUrl:
         Basically a wrapper around ``tld.Result`` to make accessing elements easier.
 
         :param url: URL string to parse.
-        :param fail_silently: Returns ``None`` instead of raising an exception.
         :raises Exception: Exceptions from `TLD package <https://github.com/barseghyanartur/tld>`__ if the URL is invalid.
+
+        :ivar url: Entire URL. In the following, this example URL is used to illustrate the various URL parts:
+            ``http://username:password@some.subdomain.example.co.uk/path1/path2?param="abc"#xyz``
+        :ivar domain: ``example``
+        :ivar subdomain: ``some.subdomain``
+        :ivar fld: ``example.co.uk``
+        :ivar tld: ``co.uk``
+        :ivar scheme: ``http``
+        :ivar netloc: ``username:password@some.subdomain.example.co.uk``
+        :ivar hostname: ``some.subdomain.example.co.uk``
+        :ivar path: ``/path1/path2``
+        :ivar query: ``param="abc"``
+        :ivar fragment: ``xyz``
         """
         url_object = tld.get_tld(url, as_object=True)
 
