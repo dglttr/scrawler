@@ -15,15 +15,14 @@ The three most important ones are:
    for how to extract data from it). Because :class:`.Website` extends
    ``BeautifulSoup``, you can directly execute BeautifulSoup methods on
    the website object.
-2. The HTTP response object (:attr:`http_response` attribute) as :class:`requests:requests.Response` or :class:`aiohttp:aiohttp.ClientResponse`
+2. The HTTP response object (:attr:`.http_response` attribute) as :class:`requests:requests.Response` or :class:`aiohttp:aiohttp.ClientResponse`
    (depending on whether you are using the ``asyncio`` or ``multithreading`` backend).
-3. The website's raw URL (:attr:`url` attribute) and parsed URL
-   (:attr:`parsed_url` attribute) parts (as :class:`.ParsedUrl` object).
+3. The website's raw URL (:attr:`~scrawler.website.Website.url` attribute) and parsed URL parts (:attr:`.parsed_url` attribute).
 
 Basic structure
 ---------------
 
-Data extractors must inherit from :class:`.BaseExtractor` and implement two methods:
+Data extractors are classes that inherit from :class:`.BaseExtractor` and implement two methods:
 
 -  :func:`~scrawler.data_extractors.BaseExtractor.__init__`: Where parameters to the extractor can be passed and
    are stored in object attributes.

@@ -75,7 +75,7 @@ class BaseExtractor:
         Every data extractor has to inherit from :class:`.BaseExtractor`.
 
         :param args: Positional arguments to be used by children inheriting from :class:`.BaseExtractor`.
-        :param dynamic_parameters: Set this to ``True`` when you would like to pass a ``list`` to a certain parameter,
+        :param dynamic_parameters: Set this to ``True`` when you would like to pass a :class:`list` to a certain parameter,
             and have each URL/scraping target use a different value from that list based on an index.
             See also `here <custom_data_extractors.html#dynamic-parameters>`__.
         :param n_return_values: Specifies the number of values that will be returned by the extractor.
