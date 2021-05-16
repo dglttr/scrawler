@@ -1,0 +1,329 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>scrawler.attributes - scrawler 0.3.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="../../_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">scrawler 0.3.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  
+  <span class="sidebar-brand-text">scrawler 0.3.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../built_in_data_extractors.html">Built-in Data Extractors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_data_extractors.html">Custom Data Extractors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for scrawler.attributes</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Specifies the attribute objects used by crawlers and scrapers."""</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">signature</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">scrawler.defaults</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DEFAULT_CSV_ENCODING</span><span class="p">,</span> <span class="n">DEFAULT_CSV_SEPARATOR</span><span class="p">,</span> <span class="n">DEFAULT_CSV_QUOTING</span><span class="p">,</span> <span class="n">DEFAULT_CSV_ESCAPECHAR</span><span class="p">,</span>
+                               <span class="n">DEFAULT_PAUSE_TIME</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scrawler.website</span> <span class="kn">import</span> <span class="n">Website</span>
+<span class="kn">from</span> <span class="nn">scrawler.data_extractors</span> <span class="kn">import</span> <span class="n">BaseExtractor</span>
+<span class="kn">from</span> <span class="nn">scrawler.utils.web_utils</span> <span class="kn">import</span> <span class="n">is_same_host</span><span class="p">,</span> <span class="n">extract_same_host_pattern</span>
+
+
+<div class="viewcode-block" id="SearchAttributes"><a class="viewcode-back" href="../../reference.html#scrawler.attributes.SearchAttributes">[docs]</a><span class="k">class</span> <span class="nc">SearchAttributes</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">BaseExtractor</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">"""Specify which data to collect/search for in the website.</span>
+
+<span class="sd">        :param args: Data extractors specifying which data to extract in websites</span>
+<span class="sd">            (see `built-in data extractors &lt;built_in_data_extractors.html&gt;`__  or for possibilities</span>
+<span class="sd">            or `define a custom data extractor &lt;custom_data_extractors.html&gt;`__).</span>
+<span class="sd">        :param validate: Whether to make sure that input parameters are valid.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extractor</span><span class="p">,</span> <span class="n">BaseExtractor</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">extractor</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> does not inherit from BaseExtractor."</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">BaseExtractor</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_return_values</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">extractor</span><span class="o">.</span><span class="n">n_return_values</span> <span class="k">for</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">])</span>
+
+<div class="viewcode-block" id="SearchAttributes.extract_all_attrs_from_website"><a class="viewcode-back" href="../../reference.html#scrawler.attributes.SearchAttributes.extract_all_attrs_from_website">[docs]</a>    <span class="k">def</span> <span class="nf">extract_all_attrs_from_website</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">website</span><span class="p">:</span> <span class="n">Website</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">"""Extract data from a website using data extractors specified in ``SearchAttributes`` definition.</span>
+
+<span class="sd">        :param website: Website object to collect the specified data points from.</span>
+<span class="sd">        :param index: Optionally pass an index for data extractors that index into passed parameters.</span>
+<span class="sd">            See `this explanation &lt;custom_data_extractors.html#dynamic-parameters&gt;`__ for details.</span>
+<span class="sd">        """</span>
+        <span class="n">extracted_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>
+            <span class="c1"># Case handling for functions using an index</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="n">extractor</span><span class="o">.</span><span class="n">dynamic_parameters</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">website</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">website</span><span class="p">)</span>
+
+            <span class="c1"># Case handling for functions with multiple return values</span>
+            <span class="k">if</span> <span class="n">extractor</span><span class="o">.</span><span class="n">n_return_values</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">extracted_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">extracted_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">extracted_data</span></div></div>
+
+
+<div class="viewcode-block" id="ExportAttributes"><a class="viewcode-back" href="../../reference.html#scrawler.attributes.ExportAttributes">[docs]</a><span class="k">class</span> <span class="nc">ExportAttributes</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fn</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
+                 <span class="n">header</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_CSV_ENCODING</span><span class="p">,</span>
+                 <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_CSV_SEPARATOR</span><span class="p">,</span> <span class="n">quoting</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_CSV_QUOTING</span><span class="p">,</span>
+                 <span class="n">escapechar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_CSV_ESCAPECHAR</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""Specify how and where to export the collected data.</span>
+
+<span class="sd">        :param directory: Folder where file(s) will be saved to.</span>
+<span class="sd">        :param fn: Name(s) of the file(s) containing the crawled data. *Without* file extension.</span>
+<span class="sd">        :param header: Have the final CSV file have a header. Possible parameters:</span>
+<span class="sd">            If ``None`` or ``False``, no header will be written.</span>
+<span class="sd">            If ``first-row`` or ``True``, uses first row of data as header.</span>
+<span class="sd">            Else, pass list of strings of appropriate length.</span>
+<span class="sd">        :param encoding: Encoding to use to create the CSV file.</span>
+<span class="sd">        :param separator: Column separator or delimiter to use for creating the CSV file.</span>
+<span class="sd">        :param quoting: Puts quotes around cells that contain the separator character.</span>
+<span class="sd">        :param escapechar: Escapes the separator character.</span>
+<span class="sd">        :param validate: Whether to make sure that input parameters are valid.</span>
+<span class="sd">        :param kwargs: Any parameter supported by :meth:`pandas:pandas.DataFrame.to_csv` can be passed.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
+            <span class="c1"># Check that directory exists</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">NotADirectoryError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Export directory does not exist on this system (</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">)."</span><span class="p">)</span>
+
+            <span class="c1"># Check that keyword arguments are allowed for pandas.DataFrame.to_csv()</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">signature</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Invalid keyword argument passed to ExportAttributes: "</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">"'</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="n">directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">fn</span>    <span class="c1"># Filename(s)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">header</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quoting</span> <span class="o">=</span> <span class="n">quoting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">escapechar</span> <span class="o">=</span> <span class="n">escapechar</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>   <span class="c1"># Add keyword arguments as attributes</span>
+            <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CrawlingAttributes"><a class="viewcode-back" href="../../reference.html#scrawler.attributes.CrawlingAttributes">[docs]</a><span class="k">class</span> <span class="nc">CrawlingAttributes</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">filter_non_standard_schemes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">filter_media_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">blocklist</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(),</span>
+                 <span class="n">filter_foreign_urls</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"auto"</span><span class="p">,</span>
+                 <span class="n">strip_url_parameters</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">strip_url_fragments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+
+                 <span class="n">max_no_urls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">max_distance_from_start_url</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">max_subdirectory_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+
+                 <span class="n">pause_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_PAUSE_TIME</span><span class="p">,</span>
+                 <span class="n">respect_robots_txt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+
+                 <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+                 <span class="p">):</span>
+        <span class="sd">"""Specify how to conduct the crawling, including filtering irrelevant URLs or limiting the number of crawled URLs.</span>
+
+<span class="sd">        :param filter_non_standard_schemes: Filter URLs starting with schemes other than ``http:`` or ``https:`` (e.g., ``mailto:`` or ``javascript:``).</span>
+<span class="sd">        :param filter_media_files: Whether to filter media files. Recommended: ``True`` to avoid long runtimes caused by large file downloads.</span>
+<span class="sd">        :param blocklist: Filter URLs that contain one or more of the parts specified here. Has to be a ``list``.</span>
+<span class="sd">        :param filter_foreign_urls: Filter URLs that do not belong to the same host (foreign URLs).</span>
+<span class="sd">            Can either be a string that is passed to :func:`.is_same_host`, or a custom ``Callable`` that has to include two arguments, ``url1`` and ``url2``.</span>
+<span class="sd">            In :func:`.is_same_host`, the following string values are permitted:</span>
+<span class="sd">            1. ``auto``: Automatically extracts a matching pattern from the start URL (see :func:`.extract_same_host_pattern` for details).</span>
+<span class="sd">            2. Any one of the attributes of the :class:`.ParsedUrl` class (e.g. ``domain``, ``hostname``, ``fld``).</span>
+<span class="sd">            3. ``subdomainX`` with ``X`` representing an integer number up to which subdomain the URLs should be compared. E.g., comparing ``http://www.sub.example.com`` and ``http://blog.sub.example.com``, ``sub`` is the first level, while the second levels are ``www`` and ``blog``, respectively.</span>
+<span class="sd">            4. ``directoryX`` with ``X`` representing an integer number up to which directory the URLs should be compared. E.g., for ``http://example.com/dir1/dir2/index.html``, ``directory2`` would include all files in ``dir2``.</span>
+
+<span class="sd">        :param strip_url_parameters: Whether to strip URL query parameters (prefixed by ``?``) from the URL.</span>
+<span class="sd">        :param strip_url_fragments: Whether to strip URL fragments (prefixed by ``#``) from the URL.</span>
+
+<span class="sd">        :param max_no_urls: Maximum number of URLs to be crawled per domain (safety limit for very large crawls). Set to ``None`` if you want all URLs to be crawled.</span>
+<span class="sd">        :param max_distance_from_start_url: Maximum number of links that have to be followed to arrive at a certain URL from the start URL.</span>
+<span class="sd">        :param max_subdirectory_depth: Maximum sub-level of the host up to which to crawl. E.g., consider this schema: ``hostname/sub-directory1/sub-siteA``.</span>
+<span class="sd">            If you would want to crawl all URLs of the same level as ``sub-directory1``, specify 1.</span>
+<span class="sd">            ``sub-siteA`` will then not be found, but a site ``hostname/sub-directory2`` or ``hostname/sub-siteB`` will be.</span>
+
+<span class="sd">        :param pause_time: Time to wait between the crawling of two URLs (in seconds).</span>
+<span class="sd">        :param respect_robots_txt: Whether to respect the specifications made in the website's ``robots.txt`` file.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
+            <span class="c1"># Check that a valid input is passed to parameter filter_foreign_url</span>
+            <span class="n">TEST_URL</span> <span class="o">=</span> <span class="s2">"https://www.example.com"</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filter_foreign_urls</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
+                    <span class="n">test_mode</span> <span class="o">=</span> <span class="n">extract_same_host_pattern</span><span class="p">(</span><span class="n">TEST_URL</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">filter_foreign_urls</span> <span class="o">==</span> <span class="s2">"auto"</span><span class="p">)</span> <span class="k">else</span> <span class="n">filter_foreign_urls</span>
+                    <span class="k">assert</span> <span class="n">is_same_host</span><span class="p">(</span><span class="n">TEST_URL</span><span class="p">,</span> <span class="n">TEST_URL</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">test_mode</span><span class="p">),</span> <span class="s2">"is_same_host() should be True if the same URL is used."</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="n">filter_foreign_urls</span><span class="p">(</span><span class="n">TEST_URL</span><span class="p">,</span> <span class="n">TEST_URL</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Error when testing your custom foreign URL filter function (</span><span class="si">{</span><span class="n">filter_foreign_urls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">): Should be True if the same URL is used for both input arguments."</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AssertionError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter filter_foreign_url is not correctly specified: </span><span class="si">{</span><span class="n">filter_foreign_urls</span><span class="si">}</span><span class="s2">. The following error occurred during validation: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_non_standard_schemes</span> <span class="o">=</span> <span class="n">filter_non_standard_schemes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_media</span> <span class="o">=</span> <span class="n">filter_media_files</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocklist</span> <span class="o">=</span> <span class="n">blocklist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_foreign_urls</span> <span class="o">=</span> <span class="n">filter_foreign_urls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strip_url_parameters</span> <span class="o">=</span> <span class="n">strip_url_parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strip_url_fragments</span> <span class="o">=</span> <span class="n">strip_url_fragments</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_no_urls</span> <span class="o">=</span> <span class="n">max_no_urls</span> <span class="k">if</span> <span class="p">(</span><span class="n">max_no_urls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_distance_from_start_url</span> <span class="o">=</span> <span class="n">max_distance_from_start_url</span> <span class="k">if</span> <span class="p">(</span><span class="n">max_distance_from_start_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_subdirectory_depth</span> <span class="o">=</span> <span class="n">max_subdirectory_depth</span> <span class="k">if</span> <span class="p">(</span><span class="n">max_subdirectory_depth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pause_time</span> <span class="o">=</span> <span class="n">pause_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">respect_robots_txt</span> <span class="o">=</span> <span class="n">respect_robots_txt</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Daniel Glatter
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>
