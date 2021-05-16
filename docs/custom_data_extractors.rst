@@ -7,7 +7,7 @@ What kinds of data can be extracted?
 ------------------------------------
 
 Data extractors are passed a :class:`.Website` object, which provides access to various data points
-(see also the documented variables in the :class:`.Website` documentation).
+(see also the documented attributes in the :class:`.Website` documentation).
 The three most important ones are:
 
 1. The website's HTML parsed as a BeautifulSoup object (see `their
