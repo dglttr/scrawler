@@ -169,7 +169,7 @@ Then, three methods can be applied to them:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">run()</span></code>: Execute the task and return the results.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">run_and_export()</span></code>: This may be used when scraping/crawling many
 sites at once, generating huge amounts of data. In order to prevent a
-<code class="docutils literal notranslate"><span class="pre">MemoryError</span></code>, data will be exported as soon as it is ready and
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#MemoryError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryError</span></code></a>, data will be exported as soon as it is ready and
 then discarded to make room for the next sites/domains.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">export_data()</span></code>: Export the collected data to CSV file(s).</p></li>
 </ul>
@@ -316,7 +316,7 @@ crawled.</p></li>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Another example with a custom foreign URL filter:</p>
+<p>Another example with a <em>custom foreign URL filter</em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tld.exceptions</span>
 
 <span class="kn">from</span> <span class="nn">scrawler.attributes</span> <span class="kn">import</span> <span class="n">CrawlingAttributes</span>

@@ -41,7 +41,7 @@ Then, three methods can be applied to them:
 -  ``run()``: Execute the task and return the results.
 -  ``run_and_export()``: This may be used when scraping/crawling many
    sites at once, generating huge amounts of data. In order to prevent a
-   ``MemoryError``, data will be exported as soon as it is ready and
+   :class:`.MemoryError`, data will be exported as soon as it is ready and
    then discarded to make room for the next sites/domains.
 -  ``export_data()``: Export the collected data to CSV file(s).
 
@@ -199,7 +199,7 @@ Here's an exemplary :class:`.CrawlingAttributes` object creation:
        max_no_urls=1000
    )
 
-Another example with a custom foreign URL filter:
+Another example with a *custom foreign URL filter*:
 
 .. code:: python
 
