@@ -15,21 +15,25 @@ class Website(BeautifulSoup):
             Note that this is an optional parameter used in conjunction with the Crawler object.
 
         :raises: Exceptions raised during URL parsing.
-
-        :ivar url: Website URL.
-        :ivar parsed_url: :class:`.ParsedUrl` object for accessing the various URL parts (hostname, domain, path, ...).
-        :ivar html_text: Website's HTML text as a string. Only available after retrieving the Website using :func:`fetch` or :func:`fetch_async`.
-        :ivar http_response: HTTP response as :class:`requests:requests.Response` or :class:`aiohttp:aiohttp.ClientResponse` (depending on whether the website was fetched with :func:`fetch` or :func:`fetch_async`).
-            Only available after retrieving the Website using :func:`fetch` or :func:`fetch_async`.
-        :ivar steps_from_start_page: Number of steps from start URL to reach the URL in crawlings.
-            This has to be passed during object initialization, which is done automatically in
-            :func:`~scrawler.backends.multithreading_backend.crawl_domain` and :func:`~scrawler.backends.asyncio_backend.async_crawl_domain`.
-        :ivar Others: Other variables/attributes from `BeautifulSoup <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>`__.
         """
+        #: Website URL.
         self.url = url
-        self.parsed_url = ParsedUrl(self.url)    # this will raise an error if the URL is invalid
 
+        #: :class:`.ParsedUrl` object for accessing the various URL parts (hostname, domain, path, ...).
+        self.parsed_url = ParsedUrl(self.url)
+
+        #: Number of steps from start URL to reach the URL in crawlings.
+        #: This has to be passed during object initialization, which is done automatically in
+        #: :func:`~scrawler.backends.multithreading_backend.crawl_domain` and :func:`~scrawler.backends.asyncio_backend.async_crawl_domain`.
         self.steps_from_start_page = steps_from_start_page
+
+        #: Website's HTML text as a string. Only available after retrieving the Website using :func:`fetch` or :func:`fetch_async`.
+        self.html_text = None
+
+        #: HTTP response as :class:`requests:requests.Response` or :class:`aiohttp:aiohttp.ClientResponse`
+        #: (depending on whether the website was fetched with :func:`fetch` or :func:`fetch_async`).
+        #: Only available after retrieving the Website using :func:`fetch` or :func:`fetch_async`.
+        self.http_response = None
 
     def fetch(self, **kwargs):
         """Fetch website from given URL and construct ``BeautifulSoup`` from response data.

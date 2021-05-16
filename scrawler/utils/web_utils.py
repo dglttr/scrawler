@@ -493,34 +493,22 @@ class ParsedUrl:
 
         :param url: URL string to parse.
         :raises Exception: Exceptions from `TLD package <https://github.com/barseghyanartur/tld>`__ if the URL is invalid.
-
-        :ivar url: Entire URL. In the following, this example URL is used to illustrate the various URL parts:
-            ``http://username:password@some.subdomain.example.co.uk/path1/path2?param="abc"#xyz``
-        :ivar domain: ``example``
-        :ivar subdomain: ``some.subdomain``
-        :ivar fld: ``example.co.uk``
-        :ivar tld: ``co.uk``
-        :ivar scheme: ``http``
-        :ivar netloc: ``username:password@some.subdomain.example.co.uk``
-        :ivar hostname: ``some.subdomain.example.co.uk``
-        :ivar path: ``/path1/path2``
-        :ivar query: ``param="abc"``
-        :ivar fragment: ``xyz``
         """
         url_object = tld.get_tld(url, as_object=True)
 
-        # example: 'http://username:password@some.subdomain.example.co.uk/path1/path2?param="abc"#xyz'
+        #: Entire URL. In the following, this example URL is used to illustrate the various URL parts:
+        #: ``http://username:password@some.subdomain.example.co.uk/path1/path2?param="abc"#xyz``
         self.url = url
-        self.domain = url_object.domain                  # 'example'
-        self.subdomain = url_object.subdomain            # 'some.subdomain'
-        self.fld = url_object.fld                        # 'example.co.uk'
-        self.tld = url_object.tld                        # 'co.uk'
-        self.scheme = url_object.parsed_url.scheme       # 'http'
-        self.netloc = url_object.parsed_url.netloc       # 'username:password@some.subdomain.example.co.uk'
-        self.hostname = url_object.parsed_url.hostname   # 'some.subdomain.example.co.uk'
-        self.path = url_object.parsed_url.path           # '/path1/path2'
-        self.query = url_object.parsed_url.query         # 'param="abc"'
-        self.fragment = url_object.parsed_url.fragment   # 'xyz'
+        self.domain = url_object.domain                  #: ``example`` in the example from :attr:`.url`
+        self.subdomain = url_object.subdomain            #: ``some.subdomain`` in the example from :attr:`.url`
+        self.fld = url_object.fld                        #: ``example.co.uk`` in the example from :attr:`.url`
+        self.tld = url_object.tld                        #: ``co.uk`` in the example from :attr:`.url`
+        self.scheme = url_object.parsed_url.scheme       #: ``http`` in the example from :attr:`.url`
+        self.netloc = url_object.parsed_url.netloc       #: ``username:password@some.subdomain.example.co.uk`` in the example from :attr:`.url`
+        self.hostname = url_object.parsed_url.hostname   #: ``some.subdomain.example.co.uk`` in the example from :attr:`.url`
+        self.path = url_object.parsed_url.path           #: ``/path1/path2`` in the example from :attr:`.url`
+        self.query = url_object.parsed_url.query         #: ``param="abc"`` in the example from :attr:`.url`
+        self.fragment = url_object.parsed_url.fragment   #: ``xyz`` in the example from :attr:`.url`
 
     def __repr__(self):
         return f"ParsedUrl(url={self.url}, domain={self.domain}, subdomain={self.subdomain}, fld={self.fld}, tld={self.tld}, scheme={self.scheme}, netloc={self.netloc}, hostname={self.hostname}, path={self.path}, query={self.query}, fragment={self.fragment})"
