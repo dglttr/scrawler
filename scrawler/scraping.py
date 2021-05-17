@@ -28,11 +28,11 @@ class Scraper:
         :param export_attributes: Specify how and where to export the collected data (as CSV).
         :param user_agent: Optionally specify a user agent for making the HTTP request.
         :param timeout: Timeout to be used when making HTTP requests. Note that the values specified here apply to each request individually, not to an entire session.
-            When using the ``asyncio`` backend, you can pass an :class:`aiohttp:aiohttp.ClientTimeout` object where you can specify detailed timeout settings.
+            When using the :mod:`.asyncio_backend`, you can pass an :class:`aiohttp:aiohttp.ClientTimeout` object where you can specify detailed timeout settings.
             Alternatively, you can pass an integer that will be interpreted as total timeout for one request in seconds.
             If nothing is passed, a default timeout will be used.
-        :param backend: ``multithreading`` (more stable, but most likely slower) or
-                        ``asyncio`` (faster when crawling many domains at once, but more unstable and may get hung).
+        :param backend: "asyncio" to use the :mod:`.asyncio_backend` (faster when crawling many domains at once, but more unstable and may get hung).
+                        "multithreading" to use the :mod:`~scrawler.backends.multithreading_backend` (more stable, but most likely slower).
                         See also `Why are there two backends? <getting_started.html#why-are-there-two-backends>`__
         :param validate_input_parameters: Whether to validate input parameters.
             Note that this validates that all URLs work and that the various attributes work together.
@@ -68,7 +68,7 @@ class Scraper:
     def run(self, export_immediately: bool = False) -> List[List[Any]]:
         """Execute the scraping task and return the results.
 
-        :param export_immediately: May be used when scraping many sites at once. In order to prevent a ``MemoryError``,
+        :param export_immediately: May be used when scraping many sites at once. In order to prevent a :class:`MemoryError`,
             data will be exported as soon as it is ready and then discarded to make room for the next sites.
         :return: The result is a list  with one entry per processed URL (result = [url1, url2, ...]).
             Each URL entry is a list with one entry per extracted datapoint (url = [datapoint1, datapoint2, ...]).
@@ -108,7 +108,7 @@ class Scraper:
     def run_and_export(self, export_attrs: ExportAttributes = None) -> None:
         """Shorthand for ``Scraper.run(export_immediately=True)``.
 
-        :param export_attrs: Object specifying export parameters.
+        :param export_attrs: :class:`.ExportAttributes` object specifying export parameters.
         """
         if export_attrs is not None:
             self.export_attrs = export_attrs
@@ -121,8 +121,8 @@ class Scraper:
     def export_data(self, export_attrs: ExportAttributes = None, export_as_one_file: bool = True) -> None:
         """Export data previously collected from scraping task.
 
-        :param export_attrs: Object specifying export parameters.
-        :param export_as_one_file: If True, the data will be exported in one CSV file, each line representing one scraped URL.
+        :param export_attrs: :class:`.ExportAttributes` object specifying export parameters.
+        :param export_as_one_file: If ``True``, the data will be exported in one CSV file, each line representing one scraped URL.
         """
         ea = export_attrs if (export_attrs is not None) else self.export_attrs
 

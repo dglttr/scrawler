@@ -1,6 +1,7 @@
 """General purpose utility functions."""
 import datetime
 import re
+import functools
 
 
 def sanitize_text(text: str, lower: bool = False) -> str:
@@ -17,15 +18,16 @@ def sanitize_text(text: str, lower: bool = False) -> str:
     return text
 
 
-def timing_decorator(method):
+def timing_decorator(func):
     """A function decorator to measure function runtime and print the runtime on the console."""
 
+    @functools.wraps(func)
     def timed(*args, **kw):
         start_time = datetime.datetime.now()
-        result = method(*args, **kw)
+        result = func(*args, **kw)
         end_time = datetime.datetime.now()
 
-        print(f"\nRuntime of method {method.__name__}: {end_time - start_time}")
+        print(f"\nRuntime of method {func.__name__}: {end_time - start_time}")
         return result
 
     return timed

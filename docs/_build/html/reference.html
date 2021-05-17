@@ -365,7 +365,7 @@ parameter allows to specify an interval of files that should be read in, e. g. t
 </dd></dl>
 <dl class="py function">
 <dt id="scrawler.utils.general_utils.timing_decorator">
-<code class="sig-prename descclassname"><span class="pre">scrawler.utils.general_utils.</span></code><code class="sig-name descname"><span class="pre">timing_decorator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scrawler/utils/general_utils.html#timing_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scrawler.utils.general_utils.timing_decorator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">scrawler.utils.general_utils.</span></code><code class="sig-name descname"><span class="pre">timing_decorator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scrawler/utils/general_utils.html#timing_decorator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scrawler.utils.general_utils.timing_decorator" title="Permalink to this definition">¶</a></dt>
 <dd><p>A function decorator to measure function runtime and print the runtime on the console.</p>
 </dd></dl>
 </div>
@@ -823,11 +823,11 @@ See <a class="reference external" href="custom_data_extractors.html#dynamic-para
 <li><p><strong>crawling_attributes</strong> – Specify how to conduct the crawling, e. g. how to filter irrelevant URLs or limits on the number of URLs crawled.</p></li>
 <li><p><strong>user_agent</strong> – Optionally specify a user agent for making the HTTP request.</p></li>
 <li><p><strong>timeout</strong> – Timeout to be used when making HTTP requests. Note that the values specified here apply to each request individually, not to an entire session.
-When using the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> backend, you can pass an <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientTimeout</span></code></a> object where you can specify detailed timeout settings.
+When using the <a class="reference internal" href="#module-scrawler.backends.asyncio_backend" title="scrawler.backends.asyncio_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio_backend</span></code></a>, you can pass an <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientTimeout</span></code></a> object where you can specify detailed timeout settings.
 Alternatively, you can pass an integer that will be interpreted as total timeout for one request in seconds.
 If nothing is passed, a default timeout will be used.</p></li>
-<li><p><strong>backend</strong> – <code class="docutils literal notranslate"><span class="pre">multithreading</span></code> (more stable, but most likely slower) or
-<code class="docutils literal notranslate"><span class="pre">asyncio</span></code> (faster when crawling many domains at once, but more unstable and may get hung).
+<li><p><strong>backend</strong> – “asyncio” to use the <a class="reference internal" href="#module-scrawler.backends.asyncio_backend" title="scrawler.backends.asyncio_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio_backend</span></code></a> (faster when crawling many domains at once, but more unstable and may get hung).
+“multithreading” to use the <a class="reference internal" href="#module-scrawler.backends.multithreading_backend" title="scrawler.backends.multithreading_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multithreading_backend</span></code></a> (more stable, but most likely slower).
 See also <a class="reference external" href="getting_started.html#why-are-there-two-backends">Why are there two backends?</a></p></li>
 <li><p><strong>parallel_processes</strong> – Number of concurrent processes/threads to use.
 Can be very large when using the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> backend.
@@ -845,21 +845,34 @@ You will need to also pass <code class="docutils literal notranslate"><span clas
 <dd><p>Export data previously collected from crawling task.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>export_attrs</strong> – Object specifying export parameters.</p>
+<dd class="field-odd"><p><strong>export_attrs</strong> – <a class="reference internal" href="#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> object specifying export parameters.</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="scrawler.crawling.Crawler.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.crawling.Crawler.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_immediately</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/scrawler/crawling.html#Crawler.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scrawler.crawling.Crawler.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the crawling task and return the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>export_immediately</strong> – May be used when crawling many sites at once. In order to prevent a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#MemoryError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryError</span></code></a>,
+data will be exported as soon as it is ready and then discarded to make room for the next domains.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result is a list with three layers.
+The first layer has one entry per crawled domain (result = [domain1, domain2, …]).
+The second layer (representing each crawled domain) is a list with one entry per processed URL (domain = [url1, url2, …]).
+The third layer (representing each URL) is a list with one entry per extracted datapoint (url = [datapoint1, datapoint2, …]).</p>
+</dd>
+</dl>
+</dd></dl>
 <dl class="py method">
 <dt id="scrawler.crawling.Crawler.run_and_export">
 <code class="sig-name descname"><span class="pre">run_and_export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_attrs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><span class="pre">scrawler.attributes.ExportAttributes</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="_modules/scrawler/crawling.html#Crawler.run_and_export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scrawler.crawling.Crawler.run_and_export" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shorthand for <code class="docutils literal notranslate"><span class="pre">Crawler.run(export_immediately=True)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>export_attrs</strong> – Object specifying export parameters.</p>
+<dd class="field-odd"><p><strong>export_attrs</strong> – <a class="reference internal" href="#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> object specifying export parameters.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1568,11 +1581,11 @@ a different string for each domain). See also <a class="reference external" href
 <li><p><strong>export_attributes</strong> – Specify how and where to export the collected data (as CSV).</p></li>
 <li><p><strong>user_agent</strong> – Optionally specify a user agent for making the HTTP request.</p></li>
 <li><p><strong>timeout</strong> – Timeout to be used when making HTTP requests. Note that the values specified here apply to each request individually, not to an entire session.
-When using the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> backend, you can pass an <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientTimeout</span></code></a> object where you can specify detailed timeout settings.
+When using the <a class="reference internal" href="#module-scrawler.backends.asyncio_backend" title="scrawler.backends.asyncio_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio_backend</span></code></a>, you can pass an <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ClientTimeout" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ClientTimeout</span></code></a> object where you can specify detailed timeout settings.
 Alternatively, you can pass an integer that will be interpreted as total timeout for one request in seconds.
 If nothing is passed, a default timeout will be used.</p></li>
-<li><p><strong>backend</strong> – <code class="docutils literal notranslate"><span class="pre">multithreading</span></code> (more stable, but most likely slower) or
-<code class="docutils literal notranslate"><span class="pre">asyncio</span></code> (faster when crawling many domains at once, but more unstable and may get hung).
+<li><p><strong>backend</strong> – “asyncio” to use the <a class="reference internal" href="#module-scrawler.backends.asyncio_backend" title="scrawler.backends.asyncio_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio_backend</span></code></a> (faster when crawling many domains at once, but more unstable and may get hung).
+“multithreading” to use the <a class="reference internal" href="#module-scrawler.backends.multithreading_backend" title="scrawler.backends.multithreading_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multithreading_backend</span></code></a> (more stable, but most likely slower).
 See also <a class="reference external" href="getting_started.html#why-are-there-two-backends">Why are there two backends?</a></p></li>
 <li><p><strong>validate_input_parameters</strong> – Whether to validate input parameters.
 Note that this validates that all URLs work and that the various attributes work together.
@@ -1588,23 +1601,34 @@ You will need to also pass <code class="docutils literal notranslate"><span clas
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>export_attrs</strong> – Object specifying export parameters.</p></li>
-<li><p><strong>export_as_one_file</strong> – If True, the data will be exported in one CSV file, each line representing one scraped URL.</p></li>
+<li><p><strong>export_attrs</strong> – <a class="reference internal" href="#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> object specifying export parameters.</p></li>
+<li><p><strong>export_as_one_file</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the data will be exported in one CSV file, each line representing one scraped URL.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="scrawler.scraping.Scraper.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scrawler.scraping.Scraper.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_immediately</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/scrawler/scraping.html#Scraper.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scrawler.scraping.Scraper.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the scraping task and return the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>export_immediately</strong> – May be used when scraping many sites at once. In order to prevent a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#MemoryError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryError</span></code></a>,
+data will be exported as soon as it is ready and then discarded to make room for the next sites.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result is a list  with one entry per processed URL (result = [url1, url2, …]).
+Each URL entry is a list with one entry per extracted datapoint (url = [datapoint1, datapoint2, …]).</p>
+</dd>
+</dl>
+</dd></dl>
 <dl class="py method">
 <dt id="scrawler.scraping.Scraper.run_and_export">
 <code class="sig-name descname"><span class="pre">run_and_export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_attrs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><span class="pre">scrawler.attributes.ExportAttributes</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="_modules/scrawler/scraping.html#Scraper.run_and_export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scrawler.scraping.Scraper.run_and_export" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shorthand for <code class="docutils literal notranslate"><span class="pre">Scraper.run(export_immediately=True)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>export_attrs</strong> – Object specifying export parameters.</p>
+<dd class="field-odd"><p><strong>export_attrs</strong> – <a class="reference internal" href="#scrawler.attributes.ExportAttributes" title="scrawler.attributes.ExportAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExportAttributes</span></code></a> object specifying export parameters.</p>
 </dd>
 </dl>
 </dd></dl>

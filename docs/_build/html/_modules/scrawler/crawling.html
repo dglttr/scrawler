@@ -160,11 +160,11 @@
 <span class="sd">        :param crawling_attributes: Specify how to conduct the crawling, e. g. how to filter irrelevant URLs or limits on the number of URLs crawled.</span>
 <span class="sd">        :param user_agent: Optionally specify a user agent for making the HTTP request.</span>
 <span class="sd">        :param timeout: Timeout to be used when making HTTP requests. Note that the values specified here apply to each request individually, not to an entire session.</span>
-<span class="sd">            When using the ``asyncio`` backend, you can pass an :class:`aiohttp:aiohttp.ClientTimeout` object where you can specify detailed timeout settings.</span>
+<span class="sd">            When using the :mod:`.asyncio_backend`, you can pass an :class:`aiohttp:aiohttp.ClientTimeout` object where you can specify detailed timeout settings.</span>
 <span class="sd">            Alternatively, you can pass an integer that will be interpreted as total timeout for one request in seconds.</span>
 <span class="sd">            If nothing is passed, a default timeout will be used.</span>
-<span class="sd">        :param backend: ``multithreading`` (more stable, but most likely slower) or</span>
-<span class="sd">                        ``asyncio`` (faster when crawling many domains at once, but more unstable and may get hung).</span>
+<span class="sd">        :param backend: "asyncio" to use the :mod:`.asyncio_backend` (faster when crawling many domains at once, but more unstable and may get hung).</span>
+<span class="sd">                        "multithreading" to use the :mod:`~scrawler.backends.multithreading_backend` (more stable, but most likely slower).</span>
 <span class="sd">                        See also `Why are there two backends? &lt;getting_started.html#why-are-there-two-backends&gt;`__</span>
 <span class="sd">        :param parallel_processes: Number of concurrent processes/threads to use.</span>
 <span class="sd">            Can be very large when using the ``asyncio`` backend.</span>
@@ -203,11 +203,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="nd">@timing_decorator</span>
+<div class="viewcode-block" id="Crawler.run"><a class="viewcode-back" href="../../reference.html#scrawler.crawling.Crawler.run">[docs]</a>    <span class="nd">@timing_decorator</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">export_immediately</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]:</span>
         <span class="sd">"""Execute the crawling task and return the results.</span>
 
-<span class="sd">        :param export_immediately: May be used when crawling many sites at once. In order to prevent a ``MemoryError``,</span>
+<span class="sd">        :param export_immediately: May be used when crawling many sites at once. In order to prevent a :class:`MemoryError`,</span>
 <span class="sd">            data will be exported as soon as it is ready and then discarded to make room for the next domains.</span>
 <span class="sd">        :return: The result is a list with three layers.</span>
 <span class="sd">            The first layer has one entry per crawled domain (result = [domain1, domain2, ...]).</span>
@@ -254,12 +254,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Backend "</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="si">}</span><span class="s1">" not supported.'</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span></div>
 
 <div class="viewcode-block" id="Crawler.run_and_export"><a class="viewcode-back" href="../../reference.html#scrawler.crawling.Crawler.run_and_export">[docs]</a>    <span class="k">def</span> <span class="nf">run_and_export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">export_attrs</span><span class="p">:</span> <span class="n">ExportAttributes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Shorthand for ``Crawler.run(export_immediately=True)``.</span>
 
-<span class="sd">        :param export_attrs: Object specifying export parameters.</span>
+<span class="sd">        :param export_attrs: :class:`.ExportAttributes` object specifying export parameters.</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="n">export_attrs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">export_attrs</span> <span class="o">=</span> <span class="n">export_attrs</span>
@@ -272,7 +272,7 @@
 <div class="viewcode-block" id="Crawler.export_data"><a class="viewcode-back" href="../../reference.html#scrawler.crawling.Crawler.export_data">[docs]</a>    <span class="k">def</span> <span class="nf">export_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">export_attrs</span><span class="p">:</span> <span class="n">ExportAttributes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Export data previously collected from crawling task.</span>
 
-<span class="sd">        :param export_attrs: Object specifying export parameters.</span>
+<span class="sd">        :param export_attrs: :class:`.ExportAttributes` object specifying export parameters.</span>
 <span class="sd">        """</span>
         <span class="n">ea</span> <span class="o">=</span> <span class="n">export_attrs</span> <span class="k">if</span> <span class="p">(</span><span class="n">export_attrs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_attrs</span>
 

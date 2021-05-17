@@ -366,17 +366,13 @@ contains standard settings that are used throughout the project.</p>
 <h3>Why are there two backends?<a class="headerlink" href="#why-are-there-two-backends" title="Permalink to this headline">¶</a></h3>
 <p>The module <a class="reference external" href="https://github.com/dglttr/scrawler/tree/main/scrawler/backends">backends</a> contains two files with
 the same functions for scraping and crawling, but built on different
-technologies for parallelization. In general, the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> version is
-preferable because more sites can be processed in parallel. However, on
-very large sites, scrawler may get stuck, and the entire crawling will
-hang. Also, there you may occasionally get many
-<code class="docutils literal notranslate"><span class="pre">ServerDisconnectedError</span></code>s when using the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> backend. If
-you expect or experience these cases, it is preferable to use the
-backend built on <code class="docutils literal notranslate"><span class="pre">multithreading</span></code>, which is slower, but more robust.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="reference.html#module-scrawler.backends.asyncio_backend">asyncio Backend Documentation</a></p></li>
-<li><p><a class="reference external" href="reference.html#module-scrawler.backends.multithreading_backend">multithreading Backend Documentation</a></p></li>
-</ul>
+technologies for parallelization: One uses <a class="reference external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code></a> and the other <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>,
+more precisely using <em>multithreading</em> by means of <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing.dummy" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.dummy</span></code></a>.</p>
+<p>In general, <a class="reference internal" href="reference.html#module-scrawler.backends.asyncio_backend" title="scrawler.backends.asyncio_backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio_backend</span></code></a> is preferable because more sites can be processed in parallel.
+However, on very large sites, scrawler may get stuck, and the entire crawling will hang.
+Also, <a class="reference external" href="https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.ServerDisconnectedError" title="(in aiohttp v3.7)"><code class="docutils literal notranslate"><span class="pre">aiohttp.ServerDisconnectedError</span></code></a> may occur a lot.
+If you expect or experience these cases, it is preferable to use the
+<a class="reference internal" href="reference.html#module-scrawler.backends.multithreading_backend" title="scrawler.backends.multithreading_backend"><code class="xref py py-class docutils literal notranslate"><span class="pre">multithreading_backend</span></code></a>, which is slower, but more robust.</p>
 </div>
 </div>
 </div>

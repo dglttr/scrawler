@@ -252,13 +252,11 @@ Why are there two backends?
 
 The module `backends <https://github.com/dglttr/scrawler/tree/main/scrawler/backends>`__ contains two files with
 the same functions for scraping and crawling, but built on different
-technologies for parallelization. In general, the ``asyncio`` version is
-preferable because more sites can be processed in parallel. However, on
-very large sites, scrawler may get stuck, and the entire crawling will
-hang. Also, there you may occasionally get many
-``ServerDisconnectedError``\ s when using the ``asyncio`` backend. If
-you expect or experience these cases, it is preferable to use the
-backend built on ``multithreading``, which is slower, but more robust.
+technologies for parallelization: One uses :mod:`.asyncio` and the other :mod:`.multiprocessing`,
+more precisely using *multithreading* by means of :mod:`.multiprocessing.dummy`.
 
-- `asyncio Backend Documentation <reference.html#module-scrawler.backends.asyncio_backend>`__
-- `multithreading Backend Documentation <reference.html#module-scrawler.backends.multithreading_backend>`__
+In general, :mod:`.asyncio_backend` is preferable because more sites can be processed in parallel.
+However, on very large sites, scrawler may get stuck, and the entire crawling will hang.
+Also, :class:`aiohttp:aiohttp.ServerDisconnectedError` may occur a lot.
+If you expect or experience these cases, it is preferable to use the
+:class:`~scrawler.backends.multithreading_backend`, which is slower, but more robust.
