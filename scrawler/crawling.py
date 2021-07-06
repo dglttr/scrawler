@@ -38,8 +38,8 @@ class Crawler:
                         "multithreading" to use the :mod:`~scrawler.backends.multithreading_backend` (more stable, but most likely slower).
                         See also `Why are there two backends? <getting_started.html#why-are-there-two-backends>`__
         :param parallel_processes: Number of concurrent processes/threads to use.
-            Can be very large when using the ``asyncio`` backend.
-            When using ``multithreading``, should not exceed 2x the CPU count on the machine running the crawling.
+            Can be very large when using :mod:`.asyncio_backend`.
+            When using :mod:`~scrawler.backends.multithreading_backend`, should not exceed 2x the CPU count on the machine running the crawling.
         :param validate_input_parameters: Whether to validate input parameters.
             Note that this validates that all URLs work and that the various attributes work together.
             However, the attributes themselves are also validated independently.
