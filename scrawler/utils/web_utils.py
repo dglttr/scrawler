@@ -15,7 +15,8 @@ from scrawler.defaults import (DEFAULT_REQUEST_TIMEOUT, DEFAULT_REQUEST_TLS_VERI
 
 # CONSTANTS
 DEFAULT_URL_SCHEMES = ("http:", "https:")
-DEFAULT_TEXT_FILE_EXTENSIONS = ("html", "htm", "php", "cfm", "shtml", "xhtml", "asp", "aspx", "axd", "asx", "asmx", "ashx", "jsp")
+DEFAULT_TEXT_FILE_EXTENSIONS = ("html", "htm", "php", "cfm", "shtml", "xhtml",
+                                "asp", "aspx", "axd", "asx", "asmx", "ashx", "jsp", "cms")
 DEFAULT_MEDIA_FILE_EXTENSIONS = ("pdf", "xml", "jpg", "jpeg", "png", "svg", "gif", "tiff", "tif", "ico", "mp4", "mp3",
                                  "zip", "exe", "avi", "css", "doc", "docx", "mid", "midi", "mpg", "mpeg", "mov", "qt",
                                  "ram", "rar", "txt", "wav", "7z", "tar.gz", "bin", "dmg", "iso", "csv", "dat", "db",
