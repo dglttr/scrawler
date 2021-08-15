@@ -65,8 +65,7 @@ data_extractors
 
    .. autoclass:: BaseExtractor
       :members:
-
-      .. automethod:: __init__
+      :undoc-members:
 
    .. autofunction:: supports_dynamic_parameters
 
