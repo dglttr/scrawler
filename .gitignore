@@ -12,6 +12,7 @@ venv/
 dist/
 build/
 scrawler.egg-info/
+docs/_build/
 
 # Pycaches
 scrawler/__pycache__/
